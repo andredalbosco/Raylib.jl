@@ -19,18 +19,6 @@ rl.with_window(800, 450, "Raylib.jl — 3D") do
             rl.DrawText("Julia + raylib: a cube in 3D", 20, 20, 24, rl.DARKGRAY)
             rl.DrawFPS(700, 20)
         end
-        if smoke && frame == 2
-            for arg in ARGS
-                if startswith(arg, "--screenshot=")
-                    image = rl.LoadImageFromScreen()
-                    try
-                        rl.ExportImage(image, split(arg, '='; limit=2)[2]) || error("Screenshot export failed")
-                    finally
-                        rl.UnloadImage(image)
-                    end
-                end
-            end
-        end
         frame += 1
     end
 end

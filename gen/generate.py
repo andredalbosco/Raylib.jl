@@ -1,10 +1,19 @@
-"""Generate the C-style API from the vendored raylib 6.0 parser output."""
+"""Regenerate bindings from raylib 6.0 (requires network access)."""
+import hashlib
 import json
 import re
 from pathlib import Path
+from urllib.request import urlopen
 
 ROOT = Path(__file__).resolve().parents[1]
-raw = (ROOT / 'gen/raylib_api.json').read_text()
+# Same raylib revision used by Raylib_jll 6.0.1; upstream license: RAYLIB_LICENSE.
+REV = 'dbc56a87da87d973a9c5baa4e7438a9d20121d28'
+URL = f'https://raw.githubusercontent.com/raysan5/raylib/{REV}/tools/rlparser/output/raylib_api.json'
+with urlopen(URL, timeout=30) as response:
+    data = response.read()
+if hashlib.sha256(data).hexdigest() != 'd4e2dd0727a8edf4d4f828e23f86e3bb74e373861edd0eabef4a634ae74936d6':
+    raise ValueError('Unexpected raylib API checksum')
+raw = data.decode()
 # Upstream's JSON writer does not escape embedded quotes in descriptions.
 raw = re.sub(r'("description": )"(.*)"(,?)$',
              lambda m: m[1] + json.dumps(m[2]) + m[3], raw, flags=re.M)
@@ -68,13 +77,3 @@ for fn in api['functions']:
 out.append('export ' + ', '.join(names))
 (ROOT / 'src/bindings.jl').write_text('\n'.join(out) + '\n')
 print(f'Generated {len(api["functions"]) - len(skipped)} functions; variadic exclusions: {skipped}')
-
-probe = ['#include <stddef.h>', '#include <stdio.h>', '#include "raylib.h"', 'int main(void) {']
-for st in api['structs']:
-    n = st['name']
-    probe.append(f'printf("{n} %zu", sizeof({n}));')
-    for field in st['fields']:
-        probe.append(f'printf(" %zu", offsetof({n}, {field["name"]}));')
-    probe.append('puts("");')
-probe.append('return 0; }')
-(ROOT / 'test/abi.c').write_text('\n'.join(probe) + '\n')
