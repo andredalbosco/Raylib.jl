@@ -1,0 +1,18 @@
+name = "Raylib"
+uuid = "36b2a3b8-7178-4b79-adeb-432bcc43ab7c"
+authors = ["André Dal Bosco"]
+version = "0.1.0"
+
+[deps]
+Raylib_jll = "f9cae4b5-603c-5a13-b73f-1dfe71482639"
+
+[compat]
+julia = "1.10"
+Raylib_jll = "=6.0.1"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+Libdl = "8f399da3-3557-5675-b5ff-fb832c97cbdb"
+
+[targets]
+test = ["Test", "Libdl"]

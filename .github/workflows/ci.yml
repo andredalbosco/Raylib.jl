@@ -1,0 +1,27 @@
+name: CI
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        julia: ['1.10', '1']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: julia-actions/setup-julia@v2
+        with:
+          version: ${{ matrix.julia }}
+      - uses: julia-actions/cache@v2
+      - name: Check generated bindings
+        run: |
+          python3 gen/generate.py
+          git diff --exit-code src/bindings.jl test/abi.c
+      - name: Install graphics test dependencies
+        run: sudo apt-get update && sudo apt-get install -y xvfb libgl1-mesa-dri
+      - name: Test API and graphics examples
+        env:
+          RAYLIB_TEST_GRAPHICS: '1'
+          LIBGL_ALWAYS_SOFTWARE: '1'
+        run: xvfb-run -a julia --project=. -e 'using Pkg; Pkg.instantiate(); Pkg.test()'
+      - name: Check all C struct layouts
+        run: julia --project=. test/abi.jl

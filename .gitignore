@@ -1,0 +1,5 @@
+Manifest.toml
+*.so
+*.dylib
+*.dll
+*.png
