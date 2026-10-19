@@ -68,7 +68,7 @@ for fn in api['functions']:
         skipped.append(fn['name'])
         continue
     n = fn['name']
-    args = [f'a{i}' for i in range(len(ps))]
+    args = [p['name'] + ('_' if p['name'] in {'begin', 'end', 'type'} else '') for p in ps]
     ts = [typ(p['type'], argument=True) for p in ps]
     out += [f'function {n}({", ".join(args)})',
             f'    ccall((:{n}, libraylib), {typ(fn["returnType"])}, ({", ".join(ts)}{"," if len(ts)==1 else ""}), {", ".join(args)})' if args else

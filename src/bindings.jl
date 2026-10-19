@@ -608,8 +608,8 @@ const BLACK = Color( 0, 0, 0, 255 )
 const BLANK = Color( 0, 0, 0, 0 )
 const MAGENTA = Color( 255, 0, 255, 255 )
 const RAYWHITE = Color( 245, 245, 245, 255 )
-function InitWindow(a0, a1, a2)
-    ccall((:InitWindow, libraylib), Cvoid, (Cint, Cint, Cstring), a0, a1, a2)
+function InitWindow(width, height, title)
+    ccall((:InitWindow, libraylib), Cvoid, (Cint, Cint, Cstring), width, height, title)
 end
 function CloseWindow()
     ccall((:CloseWindow, libraylib), Cvoid, ())
@@ -638,14 +638,14 @@ end
 function IsWindowResized()
     ccall((:IsWindowResized, libraylib), Bool, ())
 end
-function IsWindowState(a0)
-    ccall((:IsWindowState, libraylib), Bool, (Cuint,), a0)
+function IsWindowState(flag)
+    ccall((:IsWindowState, libraylib), Bool, (Cuint,), flag)
 end
-function SetWindowState(a0)
-    ccall((:SetWindowState, libraylib), Cvoid, (Cuint,), a0)
+function SetWindowState(flags)
+    ccall((:SetWindowState, libraylib), Cvoid, (Cuint,), flags)
 end
-function ClearWindowState(a0)
-    ccall((:ClearWindowState, libraylib), Cvoid, (Cuint,), a0)
+function ClearWindowState(flags)
+    ccall((:ClearWindowState, libraylib), Cvoid, (Cuint,), flags)
 end
 function ToggleFullscreen()
     ccall((:ToggleFullscreen, libraylib), Cvoid, ())
@@ -662,32 +662,32 @@ end
 function RestoreWindow()
     ccall((:RestoreWindow, libraylib), Cvoid, ())
 end
-function SetWindowIcon(a0)
-    ccall((:SetWindowIcon, libraylib), Cvoid, (Image,), a0)
+function SetWindowIcon(image)
+    ccall((:SetWindowIcon, libraylib), Cvoid, (Image,), image)
 end
-function SetWindowIcons(a0, a1)
-    ccall((:SetWindowIcons, libraylib), Cvoid, (Ptr{Image}, Cint), a0, a1)
+function SetWindowIcons(images, count)
+    ccall((:SetWindowIcons, libraylib), Cvoid, (Ptr{Image}, Cint), images, count)
 end
-function SetWindowTitle(a0)
-    ccall((:SetWindowTitle, libraylib), Cvoid, (Cstring,), a0)
+function SetWindowTitle(title)
+    ccall((:SetWindowTitle, libraylib), Cvoid, (Cstring,), title)
 end
-function SetWindowPosition(a0, a1)
-    ccall((:SetWindowPosition, libraylib), Cvoid, (Cint, Cint), a0, a1)
+function SetWindowPosition(x, y)
+    ccall((:SetWindowPosition, libraylib), Cvoid, (Cint, Cint), x, y)
 end
-function SetWindowMonitor(a0)
-    ccall((:SetWindowMonitor, libraylib), Cvoid, (Cint,), a0)
+function SetWindowMonitor(monitor)
+    ccall((:SetWindowMonitor, libraylib), Cvoid, (Cint,), monitor)
 end
-function SetWindowMinSize(a0, a1)
-    ccall((:SetWindowMinSize, libraylib), Cvoid, (Cint, Cint), a0, a1)
+function SetWindowMinSize(width, height)
+    ccall((:SetWindowMinSize, libraylib), Cvoid, (Cint, Cint), width, height)
 end
-function SetWindowMaxSize(a0, a1)
-    ccall((:SetWindowMaxSize, libraylib), Cvoid, (Cint, Cint), a0, a1)
+function SetWindowMaxSize(width, height)
+    ccall((:SetWindowMaxSize, libraylib), Cvoid, (Cint, Cint), width, height)
 end
-function SetWindowSize(a0, a1)
-    ccall((:SetWindowSize, libraylib), Cvoid, (Cint, Cint), a0, a1)
+function SetWindowSize(width, height)
+    ccall((:SetWindowSize, libraylib), Cvoid, (Cint, Cint), width, height)
 end
-function SetWindowOpacity(a0)
-    ccall((:SetWindowOpacity, libraylib), Cvoid, (Cfloat,), a0)
+function SetWindowOpacity(opacity)
+    ccall((:SetWindowOpacity, libraylib), Cvoid, (Cfloat,), opacity)
 end
 function SetWindowFocused()
     ccall((:SetWindowFocused, libraylib), Cvoid, ())
@@ -713,23 +713,23 @@ end
 function GetCurrentMonitor()
     ccall((:GetCurrentMonitor, libraylib), Cint, ())
 end
-function GetMonitorPosition(a0)
-    ccall((:GetMonitorPosition, libraylib), Vector2, (Cint,), a0)
+function GetMonitorPosition(monitor)
+    ccall((:GetMonitorPosition, libraylib), Vector2, (Cint,), monitor)
 end
-function GetMonitorWidth(a0)
-    ccall((:GetMonitorWidth, libraylib), Cint, (Cint,), a0)
+function GetMonitorWidth(monitor)
+    ccall((:GetMonitorWidth, libraylib), Cint, (Cint,), monitor)
 end
-function GetMonitorHeight(a0)
-    ccall((:GetMonitorHeight, libraylib), Cint, (Cint,), a0)
+function GetMonitorHeight(monitor)
+    ccall((:GetMonitorHeight, libraylib), Cint, (Cint,), monitor)
 end
-function GetMonitorPhysicalWidth(a0)
-    ccall((:GetMonitorPhysicalWidth, libraylib), Cint, (Cint,), a0)
+function GetMonitorPhysicalWidth(monitor)
+    ccall((:GetMonitorPhysicalWidth, libraylib), Cint, (Cint,), monitor)
 end
-function GetMonitorPhysicalHeight(a0)
-    ccall((:GetMonitorPhysicalHeight, libraylib), Cint, (Cint,), a0)
+function GetMonitorPhysicalHeight(monitor)
+    ccall((:GetMonitorPhysicalHeight, libraylib), Cint, (Cint,), monitor)
 end
-function GetMonitorRefreshRate(a0)
-    ccall((:GetMonitorRefreshRate, libraylib), Cint, (Cint,), a0)
+function GetMonitorRefreshRate(monitor)
+    ccall((:GetMonitorRefreshRate, libraylib), Cint, (Cint,), monitor)
 end
 function GetWindowPosition()
     ccall((:GetWindowPosition, libraylib), Vector2, ())
@@ -737,11 +737,11 @@ end
 function GetWindowScaleDPI()
     ccall((:GetWindowScaleDPI, libraylib), Vector2, ())
 end
-function GetMonitorName(a0)
-    ccall((:GetMonitorName, libraylib), Ptr{Cchar}, (Cint,), a0)
+function GetMonitorName(monitor)
+    ccall((:GetMonitorName, libraylib), Ptr{Cchar}, (Cint,), monitor)
 end
-function SetClipboardText(a0)
-    ccall((:SetClipboardText, libraylib), Cvoid, (Cstring,), a0)
+function SetClipboardText(text)
+    ccall((:SetClipboardText, libraylib), Cvoid, (Cstring,), text)
 end
 function GetClipboardText()
     ccall((:GetClipboardText, libraylib), Ptr{Cchar}, ())
@@ -773,8 +773,8 @@ end
 function IsCursorOnScreen()
     ccall((:IsCursorOnScreen, libraylib), Bool, ())
 end
-function ClearBackground(a0)
-    ccall((:ClearBackground, libraylib), Cvoid, (Color,), a0)
+function ClearBackground(color)
+    ccall((:ClearBackground, libraylib), Cvoid, (Color,), color)
 end
 function BeginDrawing()
     ccall((:BeginDrawing, libraylib), Cvoid, ())
@@ -782,110 +782,110 @@ end
 function EndDrawing()
     ccall((:EndDrawing, libraylib), Cvoid, ())
 end
-function BeginMode2D(a0)
-    ccall((:BeginMode2D, libraylib), Cvoid, (Camera2D,), a0)
+function BeginMode2D(camera)
+    ccall((:BeginMode2D, libraylib), Cvoid, (Camera2D,), camera)
 end
 function EndMode2D()
     ccall((:EndMode2D, libraylib), Cvoid, ())
 end
-function BeginMode3D(a0)
-    ccall((:BeginMode3D, libraylib), Cvoid, (Camera3D,), a0)
+function BeginMode3D(camera)
+    ccall((:BeginMode3D, libraylib), Cvoid, (Camera3D,), camera)
 end
 function EndMode3D()
     ccall((:EndMode3D, libraylib), Cvoid, ())
 end
-function BeginTextureMode(a0)
-    ccall((:BeginTextureMode, libraylib), Cvoid, (RenderTexture2D,), a0)
+function BeginTextureMode(target)
+    ccall((:BeginTextureMode, libraylib), Cvoid, (RenderTexture2D,), target)
 end
 function EndTextureMode()
     ccall((:EndTextureMode, libraylib), Cvoid, ())
 end
-function BeginShaderMode(a0)
-    ccall((:BeginShaderMode, libraylib), Cvoid, (Shader,), a0)
+function BeginShaderMode(shader)
+    ccall((:BeginShaderMode, libraylib), Cvoid, (Shader,), shader)
 end
 function EndShaderMode()
     ccall((:EndShaderMode, libraylib), Cvoid, ())
 end
-function BeginBlendMode(a0)
-    ccall((:BeginBlendMode, libraylib), Cvoid, (Cint,), a0)
+function BeginBlendMode(mode)
+    ccall((:BeginBlendMode, libraylib), Cvoid, (Cint,), mode)
 end
 function EndBlendMode()
     ccall((:EndBlendMode, libraylib), Cvoid, ())
 end
-function BeginScissorMode(a0, a1, a2, a3)
-    ccall((:BeginScissorMode, libraylib), Cvoid, (Cint, Cint, Cint, Cint), a0, a1, a2, a3)
+function BeginScissorMode(x, y, width, height)
+    ccall((:BeginScissorMode, libraylib), Cvoid, (Cint, Cint, Cint, Cint), x, y, width, height)
 end
 function EndScissorMode()
     ccall((:EndScissorMode, libraylib), Cvoid, ())
 end
-function BeginVrStereoMode(a0)
-    ccall((:BeginVrStereoMode, libraylib), Cvoid, (VrStereoConfig,), a0)
+function BeginVrStereoMode(config)
+    ccall((:BeginVrStereoMode, libraylib), Cvoid, (VrStereoConfig,), config)
 end
 function EndVrStereoMode()
     ccall((:EndVrStereoMode, libraylib), Cvoid, ())
 end
-function LoadVrStereoConfig(a0)
-    ccall((:LoadVrStereoConfig, libraylib), VrStereoConfig, (VrDeviceInfo,), a0)
+function LoadVrStereoConfig(device)
+    ccall((:LoadVrStereoConfig, libraylib), VrStereoConfig, (VrDeviceInfo,), device)
 end
-function UnloadVrStereoConfig(a0)
-    ccall((:UnloadVrStereoConfig, libraylib), Cvoid, (VrStereoConfig,), a0)
+function UnloadVrStereoConfig(config)
+    ccall((:UnloadVrStereoConfig, libraylib), Cvoid, (VrStereoConfig,), config)
 end
-function LoadShader(a0, a1)
-    ccall((:LoadShader, libraylib), Shader, (Cstring, Cstring), a0, a1)
+function LoadShader(vsFileName, fsFileName)
+    ccall((:LoadShader, libraylib), Shader, (Cstring, Cstring), vsFileName, fsFileName)
 end
-function LoadShaderFromMemory(a0, a1)
-    ccall((:LoadShaderFromMemory, libraylib), Shader, (Cstring, Cstring), a0, a1)
+function LoadShaderFromMemory(vsCode, fsCode)
+    ccall((:LoadShaderFromMemory, libraylib), Shader, (Cstring, Cstring), vsCode, fsCode)
 end
-function IsShaderValid(a0)
-    ccall((:IsShaderValid, libraylib), Bool, (Shader,), a0)
+function IsShaderValid(shader)
+    ccall((:IsShaderValid, libraylib), Bool, (Shader,), shader)
 end
-function GetShaderLocation(a0, a1)
-    ccall((:GetShaderLocation, libraylib), Cint, (Shader, Cstring), a0, a1)
+function GetShaderLocation(shader, uniformName)
+    ccall((:GetShaderLocation, libraylib), Cint, (Shader, Cstring), shader, uniformName)
 end
-function GetShaderLocationAttrib(a0, a1)
-    ccall((:GetShaderLocationAttrib, libraylib), Cint, (Shader, Cstring), a0, a1)
+function GetShaderLocationAttrib(shader, attribName)
+    ccall((:GetShaderLocationAttrib, libraylib), Cint, (Shader, Cstring), shader, attribName)
 end
-function SetShaderValue(a0, a1, a2, a3)
-    ccall((:SetShaderValue, libraylib), Cvoid, (Shader, Cint, Ptr{Cvoid}, Cint), a0, a1, a2, a3)
+function SetShaderValue(shader, locIndex, value, uniformType)
+    ccall((:SetShaderValue, libraylib), Cvoid, (Shader, Cint, Ptr{Cvoid}, Cint), shader, locIndex, value, uniformType)
 end
-function SetShaderValueV(a0, a1, a2, a3, a4)
-    ccall((:SetShaderValueV, libraylib), Cvoid, (Shader, Cint, Ptr{Cvoid}, Cint, Cint), a0, a1, a2, a3, a4)
+function SetShaderValueV(shader, locIndex, value, uniformType, count)
+    ccall((:SetShaderValueV, libraylib), Cvoid, (Shader, Cint, Ptr{Cvoid}, Cint, Cint), shader, locIndex, value, uniformType, count)
 end
-function SetShaderValueMatrix(a0, a1, a2)
-    ccall((:SetShaderValueMatrix, libraylib), Cvoid, (Shader, Cint, Matrix), a0, a1, a2)
+function SetShaderValueMatrix(shader, locIndex, mat)
+    ccall((:SetShaderValueMatrix, libraylib), Cvoid, (Shader, Cint, Matrix), shader, locIndex, mat)
 end
-function SetShaderValueTexture(a0, a1, a2)
-    ccall((:SetShaderValueTexture, libraylib), Cvoid, (Shader, Cint, Texture2D), a0, a1, a2)
+function SetShaderValueTexture(shader, locIndex, texture)
+    ccall((:SetShaderValueTexture, libraylib), Cvoid, (Shader, Cint, Texture2D), shader, locIndex, texture)
 end
-function UnloadShader(a0)
-    ccall((:UnloadShader, libraylib), Cvoid, (Shader,), a0)
+function UnloadShader(shader)
+    ccall((:UnloadShader, libraylib), Cvoid, (Shader,), shader)
 end
-function GetScreenToWorldRay(a0, a1)
-    ccall((:GetScreenToWorldRay, libraylib), Ray, (Vector2, Camera), a0, a1)
+function GetScreenToWorldRay(position, camera)
+    ccall((:GetScreenToWorldRay, libraylib), Ray, (Vector2, Camera), position, camera)
 end
-function GetScreenToWorldRayEx(a0, a1, a2, a3)
-    ccall((:GetScreenToWorldRayEx, libraylib), Ray, (Vector2, Camera, Cint, Cint), a0, a1, a2, a3)
+function GetScreenToWorldRayEx(position, camera, width, height)
+    ccall((:GetScreenToWorldRayEx, libraylib), Ray, (Vector2, Camera, Cint, Cint), position, camera, width, height)
 end
-function GetWorldToScreen(a0, a1)
-    ccall((:GetWorldToScreen, libraylib), Vector2, (Vector3, Camera), a0, a1)
+function GetWorldToScreen(position, camera)
+    ccall((:GetWorldToScreen, libraylib), Vector2, (Vector3, Camera), position, camera)
 end
-function GetWorldToScreenEx(a0, a1, a2, a3)
-    ccall((:GetWorldToScreenEx, libraylib), Vector2, (Vector3, Camera, Cint, Cint), a0, a1, a2, a3)
+function GetWorldToScreenEx(position, camera, width, height)
+    ccall((:GetWorldToScreenEx, libraylib), Vector2, (Vector3, Camera, Cint, Cint), position, camera, width, height)
 end
-function GetWorldToScreen2D(a0, a1)
-    ccall((:GetWorldToScreen2D, libraylib), Vector2, (Vector2, Camera2D), a0, a1)
+function GetWorldToScreen2D(position, camera)
+    ccall((:GetWorldToScreen2D, libraylib), Vector2, (Vector2, Camera2D), position, camera)
 end
-function GetScreenToWorld2D(a0, a1)
-    ccall((:GetScreenToWorld2D, libraylib), Vector2, (Vector2, Camera2D), a0, a1)
+function GetScreenToWorld2D(position, camera)
+    ccall((:GetScreenToWorld2D, libraylib), Vector2, (Vector2, Camera2D), position, camera)
 end
-function GetCameraMatrix(a0)
-    ccall((:GetCameraMatrix, libraylib), Matrix, (Camera,), a0)
+function GetCameraMatrix(camera)
+    ccall((:GetCameraMatrix, libraylib), Matrix, (Camera,), camera)
 end
-function GetCameraMatrix2D(a0)
-    ccall((:GetCameraMatrix2D, libraylib), Matrix, (Camera2D,), a0)
+function GetCameraMatrix2D(camera)
+    ccall((:GetCameraMatrix2D, libraylib), Matrix, (Camera2D,), camera)
 end
-function SetTargetFPS(a0)
-    ccall((:SetTargetFPS, libraylib), Cvoid, (Cint,), a0)
+function SetTargetFPS(fps)
+    ccall((:SetTargetFPS, libraylib), Cvoid, (Cint,), fps)
 end
 function GetFrameTime()
     ccall((:GetFrameTime, libraylib), Cfloat, ())
@@ -902,125 +902,125 @@ end
 function PollInputEvents()
     ccall((:PollInputEvents, libraylib), Cvoid, ())
 end
-function WaitTime(a0)
-    ccall((:WaitTime, libraylib), Cvoid, (Cdouble,), a0)
+function WaitTime(seconds)
+    ccall((:WaitTime, libraylib), Cvoid, (Cdouble,), seconds)
 end
-function SetRandomSeed(a0)
-    ccall((:SetRandomSeed, libraylib), Cvoid, (Cuint,), a0)
+function SetRandomSeed(seed)
+    ccall((:SetRandomSeed, libraylib), Cvoid, (Cuint,), seed)
 end
-function GetRandomValue(a0, a1)
-    ccall((:GetRandomValue, libraylib), Cint, (Cint, Cint), a0, a1)
+function GetRandomValue(min, max)
+    ccall((:GetRandomValue, libraylib), Cint, (Cint, Cint), min, max)
 end
-function LoadRandomSequence(a0, a1, a2)
-    ccall((:LoadRandomSequence, libraylib), Ptr{Cint}, (Cuint, Cint, Cint), a0, a1, a2)
+function LoadRandomSequence(count, min, max)
+    ccall((:LoadRandomSequence, libraylib), Ptr{Cint}, (Cuint, Cint, Cint), count, min, max)
 end
-function UnloadRandomSequence(a0)
-    ccall((:UnloadRandomSequence, libraylib), Cvoid, (Ptr{Cint},), a0)
+function UnloadRandomSequence(sequence)
+    ccall((:UnloadRandomSequence, libraylib), Cvoid, (Ptr{Cint},), sequence)
 end
-function TakeScreenshot(a0)
-    ccall((:TakeScreenshot, libraylib), Cvoid, (Cstring,), a0)
+function TakeScreenshot(fileName)
+    ccall((:TakeScreenshot, libraylib), Cvoid, (Cstring,), fileName)
 end
-function SetConfigFlags(a0)
-    ccall((:SetConfigFlags, libraylib), Cvoid, (Cuint,), a0)
+function SetConfigFlags(flags)
+    ccall((:SetConfigFlags, libraylib), Cvoid, (Cuint,), flags)
 end
-function OpenURL(a0)
-    ccall((:OpenURL, libraylib), Cvoid, (Cstring,), a0)
+function OpenURL(url)
+    ccall((:OpenURL, libraylib), Cvoid, (Cstring,), url)
 end
-function SetTraceLogLevel(a0)
-    ccall((:SetTraceLogLevel, libraylib), Cvoid, (Cint,), a0)
+function SetTraceLogLevel(logLevel)
+    ccall((:SetTraceLogLevel, libraylib), Cvoid, (Cint,), logLevel)
 end
-function SetTraceLogCallback(a0)
-    ccall((:SetTraceLogCallback, libraylib), Cvoid, (Ptr{Cvoid},), a0)
+function SetTraceLogCallback(callback)
+    ccall((:SetTraceLogCallback, libraylib), Cvoid, (Ptr{Cvoid},), callback)
 end
-function MemAlloc(a0)
-    ccall((:MemAlloc, libraylib), Ptr{Cvoid}, (Cuint,), a0)
+function MemAlloc(size)
+    ccall((:MemAlloc, libraylib), Ptr{Cvoid}, (Cuint,), size)
 end
-function MemRealloc(a0, a1)
-    ccall((:MemRealloc, libraylib), Ptr{Cvoid}, (Ptr{Cvoid}, Cuint), a0, a1)
+function MemRealloc(ptr, size)
+    ccall((:MemRealloc, libraylib), Ptr{Cvoid}, (Ptr{Cvoid}, Cuint), ptr, size)
 end
-function MemFree(a0)
-    ccall((:MemFree, libraylib), Cvoid, (Ptr{Cvoid},), a0)
+function MemFree(ptr)
+    ccall((:MemFree, libraylib), Cvoid, (Ptr{Cvoid},), ptr)
 end
-function LoadFileData(a0, a1)
-    ccall((:LoadFileData, libraylib), Ptr{Cuchar}, (Cstring, Ptr{Cint}), a0, a1)
+function LoadFileData(fileName, dataSize)
+    ccall((:LoadFileData, libraylib), Ptr{Cuchar}, (Cstring, Ptr{Cint}), fileName, dataSize)
 end
-function UnloadFileData(a0)
-    ccall((:UnloadFileData, libraylib), Cvoid, (Ptr{Cuchar},), a0)
+function UnloadFileData(data)
+    ccall((:UnloadFileData, libraylib), Cvoid, (Ptr{Cuchar},), data)
 end
-function SaveFileData(a0, a1, a2)
-    ccall((:SaveFileData, libraylib), Bool, (Cstring, Ptr{Cvoid}, Cint), a0, a1, a2)
+function SaveFileData(fileName, data, dataSize)
+    ccall((:SaveFileData, libraylib), Bool, (Cstring, Ptr{Cvoid}, Cint), fileName, data, dataSize)
 end
-function ExportDataAsCode(a0, a1, a2)
-    ccall((:ExportDataAsCode, libraylib), Bool, (Ptr{Cuchar}, Cint, Cstring), a0, a1, a2)
+function ExportDataAsCode(data, dataSize, fileName)
+    ccall((:ExportDataAsCode, libraylib), Bool, (Ptr{Cuchar}, Cint, Cstring), data, dataSize, fileName)
 end
-function LoadFileText(a0)
-    ccall((:LoadFileText, libraylib), Ptr{Cchar}, (Cstring,), a0)
+function LoadFileText(fileName)
+    ccall((:LoadFileText, libraylib), Ptr{Cchar}, (Cstring,), fileName)
 end
-function UnloadFileText(a0)
-    ccall((:UnloadFileText, libraylib), Cvoid, (Cstring,), a0)
+function UnloadFileText(text)
+    ccall((:UnloadFileText, libraylib), Cvoid, (Cstring,), text)
 end
-function SaveFileText(a0, a1)
-    ccall((:SaveFileText, libraylib), Bool, (Cstring, Cstring), a0, a1)
+function SaveFileText(fileName, text)
+    ccall((:SaveFileText, libraylib), Bool, (Cstring, Cstring), fileName, text)
 end
-function SetLoadFileDataCallback(a0)
-    ccall((:SetLoadFileDataCallback, libraylib), Cvoid, (Ptr{Cvoid},), a0)
+function SetLoadFileDataCallback(callback)
+    ccall((:SetLoadFileDataCallback, libraylib), Cvoid, (Ptr{Cvoid},), callback)
 end
-function SetSaveFileDataCallback(a0)
-    ccall((:SetSaveFileDataCallback, libraylib), Cvoid, (Ptr{Cvoid},), a0)
+function SetSaveFileDataCallback(callback)
+    ccall((:SetSaveFileDataCallback, libraylib), Cvoid, (Ptr{Cvoid},), callback)
 end
-function SetLoadFileTextCallback(a0)
-    ccall((:SetLoadFileTextCallback, libraylib), Cvoid, (Ptr{Cvoid},), a0)
+function SetLoadFileTextCallback(callback)
+    ccall((:SetLoadFileTextCallback, libraylib), Cvoid, (Ptr{Cvoid},), callback)
 end
-function SetSaveFileTextCallback(a0)
-    ccall((:SetSaveFileTextCallback, libraylib), Cvoid, (Ptr{Cvoid},), a0)
+function SetSaveFileTextCallback(callback)
+    ccall((:SetSaveFileTextCallback, libraylib), Cvoid, (Ptr{Cvoid},), callback)
 end
-function FileRename(a0, a1)
-    ccall((:FileRename, libraylib), Cint, (Cstring, Cstring), a0, a1)
+function FileRename(fileName, fileRename)
+    ccall((:FileRename, libraylib), Cint, (Cstring, Cstring), fileName, fileRename)
 end
-function FileRemove(a0)
-    ccall((:FileRemove, libraylib), Cint, (Cstring,), a0)
+function FileRemove(fileName)
+    ccall((:FileRemove, libraylib), Cint, (Cstring,), fileName)
 end
-function FileCopy(a0, a1)
-    ccall((:FileCopy, libraylib), Cint, (Cstring, Cstring), a0, a1)
+function FileCopy(srcPath, dstPath)
+    ccall((:FileCopy, libraylib), Cint, (Cstring, Cstring), srcPath, dstPath)
 end
-function FileMove(a0, a1)
-    ccall((:FileMove, libraylib), Cint, (Cstring, Cstring), a0, a1)
+function FileMove(srcPath, dstPath)
+    ccall((:FileMove, libraylib), Cint, (Cstring, Cstring), srcPath, dstPath)
 end
-function FileTextReplace(a0, a1, a2)
-    ccall((:FileTextReplace, libraylib), Cint, (Cstring, Cstring, Cstring), a0, a1, a2)
+function FileTextReplace(fileName, search, replacement)
+    ccall((:FileTextReplace, libraylib), Cint, (Cstring, Cstring, Cstring), fileName, search, replacement)
 end
-function FileTextFindIndex(a0, a1)
-    ccall((:FileTextFindIndex, libraylib), Cint, (Cstring, Cstring), a0, a1)
+function FileTextFindIndex(fileName, search)
+    ccall((:FileTextFindIndex, libraylib), Cint, (Cstring, Cstring), fileName, search)
 end
-function FileExists(a0)
-    ccall((:FileExists, libraylib), Bool, (Cstring,), a0)
+function FileExists(fileName)
+    ccall((:FileExists, libraylib), Bool, (Cstring,), fileName)
 end
-function DirectoryExists(a0)
-    ccall((:DirectoryExists, libraylib), Bool, (Cstring,), a0)
+function DirectoryExists(dirPath)
+    ccall((:DirectoryExists, libraylib), Bool, (Cstring,), dirPath)
 end
-function IsFileExtension(a0, a1)
-    ccall((:IsFileExtension, libraylib), Bool, (Cstring, Cstring), a0, a1)
+function IsFileExtension(fileName, ext)
+    ccall((:IsFileExtension, libraylib), Bool, (Cstring, Cstring), fileName, ext)
 end
-function GetFileLength(a0)
-    ccall((:GetFileLength, libraylib), Cint, (Cstring,), a0)
+function GetFileLength(fileName)
+    ccall((:GetFileLength, libraylib), Cint, (Cstring,), fileName)
 end
-function GetFileModTime(a0)
-    ccall((:GetFileModTime, libraylib), Clong, (Cstring,), a0)
+function GetFileModTime(fileName)
+    ccall((:GetFileModTime, libraylib), Clong, (Cstring,), fileName)
 end
-function GetFileExtension(a0)
-    ccall((:GetFileExtension, libraylib), Ptr{Cchar}, (Cstring,), a0)
+function GetFileExtension(fileName)
+    ccall((:GetFileExtension, libraylib), Ptr{Cchar}, (Cstring,), fileName)
 end
-function GetFileName(a0)
-    ccall((:GetFileName, libraylib), Ptr{Cchar}, (Cstring,), a0)
+function GetFileName(filePath)
+    ccall((:GetFileName, libraylib), Ptr{Cchar}, (Cstring,), filePath)
 end
-function GetFileNameWithoutExt(a0)
-    ccall((:GetFileNameWithoutExt, libraylib), Ptr{Cchar}, (Cstring,), a0)
+function GetFileNameWithoutExt(filePath)
+    ccall((:GetFileNameWithoutExt, libraylib), Ptr{Cchar}, (Cstring,), filePath)
 end
-function GetDirectoryPath(a0)
-    ccall((:GetDirectoryPath, libraylib), Ptr{Cchar}, (Cstring,), a0)
+function GetDirectoryPath(filePath)
+    ccall((:GetDirectoryPath, libraylib), Ptr{Cchar}, (Cstring,), filePath)
 end
-function GetPrevDirectoryPath(a0)
-    ccall((:GetPrevDirectoryPath, libraylib), Ptr{Cchar}, (Cstring,), a0)
+function GetPrevDirectoryPath(dirPath)
+    ccall((:GetPrevDirectoryPath, libraylib), Ptr{Cchar}, (Cstring,), dirPath)
 end
 function GetWorkingDirectory()
     ccall((:GetWorkingDirectory, libraylib), Ptr{Cchar}, ())
@@ -1028,26 +1028,26 @@ end
 function GetApplicationDirectory()
     ccall((:GetApplicationDirectory, libraylib), Ptr{Cchar}, ())
 end
-function MakeDirectory(a0)
-    ccall((:MakeDirectory, libraylib), Cint, (Cstring,), a0)
+function MakeDirectory(dirPath)
+    ccall((:MakeDirectory, libraylib), Cint, (Cstring,), dirPath)
 end
-function ChangeDirectory(a0)
-    ccall((:ChangeDirectory, libraylib), Bool, (Cstring,), a0)
+function ChangeDirectory(dirPath)
+    ccall((:ChangeDirectory, libraylib), Bool, (Cstring,), dirPath)
 end
-function IsPathFile(a0)
-    ccall((:IsPathFile, libraylib), Bool, (Cstring,), a0)
+function IsPathFile(path)
+    ccall((:IsPathFile, libraylib), Bool, (Cstring,), path)
 end
-function IsFileNameValid(a0)
-    ccall((:IsFileNameValid, libraylib), Bool, (Cstring,), a0)
+function IsFileNameValid(fileName)
+    ccall((:IsFileNameValid, libraylib), Bool, (Cstring,), fileName)
 end
-function LoadDirectoryFiles(a0)
-    ccall((:LoadDirectoryFiles, libraylib), FilePathList, (Cstring,), a0)
+function LoadDirectoryFiles(dirPath)
+    ccall((:LoadDirectoryFiles, libraylib), FilePathList, (Cstring,), dirPath)
 end
-function LoadDirectoryFilesEx(a0, a1, a2)
-    ccall((:LoadDirectoryFilesEx, libraylib), FilePathList, (Cstring, Cstring, Bool), a0, a1, a2)
+function LoadDirectoryFilesEx(basePath, filter, scanSubdirs)
+    ccall((:LoadDirectoryFilesEx, libraylib), FilePathList, (Cstring, Cstring, Bool), basePath, filter, scanSubdirs)
 end
-function UnloadDirectoryFiles(a0)
-    ccall((:UnloadDirectoryFiles, libraylib), Cvoid, (FilePathList,), a0)
+function UnloadDirectoryFiles(files)
+    ccall((:UnloadDirectoryFiles, libraylib), Cvoid, (FilePathList,), files)
 end
 function IsFileDropped()
     ccall((:IsFileDropped, libraylib), Bool, ())
@@ -1055,53 +1055,53 @@ end
 function LoadDroppedFiles()
     ccall((:LoadDroppedFiles, libraylib), FilePathList, ())
 end
-function UnloadDroppedFiles(a0)
-    ccall((:UnloadDroppedFiles, libraylib), Cvoid, (FilePathList,), a0)
+function UnloadDroppedFiles(files)
+    ccall((:UnloadDroppedFiles, libraylib), Cvoid, (FilePathList,), files)
 end
-function GetDirectoryFileCount(a0)
-    ccall((:GetDirectoryFileCount, libraylib), Cuint, (Cstring,), a0)
+function GetDirectoryFileCount(dirPath)
+    ccall((:GetDirectoryFileCount, libraylib), Cuint, (Cstring,), dirPath)
 end
-function GetDirectoryFileCountEx(a0, a1, a2)
-    ccall((:GetDirectoryFileCountEx, libraylib), Cuint, (Cstring, Cstring, Bool), a0, a1, a2)
+function GetDirectoryFileCountEx(basePath, filter, scanSubdirs)
+    ccall((:GetDirectoryFileCountEx, libraylib), Cuint, (Cstring, Cstring, Bool), basePath, filter, scanSubdirs)
 end
-function CompressData(a0, a1, a2)
-    ccall((:CompressData, libraylib), Ptr{Cuchar}, (Ptr{Cuchar}, Cint, Ptr{Cint}), a0, a1, a2)
+function CompressData(data, dataSize, compDataSize)
+    ccall((:CompressData, libraylib), Ptr{Cuchar}, (Ptr{Cuchar}, Cint, Ptr{Cint}), data, dataSize, compDataSize)
 end
-function DecompressData(a0, a1, a2)
-    ccall((:DecompressData, libraylib), Ptr{Cuchar}, (Ptr{Cuchar}, Cint, Ptr{Cint}), a0, a1, a2)
+function DecompressData(compData, compDataSize, dataSize)
+    ccall((:DecompressData, libraylib), Ptr{Cuchar}, (Ptr{Cuchar}, Cint, Ptr{Cint}), compData, compDataSize, dataSize)
 end
-function EncodeDataBase64(a0, a1, a2)
-    ccall((:EncodeDataBase64, libraylib), Ptr{Cchar}, (Ptr{Cuchar}, Cint, Ptr{Cint}), a0, a1, a2)
+function EncodeDataBase64(data, dataSize, outputSize)
+    ccall((:EncodeDataBase64, libraylib), Ptr{Cchar}, (Ptr{Cuchar}, Cint, Ptr{Cint}), data, dataSize, outputSize)
 end
-function DecodeDataBase64(a0, a1)
-    ccall((:DecodeDataBase64, libraylib), Ptr{Cuchar}, (Cstring, Ptr{Cint}), a0, a1)
+function DecodeDataBase64(text, outputSize)
+    ccall((:DecodeDataBase64, libraylib), Ptr{Cuchar}, (Cstring, Ptr{Cint}), text, outputSize)
 end
-function ComputeCRC32(a0, a1)
-    ccall((:ComputeCRC32, libraylib), Cuint, (Ptr{Cuchar}, Cint), a0, a1)
+function ComputeCRC32(data, dataSize)
+    ccall((:ComputeCRC32, libraylib), Cuint, (Ptr{Cuchar}, Cint), data, dataSize)
 end
-function ComputeMD5(a0, a1)
-    ccall((:ComputeMD5, libraylib), Ptr{Cuint}, (Ptr{Cuchar}, Cint), a0, a1)
+function ComputeMD5(data, dataSize)
+    ccall((:ComputeMD5, libraylib), Ptr{Cuint}, (Ptr{Cuchar}, Cint), data, dataSize)
 end
-function ComputeSHA1(a0, a1)
-    ccall((:ComputeSHA1, libraylib), Ptr{Cuint}, (Ptr{Cuchar}, Cint), a0, a1)
+function ComputeSHA1(data, dataSize)
+    ccall((:ComputeSHA1, libraylib), Ptr{Cuint}, (Ptr{Cuchar}, Cint), data, dataSize)
 end
-function ComputeSHA256(a0, a1)
-    ccall((:ComputeSHA256, libraylib), Ptr{Cuint}, (Ptr{Cuchar}, Cint), a0, a1)
+function ComputeSHA256(data, dataSize)
+    ccall((:ComputeSHA256, libraylib), Ptr{Cuint}, (Ptr{Cuchar}, Cint), data, dataSize)
 end
-function LoadAutomationEventList(a0)
-    ccall((:LoadAutomationEventList, libraylib), AutomationEventList, (Cstring,), a0)
+function LoadAutomationEventList(fileName)
+    ccall((:LoadAutomationEventList, libraylib), AutomationEventList, (Cstring,), fileName)
 end
-function UnloadAutomationEventList(a0)
-    ccall((:UnloadAutomationEventList, libraylib), Cvoid, (AutomationEventList,), a0)
+function UnloadAutomationEventList(list)
+    ccall((:UnloadAutomationEventList, libraylib), Cvoid, (AutomationEventList,), list)
 end
-function ExportAutomationEventList(a0, a1)
-    ccall((:ExportAutomationEventList, libraylib), Bool, (AutomationEventList, Cstring), a0, a1)
+function ExportAutomationEventList(list, fileName)
+    ccall((:ExportAutomationEventList, libraylib), Bool, (AutomationEventList, Cstring), list, fileName)
 end
-function SetAutomationEventList(a0)
-    ccall((:SetAutomationEventList, libraylib), Cvoid, (Ptr{AutomationEventList},), a0)
+function SetAutomationEventList(list)
+    ccall((:SetAutomationEventList, libraylib), Cvoid, (Ptr{AutomationEventList},), list)
 end
-function SetAutomationEventBaseFrame(a0)
-    ccall((:SetAutomationEventBaseFrame, libraylib), Cvoid, (Cint,), a0)
+function SetAutomationEventBaseFrame(frame)
+    ccall((:SetAutomationEventBaseFrame, libraylib), Cvoid, (Cint,), frame)
 end
 function StartAutomationEventRecording()
     ccall((:StartAutomationEventRecording, libraylib), Cvoid, ())
@@ -1109,23 +1109,23 @@ end
 function StopAutomationEventRecording()
     ccall((:StopAutomationEventRecording, libraylib), Cvoid, ())
 end
-function PlayAutomationEvent(a0)
-    ccall((:PlayAutomationEvent, libraylib), Cvoid, (AutomationEvent,), a0)
+function PlayAutomationEvent(event)
+    ccall((:PlayAutomationEvent, libraylib), Cvoid, (AutomationEvent,), event)
 end
-function IsKeyPressed(a0)
-    ccall((:IsKeyPressed, libraylib), Bool, (Cint,), a0)
+function IsKeyPressed(key)
+    ccall((:IsKeyPressed, libraylib), Bool, (Cint,), key)
 end
-function IsKeyPressedRepeat(a0)
-    ccall((:IsKeyPressedRepeat, libraylib), Bool, (Cint,), a0)
+function IsKeyPressedRepeat(key)
+    ccall((:IsKeyPressedRepeat, libraylib), Bool, (Cint,), key)
 end
-function IsKeyDown(a0)
-    ccall((:IsKeyDown, libraylib), Bool, (Cint,), a0)
+function IsKeyDown(key)
+    ccall((:IsKeyDown, libraylib), Bool, (Cint,), key)
 end
-function IsKeyReleased(a0)
-    ccall((:IsKeyReleased, libraylib), Bool, (Cint,), a0)
+function IsKeyReleased(key)
+    ccall((:IsKeyReleased, libraylib), Bool, (Cint,), key)
 end
-function IsKeyUp(a0)
-    ccall((:IsKeyUp, libraylib), Bool, (Cint,), a0)
+function IsKeyUp(key)
+    ccall((:IsKeyUp, libraylib), Bool, (Cint,), key)
 end
 function GetKeyPressed()
     ccall((:GetKeyPressed, libraylib), Cint, ())
@@ -1133,56 +1133,56 @@ end
 function GetCharPressed()
     ccall((:GetCharPressed, libraylib), Cint, ())
 end
-function GetKeyName(a0)
-    ccall((:GetKeyName, libraylib), Ptr{Cchar}, (Cint,), a0)
+function GetKeyName(key)
+    ccall((:GetKeyName, libraylib), Ptr{Cchar}, (Cint,), key)
 end
-function SetExitKey(a0)
-    ccall((:SetExitKey, libraylib), Cvoid, (Cint,), a0)
+function SetExitKey(key)
+    ccall((:SetExitKey, libraylib), Cvoid, (Cint,), key)
 end
-function IsGamepadAvailable(a0)
-    ccall((:IsGamepadAvailable, libraylib), Bool, (Cint,), a0)
+function IsGamepadAvailable(gamepad)
+    ccall((:IsGamepadAvailable, libraylib), Bool, (Cint,), gamepad)
 end
-function GetGamepadName(a0)
-    ccall((:GetGamepadName, libraylib), Ptr{Cchar}, (Cint,), a0)
+function GetGamepadName(gamepad)
+    ccall((:GetGamepadName, libraylib), Ptr{Cchar}, (Cint,), gamepad)
 end
-function IsGamepadButtonPressed(a0, a1)
-    ccall((:IsGamepadButtonPressed, libraylib), Bool, (Cint, Cint), a0, a1)
+function IsGamepadButtonPressed(gamepad, button)
+    ccall((:IsGamepadButtonPressed, libraylib), Bool, (Cint, Cint), gamepad, button)
 end
-function IsGamepadButtonDown(a0, a1)
-    ccall((:IsGamepadButtonDown, libraylib), Bool, (Cint, Cint), a0, a1)
+function IsGamepadButtonDown(gamepad, button)
+    ccall((:IsGamepadButtonDown, libraylib), Bool, (Cint, Cint), gamepad, button)
 end
-function IsGamepadButtonReleased(a0, a1)
-    ccall((:IsGamepadButtonReleased, libraylib), Bool, (Cint, Cint), a0, a1)
+function IsGamepadButtonReleased(gamepad, button)
+    ccall((:IsGamepadButtonReleased, libraylib), Bool, (Cint, Cint), gamepad, button)
 end
-function IsGamepadButtonUp(a0, a1)
-    ccall((:IsGamepadButtonUp, libraylib), Bool, (Cint, Cint), a0, a1)
+function IsGamepadButtonUp(gamepad, button)
+    ccall((:IsGamepadButtonUp, libraylib), Bool, (Cint, Cint), gamepad, button)
 end
 function GetGamepadButtonPressed()
     ccall((:GetGamepadButtonPressed, libraylib), Cint, ())
 end
-function GetGamepadAxisCount(a0)
-    ccall((:GetGamepadAxisCount, libraylib), Cint, (Cint,), a0)
+function GetGamepadAxisCount(gamepad)
+    ccall((:GetGamepadAxisCount, libraylib), Cint, (Cint,), gamepad)
 end
-function GetGamepadAxisMovement(a0, a1)
-    ccall((:GetGamepadAxisMovement, libraylib), Cfloat, (Cint, Cint), a0, a1)
+function GetGamepadAxisMovement(gamepad, axis)
+    ccall((:GetGamepadAxisMovement, libraylib), Cfloat, (Cint, Cint), gamepad, axis)
 end
-function SetGamepadMappings(a0)
-    ccall((:SetGamepadMappings, libraylib), Cint, (Cstring,), a0)
+function SetGamepadMappings(mappings)
+    ccall((:SetGamepadMappings, libraylib), Cint, (Cstring,), mappings)
 end
-function SetGamepadVibration(a0, a1, a2, a3)
-    ccall((:SetGamepadVibration, libraylib), Cvoid, (Cint, Cfloat, Cfloat, Cfloat), a0, a1, a2, a3)
+function SetGamepadVibration(gamepad, leftMotor, rightMotor, duration)
+    ccall((:SetGamepadVibration, libraylib), Cvoid, (Cint, Cfloat, Cfloat, Cfloat), gamepad, leftMotor, rightMotor, duration)
 end
-function IsMouseButtonPressed(a0)
-    ccall((:IsMouseButtonPressed, libraylib), Bool, (Cint,), a0)
+function IsMouseButtonPressed(button)
+    ccall((:IsMouseButtonPressed, libraylib), Bool, (Cint,), button)
 end
-function IsMouseButtonDown(a0)
-    ccall((:IsMouseButtonDown, libraylib), Bool, (Cint,), a0)
+function IsMouseButtonDown(button)
+    ccall((:IsMouseButtonDown, libraylib), Bool, (Cint,), button)
 end
-function IsMouseButtonReleased(a0)
-    ccall((:IsMouseButtonReleased, libraylib), Bool, (Cint,), a0)
+function IsMouseButtonReleased(button)
+    ccall((:IsMouseButtonReleased, libraylib), Bool, (Cint,), button)
 end
-function IsMouseButtonUp(a0)
-    ccall((:IsMouseButtonUp, libraylib), Bool, (Cint,), a0)
+function IsMouseButtonUp(button)
+    ccall((:IsMouseButtonUp, libraylib), Bool, (Cint,), button)
 end
 function GetMouseX()
     ccall((:GetMouseX, libraylib), Cint, ())
@@ -1196,14 +1196,14 @@ end
 function GetMouseDelta()
     ccall((:GetMouseDelta, libraylib), Vector2, ())
 end
-function SetMousePosition(a0, a1)
-    ccall((:SetMousePosition, libraylib), Cvoid, (Cint, Cint), a0, a1)
+function SetMousePosition(x, y)
+    ccall((:SetMousePosition, libraylib), Cvoid, (Cint, Cint), x, y)
 end
-function SetMouseOffset(a0, a1)
-    ccall((:SetMouseOffset, libraylib), Cvoid, (Cint, Cint), a0, a1)
+function SetMouseOffset(offsetX, offsetY)
+    ccall((:SetMouseOffset, libraylib), Cvoid, (Cint, Cint), offsetX, offsetY)
 end
-function SetMouseScale(a0, a1)
-    ccall((:SetMouseScale, libraylib), Cvoid, (Cfloat, Cfloat), a0, a1)
+function SetMouseScale(scaleX, scaleY)
+    ccall((:SetMouseScale, libraylib), Cvoid, (Cfloat, Cfloat), scaleX, scaleY)
 end
 function GetMouseWheelMove()
     ccall((:GetMouseWheelMove, libraylib), Cfloat, ())
@@ -1211,8 +1211,8 @@ end
 function GetMouseWheelMoveV()
     ccall((:GetMouseWheelMoveV, libraylib), Vector2, ())
 end
-function SetMouseCursor(a0)
-    ccall((:SetMouseCursor, libraylib), Cvoid, (Cint,), a0)
+function SetMouseCursor(cursor)
+    ccall((:SetMouseCursor, libraylib), Cvoid, (Cint,), cursor)
 end
 function GetTouchX()
     ccall((:GetTouchX, libraylib), Cint, ())
@@ -1220,20 +1220,20 @@ end
 function GetTouchY()
     ccall((:GetTouchY, libraylib), Cint, ())
 end
-function GetTouchPosition(a0)
-    ccall((:GetTouchPosition, libraylib), Vector2, (Cint,), a0)
+function GetTouchPosition(index)
+    ccall((:GetTouchPosition, libraylib), Vector2, (Cint,), index)
 end
-function GetTouchPointId(a0)
-    ccall((:GetTouchPointId, libraylib), Cint, (Cint,), a0)
+function GetTouchPointId(index)
+    ccall((:GetTouchPointId, libraylib), Cint, (Cint,), index)
 end
 function GetTouchPointCount()
     ccall((:GetTouchPointCount, libraylib), Cint, ())
 end
-function SetGesturesEnabled(a0)
-    ccall((:SetGesturesEnabled, libraylib), Cvoid, (Cuint,), a0)
+function SetGesturesEnabled(flags)
+    ccall((:SetGesturesEnabled, libraylib), Cvoid, (Cuint,), flags)
 end
-function IsGestureDetected(a0)
-    ccall((:IsGestureDetected, libraylib), Bool, (Cuint,), a0)
+function IsGestureDetected(gesture)
+    ccall((:IsGestureDetected, libraylib), Bool, (Cuint,), gesture)
 end
 function GetGestureDetected()
     ccall((:GetGestureDetected, libraylib), Cint, ())
@@ -1253,14 +1253,14 @@ end
 function GetGesturePinchAngle()
     ccall((:GetGesturePinchAngle, libraylib), Cfloat, ())
 end
-function UpdateCamera(a0, a1)
-    ccall((:UpdateCamera, libraylib), Cvoid, (Ptr{Camera}, Cint), a0, a1)
+function UpdateCamera(camera, mode)
+    ccall((:UpdateCamera, libraylib), Cvoid, (Ptr{Camera}, Cint), camera, mode)
 end
-function UpdateCameraPro(a0, a1, a2, a3)
-    ccall((:UpdateCameraPro, libraylib), Cvoid, (Ptr{Camera}, Vector3, Vector3, Cfloat), a0, a1, a2, a3)
+function UpdateCameraPro(camera, movement, rotation, zoom)
+    ccall((:UpdateCameraPro, libraylib), Cvoid, (Ptr{Camera}, Vector3, Vector3, Cfloat), camera, movement, rotation, zoom)
 end
-function SetShapesTexture(a0, a1)
-    ccall((:SetShapesTexture, libraylib), Cvoid, (Texture2D, Rectangle), a0, a1)
+function SetShapesTexture(texture, source)
+    ccall((:SetShapesTexture, libraylib), Cvoid, (Texture2D, Rectangle), texture, source)
 end
 function GetShapesTexture()
     ccall((:GetShapesTexture, libraylib), Texture2D, ())
@@ -1268,941 +1268,941 @@ end
 function GetShapesTextureRectangle()
     ccall((:GetShapesTextureRectangle, libraylib), Rectangle, ())
 end
-function DrawPixel(a0, a1, a2)
-    ccall((:DrawPixel, libraylib), Cvoid, (Cint, Cint, Color), a0, a1, a2)
+function DrawPixel(posX, posY, color)
+    ccall((:DrawPixel, libraylib), Cvoid, (Cint, Cint, Color), posX, posY, color)
 end
-function DrawPixelV(a0, a1)
-    ccall((:DrawPixelV, libraylib), Cvoid, (Vector2, Color), a0, a1)
+function DrawPixelV(position, color)
+    ccall((:DrawPixelV, libraylib), Cvoid, (Vector2, Color), position, color)
 end
-function DrawLine(a0, a1, a2, a3, a4)
-    ccall((:DrawLine, libraylib), Cvoid, (Cint, Cint, Cint, Cint, Color), a0, a1, a2, a3, a4)
+function DrawLine(startPosX, startPosY, endPosX, endPosY, color)
+    ccall((:DrawLine, libraylib), Cvoid, (Cint, Cint, Cint, Cint, Color), startPosX, startPosY, endPosX, endPosY, color)
 end
-function DrawLineV(a0, a1, a2)
-    ccall((:DrawLineV, libraylib), Cvoid, (Vector2, Vector2, Color), a0, a1, a2)
+function DrawLineV(startPos, endPos, color)
+    ccall((:DrawLineV, libraylib), Cvoid, (Vector2, Vector2, Color), startPos, endPos, color)
 end
-function DrawLineEx(a0, a1, a2, a3)
-    ccall((:DrawLineEx, libraylib), Cvoid, (Vector2, Vector2, Cfloat, Color), a0, a1, a2, a3)
+function DrawLineEx(startPos, endPos, thick, color)
+    ccall((:DrawLineEx, libraylib), Cvoid, (Vector2, Vector2, Cfloat, Color), startPos, endPos, thick, color)
 end
-function DrawLineStrip(a0, a1, a2)
-    ccall((:DrawLineStrip, libraylib), Cvoid, (Ptr{Vector2}, Cint, Color), a0, a1, a2)
+function DrawLineStrip(points, pointCount, color)
+    ccall((:DrawLineStrip, libraylib), Cvoid, (Ptr{Vector2}, Cint, Color), points, pointCount, color)
 end
-function DrawLineBezier(a0, a1, a2, a3)
-    ccall((:DrawLineBezier, libraylib), Cvoid, (Vector2, Vector2, Cfloat, Color), a0, a1, a2, a3)
+function DrawLineBezier(startPos, endPos, thick, color)
+    ccall((:DrawLineBezier, libraylib), Cvoid, (Vector2, Vector2, Cfloat, Color), startPos, endPos, thick, color)
 end
-function DrawLineDashed(a0, a1, a2, a3, a4)
-    ccall((:DrawLineDashed, libraylib), Cvoid, (Vector2, Vector2, Cint, Cint, Color), a0, a1, a2, a3, a4)
+function DrawLineDashed(startPos, endPos, dashSize, spaceSize, color)
+    ccall((:DrawLineDashed, libraylib), Cvoid, (Vector2, Vector2, Cint, Cint, Color), startPos, endPos, dashSize, spaceSize, color)
 end
-function DrawCircle(a0, a1, a2, a3)
-    ccall((:DrawCircle, libraylib), Cvoid, (Cint, Cint, Cfloat, Color), a0, a1, a2, a3)
+function DrawCircle(centerX, centerY, radius, color)
+    ccall((:DrawCircle, libraylib), Cvoid, (Cint, Cint, Cfloat, Color), centerX, centerY, radius, color)
 end
-function DrawCircleV(a0, a1, a2)
-    ccall((:DrawCircleV, libraylib), Cvoid, (Vector2, Cfloat, Color), a0, a1, a2)
+function DrawCircleV(center, radius, color)
+    ccall((:DrawCircleV, libraylib), Cvoid, (Vector2, Cfloat, Color), center, radius, color)
 end
-function DrawCircleGradient(a0, a1, a2, a3)
-    ccall((:DrawCircleGradient, libraylib), Cvoid, (Vector2, Cfloat, Color, Color), a0, a1, a2, a3)
+function DrawCircleGradient(center, radius, inner, outer)
+    ccall((:DrawCircleGradient, libraylib), Cvoid, (Vector2, Cfloat, Color, Color), center, radius, inner, outer)
 end
-function DrawCircleSector(a0, a1, a2, a3, a4, a5)
-    ccall((:DrawCircleSector, libraylib), Cvoid, (Vector2, Cfloat, Cfloat, Cfloat, Cint, Color), a0, a1, a2, a3, a4, a5)
+function DrawCircleSector(center, radius, startAngle, endAngle, segments, color)
+    ccall((:DrawCircleSector, libraylib), Cvoid, (Vector2, Cfloat, Cfloat, Cfloat, Cint, Color), center, radius, startAngle, endAngle, segments, color)
 end
-function DrawCircleSectorLines(a0, a1, a2, a3, a4, a5)
-    ccall((:DrawCircleSectorLines, libraylib), Cvoid, (Vector2, Cfloat, Cfloat, Cfloat, Cint, Color), a0, a1, a2, a3, a4, a5)
+function DrawCircleSectorLines(center, radius, startAngle, endAngle, segments, color)
+    ccall((:DrawCircleSectorLines, libraylib), Cvoid, (Vector2, Cfloat, Cfloat, Cfloat, Cint, Color), center, radius, startAngle, endAngle, segments, color)
 end
-function DrawCircleLines(a0, a1, a2, a3)
-    ccall((:DrawCircleLines, libraylib), Cvoid, (Cint, Cint, Cfloat, Color), a0, a1, a2, a3)
+function DrawCircleLines(centerX, centerY, radius, color)
+    ccall((:DrawCircleLines, libraylib), Cvoid, (Cint, Cint, Cfloat, Color), centerX, centerY, radius, color)
 end
-function DrawCircleLinesV(a0, a1, a2)
-    ccall((:DrawCircleLinesV, libraylib), Cvoid, (Vector2, Cfloat, Color), a0, a1, a2)
+function DrawCircleLinesV(center, radius, color)
+    ccall((:DrawCircleLinesV, libraylib), Cvoid, (Vector2, Cfloat, Color), center, radius, color)
 end
-function DrawEllipse(a0, a1, a2, a3, a4)
-    ccall((:DrawEllipse, libraylib), Cvoid, (Cint, Cint, Cfloat, Cfloat, Color), a0, a1, a2, a3, a4)
+function DrawEllipse(centerX, centerY, radiusH, radiusV, color)
+    ccall((:DrawEllipse, libraylib), Cvoid, (Cint, Cint, Cfloat, Cfloat, Color), centerX, centerY, radiusH, radiusV, color)
 end
-function DrawEllipseV(a0, a1, a2, a3)
-    ccall((:DrawEllipseV, libraylib), Cvoid, (Vector2, Cfloat, Cfloat, Color), a0, a1, a2, a3)
+function DrawEllipseV(center, radiusH, radiusV, color)
+    ccall((:DrawEllipseV, libraylib), Cvoid, (Vector2, Cfloat, Cfloat, Color), center, radiusH, radiusV, color)
 end
-function DrawEllipseLines(a0, a1, a2, a3, a4)
-    ccall((:DrawEllipseLines, libraylib), Cvoid, (Cint, Cint, Cfloat, Cfloat, Color), a0, a1, a2, a3, a4)
+function DrawEllipseLines(centerX, centerY, radiusH, radiusV, color)
+    ccall((:DrawEllipseLines, libraylib), Cvoid, (Cint, Cint, Cfloat, Cfloat, Color), centerX, centerY, radiusH, radiusV, color)
 end
-function DrawEllipseLinesV(a0, a1, a2, a3)
-    ccall((:DrawEllipseLinesV, libraylib), Cvoid, (Vector2, Cfloat, Cfloat, Color), a0, a1, a2, a3)
+function DrawEllipseLinesV(center, radiusH, radiusV, color)
+    ccall((:DrawEllipseLinesV, libraylib), Cvoid, (Vector2, Cfloat, Cfloat, Color), center, radiusH, radiusV, color)
 end
-function DrawRing(a0, a1, a2, a3, a4, a5, a6)
-    ccall((:DrawRing, libraylib), Cvoid, (Vector2, Cfloat, Cfloat, Cfloat, Cfloat, Cint, Color), a0, a1, a2, a3, a4, a5, a6)
+function DrawRing(center, innerRadius, outerRadius, startAngle, endAngle, segments, color)
+    ccall((:DrawRing, libraylib), Cvoid, (Vector2, Cfloat, Cfloat, Cfloat, Cfloat, Cint, Color), center, innerRadius, outerRadius, startAngle, endAngle, segments, color)
 end
-function DrawRingLines(a0, a1, a2, a3, a4, a5, a6)
-    ccall((:DrawRingLines, libraylib), Cvoid, (Vector2, Cfloat, Cfloat, Cfloat, Cfloat, Cint, Color), a0, a1, a2, a3, a4, a5, a6)
+function DrawRingLines(center, innerRadius, outerRadius, startAngle, endAngle, segments, color)
+    ccall((:DrawRingLines, libraylib), Cvoid, (Vector2, Cfloat, Cfloat, Cfloat, Cfloat, Cint, Color), center, innerRadius, outerRadius, startAngle, endAngle, segments, color)
 end
-function DrawRectangle(a0, a1, a2, a3, a4)
-    ccall((:DrawRectangle, libraylib), Cvoid, (Cint, Cint, Cint, Cint, Color), a0, a1, a2, a3, a4)
+function DrawRectangle(posX, posY, width, height, color)
+    ccall((:DrawRectangle, libraylib), Cvoid, (Cint, Cint, Cint, Cint, Color), posX, posY, width, height, color)
 end
-function DrawRectangleV(a0, a1, a2)
-    ccall((:DrawRectangleV, libraylib), Cvoid, (Vector2, Vector2, Color), a0, a1, a2)
+function DrawRectangleV(position, size, color)
+    ccall((:DrawRectangleV, libraylib), Cvoid, (Vector2, Vector2, Color), position, size, color)
 end
-function DrawRectangleRec(a0, a1)
-    ccall((:DrawRectangleRec, libraylib), Cvoid, (Rectangle, Color), a0, a1)
+function DrawRectangleRec(rec, color)
+    ccall((:DrawRectangleRec, libraylib), Cvoid, (Rectangle, Color), rec, color)
 end
-function DrawRectanglePro(a0, a1, a2, a3)
-    ccall((:DrawRectanglePro, libraylib), Cvoid, (Rectangle, Vector2, Cfloat, Color), a0, a1, a2, a3)
+function DrawRectanglePro(rec, origin, rotation, color)
+    ccall((:DrawRectanglePro, libraylib), Cvoid, (Rectangle, Vector2, Cfloat, Color), rec, origin, rotation, color)
 end
-function DrawRectangleGradientV(a0, a1, a2, a3, a4, a5)
-    ccall((:DrawRectangleGradientV, libraylib), Cvoid, (Cint, Cint, Cint, Cint, Color, Color), a0, a1, a2, a3, a4, a5)
+function DrawRectangleGradientV(posX, posY, width, height, top, bottom)
+    ccall((:DrawRectangleGradientV, libraylib), Cvoid, (Cint, Cint, Cint, Cint, Color, Color), posX, posY, width, height, top, bottom)
 end
-function DrawRectangleGradientH(a0, a1, a2, a3, a4, a5)
-    ccall((:DrawRectangleGradientH, libraylib), Cvoid, (Cint, Cint, Cint, Cint, Color, Color), a0, a1, a2, a3, a4, a5)
+function DrawRectangleGradientH(posX, posY, width, height, left, right)
+    ccall((:DrawRectangleGradientH, libraylib), Cvoid, (Cint, Cint, Cint, Cint, Color, Color), posX, posY, width, height, left, right)
 end
-function DrawRectangleGradientEx(a0, a1, a2, a3, a4)
-    ccall((:DrawRectangleGradientEx, libraylib), Cvoid, (Rectangle, Color, Color, Color, Color), a0, a1, a2, a3, a4)
+function DrawRectangleGradientEx(rec, topLeft, bottomLeft, bottomRight, topRight)
+    ccall((:DrawRectangleGradientEx, libraylib), Cvoid, (Rectangle, Color, Color, Color, Color), rec, topLeft, bottomLeft, bottomRight, topRight)
 end
-function DrawRectangleLines(a0, a1, a2, a3, a4)
-    ccall((:DrawRectangleLines, libraylib), Cvoid, (Cint, Cint, Cint, Cint, Color), a0, a1, a2, a3, a4)
+function DrawRectangleLines(posX, posY, width, height, color)
+    ccall((:DrawRectangleLines, libraylib), Cvoid, (Cint, Cint, Cint, Cint, Color), posX, posY, width, height, color)
 end
-function DrawRectangleLinesEx(a0, a1, a2)
-    ccall((:DrawRectangleLinesEx, libraylib), Cvoid, (Rectangle, Cfloat, Color), a0, a1, a2)
+function DrawRectangleLinesEx(rec, lineThick, color)
+    ccall((:DrawRectangleLinesEx, libraylib), Cvoid, (Rectangle, Cfloat, Color), rec, lineThick, color)
 end
-function DrawRectangleRounded(a0, a1, a2, a3)
-    ccall((:DrawRectangleRounded, libraylib), Cvoid, (Rectangle, Cfloat, Cint, Color), a0, a1, a2, a3)
+function DrawRectangleRounded(rec, roundness, segments, color)
+    ccall((:DrawRectangleRounded, libraylib), Cvoid, (Rectangle, Cfloat, Cint, Color), rec, roundness, segments, color)
 end
-function DrawRectangleRoundedLines(a0, a1, a2, a3)
-    ccall((:DrawRectangleRoundedLines, libraylib), Cvoid, (Rectangle, Cfloat, Cint, Color), a0, a1, a2, a3)
+function DrawRectangleRoundedLines(rec, roundness, segments, color)
+    ccall((:DrawRectangleRoundedLines, libraylib), Cvoid, (Rectangle, Cfloat, Cint, Color), rec, roundness, segments, color)
 end
-function DrawRectangleRoundedLinesEx(a0, a1, a2, a3, a4)
-    ccall((:DrawRectangleRoundedLinesEx, libraylib), Cvoid, (Rectangle, Cfloat, Cint, Cfloat, Color), a0, a1, a2, a3, a4)
+function DrawRectangleRoundedLinesEx(rec, roundness, segments, lineThick, color)
+    ccall((:DrawRectangleRoundedLinesEx, libraylib), Cvoid, (Rectangle, Cfloat, Cint, Cfloat, Color), rec, roundness, segments, lineThick, color)
 end
-function DrawTriangle(a0, a1, a2, a3)
-    ccall((:DrawTriangle, libraylib), Cvoid, (Vector2, Vector2, Vector2, Color), a0, a1, a2, a3)
+function DrawTriangle(v1, v2, v3, color)
+    ccall((:DrawTriangle, libraylib), Cvoid, (Vector2, Vector2, Vector2, Color), v1, v2, v3, color)
 end
-function DrawTriangleLines(a0, a1, a2, a3)
-    ccall((:DrawTriangleLines, libraylib), Cvoid, (Vector2, Vector2, Vector2, Color), a0, a1, a2, a3)
+function DrawTriangleLines(v1, v2, v3, color)
+    ccall((:DrawTriangleLines, libraylib), Cvoid, (Vector2, Vector2, Vector2, Color), v1, v2, v3, color)
 end
-function DrawTriangleFan(a0, a1, a2)
-    ccall((:DrawTriangleFan, libraylib), Cvoid, (Ptr{Vector2}, Cint, Color), a0, a1, a2)
+function DrawTriangleFan(points, pointCount, color)
+    ccall((:DrawTriangleFan, libraylib), Cvoid, (Ptr{Vector2}, Cint, Color), points, pointCount, color)
 end
-function DrawTriangleStrip(a0, a1, a2)
-    ccall((:DrawTriangleStrip, libraylib), Cvoid, (Ptr{Vector2}, Cint, Color), a0, a1, a2)
+function DrawTriangleStrip(points, pointCount, color)
+    ccall((:DrawTriangleStrip, libraylib), Cvoid, (Ptr{Vector2}, Cint, Color), points, pointCount, color)
 end
-function DrawPoly(a0, a1, a2, a3, a4)
-    ccall((:DrawPoly, libraylib), Cvoid, (Vector2, Cint, Cfloat, Cfloat, Color), a0, a1, a2, a3, a4)
+function DrawPoly(center, sides, radius, rotation, color)
+    ccall((:DrawPoly, libraylib), Cvoid, (Vector2, Cint, Cfloat, Cfloat, Color), center, sides, radius, rotation, color)
 end
-function DrawPolyLines(a0, a1, a2, a3, a4)
-    ccall((:DrawPolyLines, libraylib), Cvoid, (Vector2, Cint, Cfloat, Cfloat, Color), a0, a1, a2, a3, a4)
+function DrawPolyLines(center, sides, radius, rotation, color)
+    ccall((:DrawPolyLines, libraylib), Cvoid, (Vector2, Cint, Cfloat, Cfloat, Color), center, sides, radius, rotation, color)
 end
-function DrawPolyLinesEx(a0, a1, a2, a3, a4, a5)
-    ccall((:DrawPolyLinesEx, libraylib), Cvoid, (Vector2, Cint, Cfloat, Cfloat, Cfloat, Color), a0, a1, a2, a3, a4, a5)
+function DrawPolyLinesEx(center, sides, radius, rotation, lineThick, color)
+    ccall((:DrawPolyLinesEx, libraylib), Cvoid, (Vector2, Cint, Cfloat, Cfloat, Cfloat, Color), center, sides, radius, rotation, lineThick, color)
 end
-function DrawSplineLinear(a0, a1, a2, a3)
-    ccall((:DrawSplineLinear, libraylib), Cvoid, (Ptr{Vector2}, Cint, Cfloat, Color), a0, a1, a2, a3)
+function DrawSplineLinear(points, pointCount, thick, color)
+    ccall((:DrawSplineLinear, libraylib), Cvoid, (Ptr{Vector2}, Cint, Cfloat, Color), points, pointCount, thick, color)
 end
-function DrawSplineBasis(a0, a1, a2, a3)
-    ccall((:DrawSplineBasis, libraylib), Cvoid, (Ptr{Vector2}, Cint, Cfloat, Color), a0, a1, a2, a3)
+function DrawSplineBasis(points, pointCount, thick, color)
+    ccall((:DrawSplineBasis, libraylib), Cvoid, (Ptr{Vector2}, Cint, Cfloat, Color), points, pointCount, thick, color)
 end
-function DrawSplineCatmullRom(a0, a1, a2, a3)
-    ccall((:DrawSplineCatmullRom, libraylib), Cvoid, (Ptr{Vector2}, Cint, Cfloat, Color), a0, a1, a2, a3)
+function DrawSplineCatmullRom(points, pointCount, thick, color)
+    ccall((:DrawSplineCatmullRom, libraylib), Cvoid, (Ptr{Vector2}, Cint, Cfloat, Color), points, pointCount, thick, color)
 end
-function DrawSplineBezierQuadratic(a0, a1, a2, a3)
-    ccall((:DrawSplineBezierQuadratic, libraylib), Cvoid, (Ptr{Vector2}, Cint, Cfloat, Color), a0, a1, a2, a3)
+function DrawSplineBezierQuadratic(points, pointCount, thick, color)
+    ccall((:DrawSplineBezierQuadratic, libraylib), Cvoid, (Ptr{Vector2}, Cint, Cfloat, Color), points, pointCount, thick, color)
 end
-function DrawSplineBezierCubic(a0, a1, a2, a3)
-    ccall((:DrawSplineBezierCubic, libraylib), Cvoid, (Ptr{Vector2}, Cint, Cfloat, Color), a0, a1, a2, a3)
+function DrawSplineBezierCubic(points, pointCount, thick, color)
+    ccall((:DrawSplineBezierCubic, libraylib), Cvoid, (Ptr{Vector2}, Cint, Cfloat, Color), points, pointCount, thick, color)
 end
-function DrawSplineSegmentLinear(a0, a1, a2, a3)
-    ccall((:DrawSplineSegmentLinear, libraylib), Cvoid, (Vector2, Vector2, Cfloat, Color), a0, a1, a2, a3)
+function DrawSplineSegmentLinear(p1, p2, thick, color)
+    ccall((:DrawSplineSegmentLinear, libraylib), Cvoid, (Vector2, Vector2, Cfloat, Color), p1, p2, thick, color)
 end
-function DrawSplineSegmentBasis(a0, a1, a2, a3, a4, a5)
-    ccall((:DrawSplineSegmentBasis, libraylib), Cvoid, (Vector2, Vector2, Vector2, Vector2, Cfloat, Color), a0, a1, a2, a3, a4, a5)
+function DrawSplineSegmentBasis(p1, p2, p3, p4, thick, color)
+    ccall((:DrawSplineSegmentBasis, libraylib), Cvoid, (Vector2, Vector2, Vector2, Vector2, Cfloat, Color), p1, p2, p3, p4, thick, color)
 end
-function DrawSplineSegmentCatmullRom(a0, a1, a2, a3, a4, a5)
-    ccall((:DrawSplineSegmentCatmullRom, libraylib), Cvoid, (Vector2, Vector2, Vector2, Vector2, Cfloat, Color), a0, a1, a2, a3, a4, a5)
+function DrawSplineSegmentCatmullRom(p1, p2, p3, p4, thick, color)
+    ccall((:DrawSplineSegmentCatmullRom, libraylib), Cvoid, (Vector2, Vector2, Vector2, Vector2, Cfloat, Color), p1, p2, p3, p4, thick, color)
 end
-function DrawSplineSegmentBezierQuadratic(a0, a1, a2, a3, a4)
-    ccall((:DrawSplineSegmentBezierQuadratic, libraylib), Cvoid, (Vector2, Vector2, Vector2, Cfloat, Color), a0, a1, a2, a3, a4)
+function DrawSplineSegmentBezierQuadratic(p1, c2, p3, thick, color)
+    ccall((:DrawSplineSegmentBezierQuadratic, libraylib), Cvoid, (Vector2, Vector2, Vector2, Cfloat, Color), p1, c2, p3, thick, color)
 end
-function DrawSplineSegmentBezierCubic(a0, a1, a2, a3, a4, a5)
-    ccall((:DrawSplineSegmentBezierCubic, libraylib), Cvoid, (Vector2, Vector2, Vector2, Vector2, Cfloat, Color), a0, a1, a2, a3, a4, a5)
+function DrawSplineSegmentBezierCubic(p1, c2, c3, p4, thick, color)
+    ccall((:DrawSplineSegmentBezierCubic, libraylib), Cvoid, (Vector2, Vector2, Vector2, Vector2, Cfloat, Color), p1, c2, c3, p4, thick, color)
 end
-function GetSplinePointLinear(a0, a1, a2)
-    ccall((:GetSplinePointLinear, libraylib), Vector2, (Vector2, Vector2, Cfloat), a0, a1, a2)
+function GetSplinePointLinear(startPos, endPos, t)
+    ccall((:GetSplinePointLinear, libraylib), Vector2, (Vector2, Vector2, Cfloat), startPos, endPos, t)
 end
-function GetSplinePointBasis(a0, a1, a2, a3, a4)
-    ccall((:GetSplinePointBasis, libraylib), Vector2, (Vector2, Vector2, Vector2, Vector2, Cfloat), a0, a1, a2, a3, a4)
+function GetSplinePointBasis(p1, p2, p3, p4, t)
+    ccall((:GetSplinePointBasis, libraylib), Vector2, (Vector2, Vector2, Vector2, Vector2, Cfloat), p1, p2, p3, p4, t)
 end
-function GetSplinePointCatmullRom(a0, a1, a2, a3, a4)
-    ccall((:GetSplinePointCatmullRom, libraylib), Vector2, (Vector2, Vector2, Vector2, Vector2, Cfloat), a0, a1, a2, a3, a4)
+function GetSplinePointCatmullRom(p1, p2, p3, p4, t)
+    ccall((:GetSplinePointCatmullRom, libraylib), Vector2, (Vector2, Vector2, Vector2, Vector2, Cfloat), p1, p2, p3, p4, t)
 end
-function GetSplinePointBezierQuad(a0, a1, a2, a3)
-    ccall((:GetSplinePointBezierQuad, libraylib), Vector2, (Vector2, Vector2, Vector2, Cfloat), a0, a1, a2, a3)
+function GetSplinePointBezierQuad(p1, c2, p3, t)
+    ccall((:GetSplinePointBezierQuad, libraylib), Vector2, (Vector2, Vector2, Vector2, Cfloat), p1, c2, p3, t)
 end
-function GetSplinePointBezierCubic(a0, a1, a2, a3, a4)
-    ccall((:GetSplinePointBezierCubic, libraylib), Vector2, (Vector2, Vector2, Vector2, Vector2, Cfloat), a0, a1, a2, a3, a4)
+function GetSplinePointBezierCubic(p1, c2, c3, p4, t)
+    ccall((:GetSplinePointBezierCubic, libraylib), Vector2, (Vector2, Vector2, Vector2, Vector2, Cfloat), p1, c2, c3, p4, t)
 end
-function CheckCollisionRecs(a0, a1)
-    ccall((:CheckCollisionRecs, libraylib), Bool, (Rectangle, Rectangle), a0, a1)
+function CheckCollisionRecs(rec1, rec2)
+    ccall((:CheckCollisionRecs, libraylib), Bool, (Rectangle, Rectangle), rec1, rec2)
 end
-function CheckCollisionCircles(a0, a1, a2, a3)
-    ccall((:CheckCollisionCircles, libraylib), Bool, (Vector2, Cfloat, Vector2, Cfloat), a0, a1, a2, a3)
+function CheckCollisionCircles(center1, radius1, center2, radius2)
+    ccall((:CheckCollisionCircles, libraylib), Bool, (Vector2, Cfloat, Vector2, Cfloat), center1, radius1, center2, radius2)
 end
-function CheckCollisionCircleRec(a0, a1, a2)
-    ccall((:CheckCollisionCircleRec, libraylib), Bool, (Vector2, Cfloat, Rectangle), a0, a1, a2)
+function CheckCollisionCircleRec(center, radius, rec)
+    ccall((:CheckCollisionCircleRec, libraylib), Bool, (Vector2, Cfloat, Rectangle), center, radius, rec)
 end
-function CheckCollisionCircleLine(a0, a1, a2, a3)
-    ccall((:CheckCollisionCircleLine, libraylib), Bool, (Vector2, Cfloat, Vector2, Vector2), a0, a1, a2, a3)
+function CheckCollisionCircleLine(center, radius, p1, p2)
+    ccall((:CheckCollisionCircleLine, libraylib), Bool, (Vector2, Cfloat, Vector2, Vector2), center, radius, p1, p2)
 end
-function CheckCollisionPointRec(a0, a1)
-    ccall((:CheckCollisionPointRec, libraylib), Bool, (Vector2, Rectangle), a0, a1)
+function CheckCollisionPointRec(point, rec)
+    ccall((:CheckCollisionPointRec, libraylib), Bool, (Vector2, Rectangle), point, rec)
 end
-function CheckCollisionPointCircle(a0, a1, a2)
-    ccall((:CheckCollisionPointCircle, libraylib), Bool, (Vector2, Vector2, Cfloat), a0, a1, a2)
+function CheckCollisionPointCircle(point, center, radius)
+    ccall((:CheckCollisionPointCircle, libraylib), Bool, (Vector2, Vector2, Cfloat), point, center, radius)
 end
-function CheckCollisionPointTriangle(a0, a1, a2, a3)
-    ccall((:CheckCollisionPointTriangle, libraylib), Bool, (Vector2, Vector2, Vector2, Vector2), a0, a1, a2, a3)
+function CheckCollisionPointTriangle(point, p1, p2, p3)
+    ccall((:CheckCollisionPointTriangle, libraylib), Bool, (Vector2, Vector2, Vector2, Vector2), point, p1, p2, p3)
 end
-function CheckCollisionPointLine(a0, a1, a2, a3)
-    ccall((:CheckCollisionPointLine, libraylib), Bool, (Vector2, Vector2, Vector2, Cint), a0, a1, a2, a3)
+function CheckCollisionPointLine(point, p1, p2, threshold)
+    ccall((:CheckCollisionPointLine, libraylib), Bool, (Vector2, Vector2, Vector2, Cint), point, p1, p2, threshold)
 end
-function CheckCollisionPointPoly(a0, a1, a2)
-    ccall((:CheckCollisionPointPoly, libraylib), Bool, (Vector2, Ptr{Vector2}, Cint), a0, a1, a2)
+function CheckCollisionPointPoly(point, points, pointCount)
+    ccall((:CheckCollisionPointPoly, libraylib), Bool, (Vector2, Ptr{Vector2}, Cint), point, points, pointCount)
 end
-function CheckCollisionLines(a0, a1, a2, a3, a4)
-    ccall((:CheckCollisionLines, libraylib), Bool, (Vector2, Vector2, Vector2, Vector2, Ptr{Vector2}), a0, a1, a2, a3, a4)
+function CheckCollisionLines(startPos1, endPos1, startPos2, endPos2, collisionPoint)
+    ccall((:CheckCollisionLines, libraylib), Bool, (Vector2, Vector2, Vector2, Vector2, Ptr{Vector2}), startPos1, endPos1, startPos2, endPos2, collisionPoint)
 end
-function GetCollisionRec(a0, a1)
-    ccall((:GetCollisionRec, libraylib), Rectangle, (Rectangle, Rectangle), a0, a1)
+function GetCollisionRec(rec1, rec2)
+    ccall((:GetCollisionRec, libraylib), Rectangle, (Rectangle, Rectangle), rec1, rec2)
 end
-function LoadImage(a0)
-    ccall((:LoadImage, libraylib), Image, (Cstring,), a0)
+function LoadImage(fileName)
+    ccall((:LoadImage, libraylib), Image, (Cstring,), fileName)
 end
-function LoadImageRaw(a0, a1, a2, a3, a4)
-    ccall((:LoadImageRaw, libraylib), Image, (Cstring, Cint, Cint, Cint, Cint), a0, a1, a2, a3, a4)
+function LoadImageRaw(fileName, width, height, format, headerSize)
+    ccall((:LoadImageRaw, libraylib), Image, (Cstring, Cint, Cint, Cint, Cint), fileName, width, height, format, headerSize)
 end
-function LoadImageAnim(a0, a1)
-    ccall((:LoadImageAnim, libraylib), Image, (Cstring, Ptr{Cint}), a0, a1)
+function LoadImageAnim(fileName, frames)
+    ccall((:LoadImageAnim, libraylib), Image, (Cstring, Ptr{Cint}), fileName, frames)
 end
-function LoadImageAnimFromMemory(a0, a1, a2, a3)
-    ccall((:LoadImageAnimFromMemory, libraylib), Image, (Cstring, Ptr{Cuchar}, Cint, Ptr{Cint}), a0, a1, a2, a3)
+function LoadImageAnimFromMemory(fileType, fileData, dataSize, frames)
+    ccall((:LoadImageAnimFromMemory, libraylib), Image, (Cstring, Ptr{Cuchar}, Cint, Ptr{Cint}), fileType, fileData, dataSize, frames)
 end
-function LoadImageFromMemory(a0, a1, a2)
-    ccall((:LoadImageFromMemory, libraylib), Image, (Cstring, Ptr{Cuchar}, Cint), a0, a1, a2)
+function LoadImageFromMemory(fileType, fileData, dataSize)
+    ccall((:LoadImageFromMemory, libraylib), Image, (Cstring, Ptr{Cuchar}, Cint), fileType, fileData, dataSize)
 end
-function LoadImageFromTexture(a0)
-    ccall((:LoadImageFromTexture, libraylib), Image, (Texture2D,), a0)
+function LoadImageFromTexture(texture)
+    ccall((:LoadImageFromTexture, libraylib), Image, (Texture2D,), texture)
 end
 function LoadImageFromScreen()
     ccall((:LoadImageFromScreen, libraylib), Image, ())
 end
-function IsImageValid(a0)
-    ccall((:IsImageValid, libraylib), Bool, (Image,), a0)
+function IsImageValid(image)
+    ccall((:IsImageValid, libraylib), Bool, (Image,), image)
 end
-function UnloadImage(a0)
-    ccall((:UnloadImage, libraylib), Cvoid, (Image,), a0)
+function UnloadImage(image)
+    ccall((:UnloadImage, libraylib), Cvoid, (Image,), image)
 end
-function ExportImage(a0, a1)
-    ccall((:ExportImage, libraylib), Bool, (Image, Cstring), a0, a1)
+function ExportImage(image, fileName)
+    ccall((:ExportImage, libraylib), Bool, (Image, Cstring), image, fileName)
 end
-function ExportImageToMemory(a0, a1, a2)
-    ccall((:ExportImageToMemory, libraylib), Ptr{Cuchar}, (Image, Cstring, Ptr{Cint}), a0, a1, a2)
+function ExportImageToMemory(image, fileType, fileSize)
+    ccall((:ExportImageToMemory, libraylib), Ptr{Cuchar}, (Image, Cstring, Ptr{Cint}), image, fileType, fileSize)
 end
-function ExportImageAsCode(a0, a1)
-    ccall((:ExportImageAsCode, libraylib), Bool, (Image, Cstring), a0, a1)
+function ExportImageAsCode(image, fileName)
+    ccall((:ExportImageAsCode, libraylib), Bool, (Image, Cstring), image, fileName)
 end
-function GenImageColor(a0, a1, a2)
-    ccall((:GenImageColor, libraylib), Image, (Cint, Cint, Color), a0, a1, a2)
+function GenImageColor(width, height, color)
+    ccall((:GenImageColor, libraylib), Image, (Cint, Cint, Color), width, height, color)
 end
-function GenImageGradientLinear(a0, a1, a2, a3, a4)
-    ccall((:GenImageGradientLinear, libraylib), Image, (Cint, Cint, Cint, Color, Color), a0, a1, a2, a3, a4)
+function GenImageGradientLinear(width, height, direction, start, end_)
+    ccall((:GenImageGradientLinear, libraylib), Image, (Cint, Cint, Cint, Color, Color), width, height, direction, start, end_)
 end
-function GenImageGradientRadial(a0, a1, a2, a3, a4)
-    ccall((:GenImageGradientRadial, libraylib), Image, (Cint, Cint, Cfloat, Color, Color), a0, a1, a2, a3, a4)
+function GenImageGradientRadial(width, height, density, inner, outer)
+    ccall((:GenImageGradientRadial, libraylib), Image, (Cint, Cint, Cfloat, Color, Color), width, height, density, inner, outer)
 end
-function GenImageGradientSquare(a0, a1, a2, a3, a4)
-    ccall((:GenImageGradientSquare, libraylib), Image, (Cint, Cint, Cfloat, Color, Color), a0, a1, a2, a3, a4)
+function GenImageGradientSquare(width, height, density, inner, outer)
+    ccall((:GenImageGradientSquare, libraylib), Image, (Cint, Cint, Cfloat, Color, Color), width, height, density, inner, outer)
 end
-function GenImageChecked(a0, a1, a2, a3, a4, a5)
-    ccall((:GenImageChecked, libraylib), Image, (Cint, Cint, Cint, Cint, Color, Color), a0, a1, a2, a3, a4, a5)
+function GenImageChecked(width, height, checksX, checksY, col1, col2)
+    ccall((:GenImageChecked, libraylib), Image, (Cint, Cint, Cint, Cint, Color, Color), width, height, checksX, checksY, col1, col2)
 end
-function GenImageWhiteNoise(a0, a1, a2)
-    ccall((:GenImageWhiteNoise, libraylib), Image, (Cint, Cint, Cfloat), a0, a1, a2)
+function GenImageWhiteNoise(width, height, factor)
+    ccall((:GenImageWhiteNoise, libraylib), Image, (Cint, Cint, Cfloat), width, height, factor)
 end
-function GenImagePerlinNoise(a0, a1, a2, a3, a4)
-    ccall((:GenImagePerlinNoise, libraylib), Image, (Cint, Cint, Cint, Cint, Cfloat), a0, a1, a2, a3, a4)
+function GenImagePerlinNoise(width, height, offsetX, offsetY, scale)
+    ccall((:GenImagePerlinNoise, libraylib), Image, (Cint, Cint, Cint, Cint, Cfloat), width, height, offsetX, offsetY, scale)
 end
-function GenImageCellular(a0, a1, a2)
-    ccall((:GenImageCellular, libraylib), Image, (Cint, Cint, Cint), a0, a1, a2)
+function GenImageCellular(width, height, tileSize)
+    ccall((:GenImageCellular, libraylib), Image, (Cint, Cint, Cint), width, height, tileSize)
 end
-function GenImageText(a0, a1, a2)
-    ccall((:GenImageText, libraylib), Image, (Cint, Cint, Cstring), a0, a1, a2)
+function GenImageText(width, height, text)
+    ccall((:GenImageText, libraylib), Image, (Cint, Cint, Cstring), width, height, text)
 end
-function ImageCopy(a0)
-    ccall((:ImageCopy, libraylib), Image, (Image,), a0)
+function ImageCopy(image)
+    ccall((:ImageCopy, libraylib), Image, (Image,), image)
 end
-function ImageFromImage(a0, a1)
-    ccall((:ImageFromImage, libraylib), Image, (Image, Rectangle), a0, a1)
+function ImageFromImage(image, rec)
+    ccall((:ImageFromImage, libraylib), Image, (Image, Rectangle), image, rec)
 end
-function ImageFromChannel(a0, a1)
-    ccall((:ImageFromChannel, libraylib), Image, (Image, Cint), a0, a1)
+function ImageFromChannel(image, selectedChannel)
+    ccall((:ImageFromChannel, libraylib), Image, (Image, Cint), image, selectedChannel)
 end
-function ImageText(a0, a1, a2)
-    ccall((:ImageText, libraylib), Image, (Cstring, Cint, Color), a0, a1, a2)
+function ImageText(text, fontSize, color)
+    ccall((:ImageText, libraylib), Image, (Cstring, Cint, Color), text, fontSize, color)
 end
-function ImageTextEx(a0, a1, a2, a3, a4)
-    ccall((:ImageTextEx, libraylib), Image, (Font, Cstring, Cfloat, Cfloat, Color), a0, a1, a2, a3, a4)
+function ImageTextEx(font, text, fontSize, spacing, tint)
+    ccall((:ImageTextEx, libraylib), Image, (Font, Cstring, Cfloat, Cfloat, Color), font, text, fontSize, spacing, tint)
 end
-function ImageFormat(a0, a1)
-    ccall((:ImageFormat, libraylib), Cvoid, (Ptr{Image}, Cint), a0, a1)
+function ImageFormat(image, newFormat)
+    ccall((:ImageFormat, libraylib), Cvoid, (Ptr{Image}, Cint), image, newFormat)
 end
-function ImageToPOT(a0, a1)
-    ccall((:ImageToPOT, libraylib), Cvoid, (Ptr{Image}, Color), a0, a1)
+function ImageToPOT(image, fill)
+    ccall((:ImageToPOT, libraylib), Cvoid, (Ptr{Image}, Color), image, fill)
 end
-function ImageCrop(a0, a1)
-    ccall((:ImageCrop, libraylib), Cvoid, (Ptr{Image}, Rectangle), a0, a1)
+function ImageCrop(image, crop)
+    ccall((:ImageCrop, libraylib), Cvoid, (Ptr{Image}, Rectangle), image, crop)
 end
-function ImageAlphaCrop(a0, a1)
-    ccall((:ImageAlphaCrop, libraylib), Cvoid, (Ptr{Image}, Cfloat), a0, a1)
+function ImageAlphaCrop(image, threshold)
+    ccall((:ImageAlphaCrop, libraylib), Cvoid, (Ptr{Image}, Cfloat), image, threshold)
 end
-function ImageAlphaClear(a0, a1, a2)
-    ccall((:ImageAlphaClear, libraylib), Cvoid, (Ptr{Image}, Color, Cfloat), a0, a1, a2)
+function ImageAlphaClear(image, color, threshold)
+    ccall((:ImageAlphaClear, libraylib), Cvoid, (Ptr{Image}, Color, Cfloat), image, color, threshold)
 end
-function ImageAlphaMask(a0, a1)
-    ccall((:ImageAlphaMask, libraylib), Cvoid, (Ptr{Image}, Image), a0, a1)
+function ImageAlphaMask(image, alphaMask)
+    ccall((:ImageAlphaMask, libraylib), Cvoid, (Ptr{Image}, Image), image, alphaMask)
 end
-function ImageAlphaPremultiply(a0)
-    ccall((:ImageAlphaPremultiply, libraylib), Cvoid, (Ptr{Image},), a0)
+function ImageAlphaPremultiply(image)
+    ccall((:ImageAlphaPremultiply, libraylib), Cvoid, (Ptr{Image},), image)
 end
-function ImageBlurGaussian(a0, a1)
-    ccall((:ImageBlurGaussian, libraylib), Cvoid, (Ptr{Image}, Cint), a0, a1)
+function ImageBlurGaussian(image, blurSize)
+    ccall((:ImageBlurGaussian, libraylib), Cvoid, (Ptr{Image}, Cint), image, blurSize)
 end
-function ImageKernelConvolution(a0, a1, a2)
-    ccall((:ImageKernelConvolution, libraylib), Cvoid, (Ptr{Image}, Ptr{Cfloat}, Cint), a0, a1, a2)
+function ImageKernelConvolution(image, kernel, kernelSize)
+    ccall((:ImageKernelConvolution, libraylib), Cvoid, (Ptr{Image}, Ptr{Cfloat}, Cint), image, kernel, kernelSize)
 end
-function ImageResize(a0, a1, a2)
-    ccall((:ImageResize, libraylib), Cvoid, (Ptr{Image}, Cint, Cint), a0, a1, a2)
+function ImageResize(image, newWidth, newHeight)
+    ccall((:ImageResize, libraylib), Cvoid, (Ptr{Image}, Cint, Cint), image, newWidth, newHeight)
 end
-function ImageResizeNN(a0, a1, a2)
-    ccall((:ImageResizeNN, libraylib), Cvoid, (Ptr{Image}, Cint, Cint), a0, a1, a2)
+function ImageResizeNN(image, newWidth, newHeight)
+    ccall((:ImageResizeNN, libraylib), Cvoid, (Ptr{Image}, Cint, Cint), image, newWidth, newHeight)
 end
-function ImageResizeCanvas(a0, a1, a2, a3, a4, a5)
-    ccall((:ImageResizeCanvas, libraylib), Cvoid, (Ptr{Image}, Cint, Cint, Cint, Cint, Color), a0, a1, a2, a3, a4, a5)
+function ImageResizeCanvas(image, newWidth, newHeight, offsetX, offsetY, fill)
+    ccall((:ImageResizeCanvas, libraylib), Cvoid, (Ptr{Image}, Cint, Cint, Cint, Cint, Color), image, newWidth, newHeight, offsetX, offsetY, fill)
 end
-function ImageMipmaps(a0)
-    ccall((:ImageMipmaps, libraylib), Cvoid, (Ptr{Image},), a0)
+function ImageMipmaps(image)
+    ccall((:ImageMipmaps, libraylib), Cvoid, (Ptr{Image},), image)
 end
-function ImageDither(a0, a1, a2, a3, a4)
-    ccall((:ImageDither, libraylib), Cvoid, (Ptr{Image}, Cint, Cint, Cint, Cint), a0, a1, a2, a3, a4)
+function ImageDither(image, rBpp, gBpp, bBpp, aBpp)
+    ccall((:ImageDither, libraylib), Cvoid, (Ptr{Image}, Cint, Cint, Cint, Cint), image, rBpp, gBpp, bBpp, aBpp)
 end
-function ImageFlipVertical(a0)
-    ccall((:ImageFlipVertical, libraylib), Cvoid, (Ptr{Image},), a0)
+function ImageFlipVertical(image)
+    ccall((:ImageFlipVertical, libraylib), Cvoid, (Ptr{Image},), image)
 end
-function ImageFlipHorizontal(a0)
-    ccall((:ImageFlipHorizontal, libraylib), Cvoid, (Ptr{Image},), a0)
+function ImageFlipHorizontal(image)
+    ccall((:ImageFlipHorizontal, libraylib), Cvoid, (Ptr{Image},), image)
 end
-function ImageRotate(a0, a1)
-    ccall((:ImageRotate, libraylib), Cvoid, (Ptr{Image}, Cint), a0, a1)
+function ImageRotate(image, degrees)
+    ccall((:ImageRotate, libraylib), Cvoid, (Ptr{Image}, Cint), image, degrees)
 end
-function ImageRotateCW(a0)
-    ccall((:ImageRotateCW, libraylib), Cvoid, (Ptr{Image},), a0)
+function ImageRotateCW(image)
+    ccall((:ImageRotateCW, libraylib), Cvoid, (Ptr{Image},), image)
 end
-function ImageRotateCCW(a0)
-    ccall((:ImageRotateCCW, libraylib), Cvoid, (Ptr{Image},), a0)
+function ImageRotateCCW(image)
+    ccall((:ImageRotateCCW, libraylib), Cvoid, (Ptr{Image},), image)
 end
-function ImageColorTint(a0, a1)
-    ccall((:ImageColorTint, libraylib), Cvoid, (Ptr{Image}, Color), a0, a1)
+function ImageColorTint(image, color)
+    ccall((:ImageColorTint, libraylib), Cvoid, (Ptr{Image}, Color), image, color)
 end
-function ImageColorInvert(a0)
-    ccall((:ImageColorInvert, libraylib), Cvoid, (Ptr{Image},), a0)
+function ImageColorInvert(image)
+    ccall((:ImageColorInvert, libraylib), Cvoid, (Ptr{Image},), image)
 end
-function ImageColorGrayscale(a0)
-    ccall((:ImageColorGrayscale, libraylib), Cvoid, (Ptr{Image},), a0)
+function ImageColorGrayscale(image)
+    ccall((:ImageColorGrayscale, libraylib), Cvoid, (Ptr{Image},), image)
 end
-function ImageColorContrast(a0, a1)
-    ccall((:ImageColorContrast, libraylib), Cvoid, (Ptr{Image}, Cfloat), a0, a1)
+function ImageColorContrast(image, contrast)
+    ccall((:ImageColorContrast, libraylib), Cvoid, (Ptr{Image}, Cfloat), image, contrast)
 end
-function ImageColorBrightness(a0, a1)
-    ccall((:ImageColorBrightness, libraylib), Cvoid, (Ptr{Image}, Cint), a0, a1)
+function ImageColorBrightness(image, brightness)
+    ccall((:ImageColorBrightness, libraylib), Cvoid, (Ptr{Image}, Cint), image, brightness)
 end
-function ImageColorReplace(a0, a1, a2)
-    ccall((:ImageColorReplace, libraylib), Cvoid, (Ptr{Image}, Color, Color), a0, a1, a2)
+function ImageColorReplace(image, color, replace)
+    ccall((:ImageColorReplace, libraylib), Cvoid, (Ptr{Image}, Color, Color), image, color, replace)
 end
-function LoadImageColors(a0)
-    ccall((:LoadImageColors, libraylib), Ptr{Color}, (Image,), a0)
+function LoadImageColors(image)
+    ccall((:LoadImageColors, libraylib), Ptr{Color}, (Image,), image)
 end
-function LoadImagePalette(a0, a1, a2)
-    ccall((:LoadImagePalette, libraylib), Ptr{Color}, (Image, Cint, Ptr{Cint}), a0, a1, a2)
+function LoadImagePalette(image, maxPaletteSize, colorCount)
+    ccall((:LoadImagePalette, libraylib), Ptr{Color}, (Image, Cint, Ptr{Cint}), image, maxPaletteSize, colorCount)
 end
-function UnloadImageColors(a0)
-    ccall((:UnloadImageColors, libraylib), Cvoid, (Ptr{Color},), a0)
+function UnloadImageColors(colors)
+    ccall((:UnloadImageColors, libraylib), Cvoid, (Ptr{Color},), colors)
 end
-function UnloadImagePalette(a0)
-    ccall((:UnloadImagePalette, libraylib), Cvoid, (Ptr{Color},), a0)
+function UnloadImagePalette(colors)
+    ccall((:UnloadImagePalette, libraylib), Cvoid, (Ptr{Color},), colors)
 end
-function GetImageAlphaBorder(a0, a1)
-    ccall((:GetImageAlphaBorder, libraylib), Rectangle, (Image, Cfloat), a0, a1)
+function GetImageAlphaBorder(image, threshold)
+    ccall((:GetImageAlphaBorder, libraylib), Rectangle, (Image, Cfloat), image, threshold)
 end
-function GetImageColor(a0, a1, a2)
-    ccall((:GetImageColor, libraylib), Color, (Image, Cint, Cint), a0, a1, a2)
+function GetImageColor(image, x, y)
+    ccall((:GetImageColor, libraylib), Color, (Image, Cint, Cint), image, x, y)
 end
-function ImageClearBackground(a0, a1)
-    ccall((:ImageClearBackground, libraylib), Cvoid, (Ptr{Image}, Color), a0, a1)
+function ImageClearBackground(dst, color)
+    ccall((:ImageClearBackground, libraylib), Cvoid, (Ptr{Image}, Color), dst, color)
 end
-function ImageDrawPixel(a0, a1, a2, a3)
-    ccall((:ImageDrawPixel, libraylib), Cvoid, (Ptr{Image}, Cint, Cint, Color), a0, a1, a2, a3)
+function ImageDrawPixel(dst, posX, posY, color)
+    ccall((:ImageDrawPixel, libraylib), Cvoid, (Ptr{Image}, Cint, Cint, Color), dst, posX, posY, color)
 end
-function ImageDrawPixelV(a0, a1, a2)
-    ccall((:ImageDrawPixelV, libraylib), Cvoid, (Ptr{Image}, Vector2, Color), a0, a1, a2)
+function ImageDrawPixelV(dst, position, color)
+    ccall((:ImageDrawPixelV, libraylib), Cvoid, (Ptr{Image}, Vector2, Color), dst, position, color)
 end
-function ImageDrawLine(a0, a1, a2, a3, a4, a5)
-    ccall((:ImageDrawLine, libraylib), Cvoid, (Ptr{Image}, Cint, Cint, Cint, Cint, Color), a0, a1, a2, a3, a4, a5)
+function ImageDrawLine(dst, startPosX, startPosY, endPosX, endPosY, color)
+    ccall((:ImageDrawLine, libraylib), Cvoid, (Ptr{Image}, Cint, Cint, Cint, Cint, Color), dst, startPosX, startPosY, endPosX, endPosY, color)
 end
-function ImageDrawLineV(a0, a1, a2, a3)
-    ccall((:ImageDrawLineV, libraylib), Cvoid, (Ptr{Image}, Vector2, Vector2, Color), a0, a1, a2, a3)
+function ImageDrawLineV(dst, start, end_, color)
+    ccall((:ImageDrawLineV, libraylib), Cvoid, (Ptr{Image}, Vector2, Vector2, Color), dst, start, end_, color)
 end
-function ImageDrawLineEx(a0, a1, a2, a3, a4)
-    ccall((:ImageDrawLineEx, libraylib), Cvoid, (Ptr{Image}, Vector2, Vector2, Cint, Color), a0, a1, a2, a3, a4)
+function ImageDrawLineEx(dst, start, end_, thick, color)
+    ccall((:ImageDrawLineEx, libraylib), Cvoid, (Ptr{Image}, Vector2, Vector2, Cint, Color), dst, start, end_, thick, color)
 end
-function ImageDrawCircle(a0, a1, a2, a3, a4)
-    ccall((:ImageDrawCircle, libraylib), Cvoid, (Ptr{Image}, Cint, Cint, Cint, Color), a0, a1, a2, a3, a4)
+function ImageDrawCircle(dst, centerX, centerY, radius, color)
+    ccall((:ImageDrawCircle, libraylib), Cvoid, (Ptr{Image}, Cint, Cint, Cint, Color), dst, centerX, centerY, radius, color)
 end
-function ImageDrawCircleV(a0, a1, a2, a3)
-    ccall((:ImageDrawCircleV, libraylib), Cvoid, (Ptr{Image}, Vector2, Cint, Color), a0, a1, a2, a3)
+function ImageDrawCircleV(dst, center, radius, color)
+    ccall((:ImageDrawCircleV, libraylib), Cvoid, (Ptr{Image}, Vector2, Cint, Color), dst, center, radius, color)
 end
-function ImageDrawCircleLines(a0, a1, a2, a3, a4)
-    ccall((:ImageDrawCircleLines, libraylib), Cvoid, (Ptr{Image}, Cint, Cint, Cint, Color), a0, a1, a2, a3, a4)
+function ImageDrawCircleLines(dst, centerX, centerY, radius, color)
+    ccall((:ImageDrawCircleLines, libraylib), Cvoid, (Ptr{Image}, Cint, Cint, Cint, Color), dst, centerX, centerY, radius, color)
 end
-function ImageDrawCircleLinesV(a0, a1, a2, a3)
-    ccall((:ImageDrawCircleLinesV, libraylib), Cvoid, (Ptr{Image}, Vector2, Cint, Color), a0, a1, a2, a3)
+function ImageDrawCircleLinesV(dst, center, radius, color)
+    ccall((:ImageDrawCircleLinesV, libraylib), Cvoid, (Ptr{Image}, Vector2, Cint, Color), dst, center, radius, color)
 end
-function ImageDrawRectangle(a0, a1, a2, a3, a4, a5)
-    ccall((:ImageDrawRectangle, libraylib), Cvoid, (Ptr{Image}, Cint, Cint, Cint, Cint, Color), a0, a1, a2, a3, a4, a5)
+function ImageDrawRectangle(dst, posX, posY, width, height, color)
+    ccall((:ImageDrawRectangle, libraylib), Cvoid, (Ptr{Image}, Cint, Cint, Cint, Cint, Color), dst, posX, posY, width, height, color)
 end
-function ImageDrawRectangleV(a0, a1, a2, a3)
-    ccall((:ImageDrawRectangleV, libraylib), Cvoid, (Ptr{Image}, Vector2, Vector2, Color), a0, a1, a2, a3)
+function ImageDrawRectangleV(dst, position, size, color)
+    ccall((:ImageDrawRectangleV, libraylib), Cvoid, (Ptr{Image}, Vector2, Vector2, Color), dst, position, size, color)
 end
-function ImageDrawRectangleRec(a0, a1, a2)
-    ccall((:ImageDrawRectangleRec, libraylib), Cvoid, (Ptr{Image}, Rectangle, Color), a0, a1, a2)
+function ImageDrawRectangleRec(dst, rec, color)
+    ccall((:ImageDrawRectangleRec, libraylib), Cvoid, (Ptr{Image}, Rectangle, Color), dst, rec, color)
 end
-function ImageDrawRectangleLines(a0, a1, a2, a3)
-    ccall((:ImageDrawRectangleLines, libraylib), Cvoid, (Ptr{Image}, Rectangle, Cint, Color), a0, a1, a2, a3)
+function ImageDrawRectangleLines(dst, rec, thick, color)
+    ccall((:ImageDrawRectangleLines, libraylib), Cvoid, (Ptr{Image}, Rectangle, Cint, Color), dst, rec, thick, color)
 end
-function ImageDrawTriangle(a0, a1, a2, a3, a4)
-    ccall((:ImageDrawTriangle, libraylib), Cvoid, (Ptr{Image}, Vector2, Vector2, Vector2, Color), a0, a1, a2, a3, a4)
+function ImageDrawTriangle(dst, v1, v2, v3, color)
+    ccall((:ImageDrawTriangle, libraylib), Cvoid, (Ptr{Image}, Vector2, Vector2, Vector2, Color), dst, v1, v2, v3, color)
 end
-function ImageDrawTriangleEx(a0, a1, a2, a3, a4, a5, a6)
-    ccall((:ImageDrawTriangleEx, libraylib), Cvoid, (Ptr{Image}, Vector2, Vector2, Vector2, Color, Color, Color), a0, a1, a2, a3, a4, a5, a6)
+function ImageDrawTriangleEx(dst, v1, v2, v3, c1, c2, c3)
+    ccall((:ImageDrawTriangleEx, libraylib), Cvoid, (Ptr{Image}, Vector2, Vector2, Vector2, Color, Color, Color), dst, v1, v2, v3, c1, c2, c3)
 end
-function ImageDrawTriangleLines(a0, a1, a2, a3, a4)
-    ccall((:ImageDrawTriangleLines, libraylib), Cvoid, (Ptr{Image}, Vector2, Vector2, Vector2, Color), a0, a1, a2, a3, a4)
+function ImageDrawTriangleLines(dst, v1, v2, v3, color)
+    ccall((:ImageDrawTriangleLines, libraylib), Cvoid, (Ptr{Image}, Vector2, Vector2, Vector2, Color), dst, v1, v2, v3, color)
 end
-function ImageDrawTriangleFan(a0, a1, a2, a3)
-    ccall((:ImageDrawTriangleFan, libraylib), Cvoid, (Ptr{Image}, Ptr{Vector2}, Cint, Color), a0, a1, a2, a3)
+function ImageDrawTriangleFan(dst, points, pointCount, color)
+    ccall((:ImageDrawTriangleFan, libraylib), Cvoid, (Ptr{Image}, Ptr{Vector2}, Cint, Color), dst, points, pointCount, color)
 end
-function ImageDrawTriangleStrip(a0, a1, a2, a3)
-    ccall((:ImageDrawTriangleStrip, libraylib), Cvoid, (Ptr{Image}, Ptr{Vector2}, Cint, Color), a0, a1, a2, a3)
+function ImageDrawTriangleStrip(dst, points, pointCount, color)
+    ccall((:ImageDrawTriangleStrip, libraylib), Cvoid, (Ptr{Image}, Ptr{Vector2}, Cint, Color), dst, points, pointCount, color)
 end
-function ImageDraw(a0, a1, a2, a3, a4)
-    ccall((:ImageDraw, libraylib), Cvoid, (Ptr{Image}, Image, Rectangle, Rectangle, Color), a0, a1, a2, a3, a4)
+function ImageDraw(dst, src, srcRec, dstRec, tint)
+    ccall((:ImageDraw, libraylib), Cvoid, (Ptr{Image}, Image, Rectangle, Rectangle, Color), dst, src, srcRec, dstRec, tint)
 end
-function ImageDrawText(a0, a1, a2, a3, a4, a5)
-    ccall((:ImageDrawText, libraylib), Cvoid, (Ptr{Image}, Cstring, Cint, Cint, Cint, Color), a0, a1, a2, a3, a4, a5)
+function ImageDrawText(dst, text, posX, posY, fontSize, color)
+    ccall((:ImageDrawText, libraylib), Cvoid, (Ptr{Image}, Cstring, Cint, Cint, Cint, Color), dst, text, posX, posY, fontSize, color)
 end
-function ImageDrawTextEx(a0, a1, a2, a3, a4, a5, a6)
-    ccall((:ImageDrawTextEx, libraylib), Cvoid, (Ptr{Image}, Font, Cstring, Vector2, Cfloat, Cfloat, Color), a0, a1, a2, a3, a4, a5, a6)
+function ImageDrawTextEx(dst, font, text, position, fontSize, spacing, tint)
+    ccall((:ImageDrawTextEx, libraylib), Cvoid, (Ptr{Image}, Font, Cstring, Vector2, Cfloat, Cfloat, Color), dst, font, text, position, fontSize, spacing, tint)
 end
-function LoadTexture(a0)
-    ccall((:LoadTexture, libraylib), Texture2D, (Cstring,), a0)
+function LoadTexture(fileName)
+    ccall((:LoadTexture, libraylib), Texture2D, (Cstring,), fileName)
 end
-function LoadTextureFromImage(a0)
-    ccall((:LoadTextureFromImage, libraylib), Texture2D, (Image,), a0)
+function LoadTextureFromImage(image)
+    ccall((:LoadTextureFromImage, libraylib), Texture2D, (Image,), image)
 end
-function LoadTextureCubemap(a0, a1)
-    ccall((:LoadTextureCubemap, libraylib), TextureCubemap, (Image, Cint), a0, a1)
+function LoadTextureCubemap(image, layout)
+    ccall((:LoadTextureCubemap, libraylib), TextureCubemap, (Image, Cint), image, layout)
 end
-function LoadRenderTexture(a0, a1)
-    ccall((:LoadRenderTexture, libraylib), RenderTexture2D, (Cint, Cint), a0, a1)
+function LoadRenderTexture(width, height)
+    ccall((:LoadRenderTexture, libraylib), RenderTexture2D, (Cint, Cint), width, height)
 end
-function IsTextureValid(a0)
-    ccall((:IsTextureValid, libraylib), Bool, (Texture2D,), a0)
+function IsTextureValid(texture)
+    ccall((:IsTextureValid, libraylib), Bool, (Texture2D,), texture)
 end
-function UnloadTexture(a0)
-    ccall((:UnloadTexture, libraylib), Cvoid, (Texture2D,), a0)
+function UnloadTexture(texture)
+    ccall((:UnloadTexture, libraylib), Cvoid, (Texture2D,), texture)
 end
-function IsRenderTextureValid(a0)
-    ccall((:IsRenderTextureValid, libraylib), Bool, (RenderTexture2D,), a0)
+function IsRenderTextureValid(target)
+    ccall((:IsRenderTextureValid, libraylib), Bool, (RenderTexture2D,), target)
 end
-function UnloadRenderTexture(a0)
-    ccall((:UnloadRenderTexture, libraylib), Cvoid, (RenderTexture2D,), a0)
+function UnloadRenderTexture(target)
+    ccall((:UnloadRenderTexture, libraylib), Cvoid, (RenderTexture2D,), target)
 end
-function UpdateTexture(a0, a1)
-    ccall((:UpdateTexture, libraylib), Cvoid, (Texture2D, Ptr{Cvoid}), a0, a1)
+function UpdateTexture(texture, pixels)
+    ccall((:UpdateTexture, libraylib), Cvoid, (Texture2D, Ptr{Cvoid}), texture, pixels)
 end
-function UpdateTextureRec(a0, a1, a2)
-    ccall((:UpdateTextureRec, libraylib), Cvoid, (Texture2D, Rectangle, Ptr{Cvoid}), a0, a1, a2)
+function UpdateTextureRec(texture, rec, pixels)
+    ccall((:UpdateTextureRec, libraylib), Cvoid, (Texture2D, Rectangle, Ptr{Cvoid}), texture, rec, pixels)
 end
-function GenTextureMipmaps(a0)
-    ccall((:GenTextureMipmaps, libraylib), Cvoid, (Ptr{Texture2D},), a0)
+function GenTextureMipmaps(texture)
+    ccall((:GenTextureMipmaps, libraylib), Cvoid, (Ptr{Texture2D},), texture)
 end
-function SetTextureFilter(a0, a1)
-    ccall((:SetTextureFilter, libraylib), Cvoid, (Texture2D, Cint), a0, a1)
+function SetTextureFilter(texture, filter)
+    ccall((:SetTextureFilter, libraylib), Cvoid, (Texture2D, Cint), texture, filter)
 end
-function SetTextureWrap(a0, a1)
-    ccall((:SetTextureWrap, libraylib), Cvoid, (Texture2D, Cint), a0, a1)
+function SetTextureWrap(texture, wrap)
+    ccall((:SetTextureWrap, libraylib), Cvoid, (Texture2D, Cint), texture, wrap)
 end
-function DrawTexture(a0, a1, a2, a3)
-    ccall((:DrawTexture, libraylib), Cvoid, (Texture2D, Cint, Cint, Color), a0, a1, a2, a3)
+function DrawTexture(texture, posX, posY, tint)
+    ccall((:DrawTexture, libraylib), Cvoid, (Texture2D, Cint, Cint, Color), texture, posX, posY, tint)
 end
-function DrawTextureV(a0, a1, a2)
-    ccall((:DrawTextureV, libraylib), Cvoid, (Texture2D, Vector2, Color), a0, a1, a2)
+function DrawTextureV(texture, position, tint)
+    ccall((:DrawTextureV, libraylib), Cvoid, (Texture2D, Vector2, Color), texture, position, tint)
 end
-function DrawTextureEx(a0, a1, a2, a3, a4)
-    ccall((:DrawTextureEx, libraylib), Cvoid, (Texture2D, Vector2, Cfloat, Cfloat, Color), a0, a1, a2, a3, a4)
+function DrawTextureEx(texture, position, rotation, scale, tint)
+    ccall((:DrawTextureEx, libraylib), Cvoid, (Texture2D, Vector2, Cfloat, Cfloat, Color), texture, position, rotation, scale, tint)
 end
-function DrawTextureRec(a0, a1, a2, a3)
-    ccall((:DrawTextureRec, libraylib), Cvoid, (Texture2D, Rectangle, Vector2, Color), a0, a1, a2, a3)
+function DrawTextureRec(texture, source, position, tint)
+    ccall((:DrawTextureRec, libraylib), Cvoid, (Texture2D, Rectangle, Vector2, Color), texture, source, position, tint)
 end
-function DrawTexturePro(a0, a1, a2, a3, a4, a5)
-    ccall((:DrawTexturePro, libraylib), Cvoid, (Texture2D, Rectangle, Rectangle, Vector2, Cfloat, Color), a0, a1, a2, a3, a4, a5)
+function DrawTexturePro(texture, source, dest, origin, rotation, tint)
+    ccall((:DrawTexturePro, libraylib), Cvoid, (Texture2D, Rectangle, Rectangle, Vector2, Cfloat, Color), texture, source, dest, origin, rotation, tint)
 end
-function DrawTextureNPatch(a0, a1, a2, a3, a4, a5)
-    ccall((:DrawTextureNPatch, libraylib), Cvoid, (Texture2D, NPatchInfo, Rectangle, Vector2, Cfloat, Color), a0, a1, a2, a3, a4, a5)
+function DrawTextureNPatch(texture, nPatchInfo, dest, origin, rotation, tint)
+    ccall((:DrawTextureNPatch, libraylib), Cvoid, (Texture2D, NPatchInfo, Rectangle, Vector2, Cfloat, Color), texture, nPatchInfo, dest, origin, rotation, tint)
 end
-function ColorIsEqual(a0, a1)
-    ccall((:ColorIsEqual, libraylib), Bool, (Color, Color), a0, a1)
+function ColorIsEqual(col1, col2)
+    ccall((:ColorIsEqual, libraylib), Bool, (Color, Color), col1, col2)
 end
-function Fade(a0, a1)
-    ccall((:Fade, libraylib), Color, (Color, Cfloat), a0, a1)
+function Fade(color, alpha)
+    ccall((:Fade, libraylib), Color, (Color, Cfloat), color, alpha)
 end
-function ColorToInt(a0)
-    ccall((:ColorToInt, libraylib), Cint, (Color,), a0)
+function ColorToInt(color)
+    ccall((:ColorToInt, libraylib), Cint, (Color,), color)
 end
-function ColorNormalize(a0)
-    ccall((:ColorNormalize, libraylib), Vector4, (Color,), a0)
+function ColorNormalize(color)
+    ccall((:ColorNormalize, libraylib), Vector4, (Color,), color)
 end
-function ColorFromNormalized(a0)
-    ccall((:ColorFromNormalized, libraylib), Color, (Vector4,), a0)
+function ColorFromNormalized(normalized)
+    ccall((:ColorFromNormalized, libraylib), Color, (Vector4,), normalized)
 end
-function ColorToHSV(a0)
-    ccall((:ColorToHSV, libraylib), Vector3, (Color,), a0)
+function ColorToHSV(color)
+    ccall((:ColorToHSV, libraylib), Vector3, (Color,), color)
 end
-function ColorFromHSV(a0, a1, a2)
-    ccall((:ColorFromHSV, libraylib), Color, (Cfloat, Cfloat, Cfloat), a0, a1, a2)
+function ColorFromHSV(hue, saturation, value)
+    ccall((:ColorFromHSV, libraylib), Color, (Cfloat, Cfloat, Cfloat), hue, saturation, value)
 end
-function ColorTint(a0, a1)
-    ccall((:ColorTint, libraylib), Color, (Color, Color), a0, a1)
+function ColorTint(color, tint)
+    ccall((:ColorTint, libraylib), Color, (Color, Color), color, tint)
 end
-function ColorBrightness(a0, a1)
-    ccall((:ColorBrightness, libraylib), Color, (Color, Cfloat), a0, a1)
+function ColorBrightness(color, factor)
+    ccall((:ColorBrightness, libraylib), Color, (Color, Cfloat), color, factor)
 end
-function ColorContrast(a0, a1)
-    ccall((:ColorContrast, libraylib), Color, (Color, Cfloat), a0, a1)
+function ColorContrast(color, contrast)
+    ccall((:ColorContrast, libraylib), Color, (Color, Cfloat), color, contrast)
 end
-function ColorAlpha(a0, a1)
-    ccall((:ColorAlpha, libraylib), Color, (Color, Cfloat), a0, a1)
+function ColorAlpha(color, alpha)
+    ccall((:ColorAlpha, libraylib), Color, (Color, Cfloat), color, alpha)
 end
-function ColorAlphaBlend(a0, a1, a2)
-    ccall((:ColorAlphaBlend, libraylib), Color, (Color, Color, Color), a0, a1, a2)
+function ColorAlphaBlend(dst, src, tint)
+    ccall((:ColorAlphaBlend, libraylib), Color, (Color, Color, Color), dst, src, tint)
 end
-function ColorLerp(a0, a1, a2)
-    ccall((:ColorLerp, libraylib), Color, (Color, Color, Cfloat), a0, a1, a2)
+function ColorLerp(color1, color2, factor)
+    ccall((:ColorLerp, libraylib), Color, (Color, Color, Cfloat), color1, color2, factor)
 end
-function GetColor(a0)
-    ccall((:GetColor, libraylib), Color, (Cuint,), a0)
+function GetColor(hexValue)
+    ccall((:GetColor, libraylib), Color, (Cuint,), hexValue)
 end
-function GetPixelColor(a0, a1)
-    ccall((:GetPixelColor, libraylib), Color, (Ptr{Cvoid}, Cint), a0, a1)
+function GetPixelColor(srcPtr, format)
+    ccall((:GetPixelColor, libraylib), Color, (Ptr{Cvoid}, Cint), srcPtr, format)
 end
-function SetPixelColor(a0, a1, a2)
-    ccall((:SetPixelColor, libraylib), Cvoid, (Ptr{Cvoid}, Color, Cint), a0, a1, a2)
+function SetPixelColor(dstPtr, color, format)
+    ccall((:SetPixelColor, libraylib), Cvoid, (Ptr{Cvoid}, Color, Cint), dstPtr, color, format)
 end
-function GetPixelDataSize(a0, a1, a2)
-    ccall((:GetPixelDataSize, libraylib), Cint, (Cint, Cint, Cint), a0, a1, a2)
+function GetPixelDataSize(width, height, format)
+    ccall((:GetPixelDataSize, libraylib), Cint, (Cint, Cint, Cint), width, height, format)
 end
 function GetFontDefault()
     ccall((:GetFontDefault, libraylib), Font, ())
 end
-function LoadFont(a0)
-    ccall((:LoadFont, libraylib), Font, (Cstring,), a0)
+function LoadFont(fileName)
+    ccall((:LoadFont, libraylib), Font, (Cstring,), fileName)
 end
-function LoadFontEx(a0, a1, a2, a3)
-    ccall((:LoadFontEx, libraylib), Font, (Cstring, Cint, Ptr{Cint}, Cint), a0, a1, a2, a3)
+function LoadFontEx(fileName, fontSize, codepoints, codepointCount)
+    ccall((:LoadFontEx, libraylib), Font, (Cstring, Cint, Ptr{Cint}, Cint), fileName, fontSize, codepoints, codepointCount)
 end
-function LoadFontFromImage(a0, a1, a2)
-    ccall((:LoadFontFromImage, libraylib), Font, (Image, Color, Cint), a0, a1, a2)
+function LoadFontFromImage(image, key, firstChar)
+    ccall((:LoadFontFromImage, libraylib), Font, (Image, Color, Cint), image, key, firstChar)
 end
-function LoadFontFromMemory(a0, a1, a2, a3, a4, a5)
-    ccall((:LoadFontFromMemory, libraylib), Font, (Cstring, Ptr{Cuchar}, Cint, Cint, Ptr{Cint}, Cint), a0, a1, a2, a3, a4, a5)
+function LoadFontFromMemory(fileType, fileData, dataSize, fontSize, codepoints, codepointCount)
+    ccall((:LoadFontFromMemory, libraylib), Font, (Cstring, Ptr{Cuchar}, Cint, Cint, Ptr{Cint}, Cint), fileType, fileData, dataSize, fontSize, codepoints, codepointCount)
 end
-function IsFontValid(a0)
-    ccall((:IsFontValid, libraylib), Bool, (Font,), a0)
+function IsFontValid(font)
+    ccall((:IsFontValid, libraylib), Bool, (Font,), font)
 end
-function LoadFontData(a0, a1, a2, a3, a4, a5, a6)
-    ccall((:LoadFontData, libraylib), Ptr{GlyphInfo}, (Ptr{Cuchar}, Cint, Cint, Ptr{Cint}, Cint, Cint, Ptr{Cint}), a0, a1, a2, a3, a4, a5, a6)
+function LoadFontData(fileData, dataSize, fontSize, codepoints, codepointCount, type_, glyphCount)
+    ccall((:LoadFontData, libraylib), Ptr{GlyphInfo}, (Ptr{Cuchar}, Cint, Cint, Ptr{Cint}, Cint, Cint, Ptr{Cint}), fileData, dataSize, fontSize, codepoints, codepointCount, type_, glyphCount)
 end
-function GenImageFontAtlas(a0, a1, a2, a3, a4, a5)
-    ccall((:GenImageFontAtlas, libraylib), Image, (Ptr{GlyphInfo}, Ptr{Ptr{Rectangle}}, Cint, Cint, Cint, Cint), a0, a1, a2, a3, a4, a5)
+function GenImageFontAtlas(glyphs, glyphRecs, glyphCount, fontSize, padding, packMethod)
+    ccall((:GenImageFontAtlas, libraylib), Image, (Ptr{GlyphInfo}, Ptr{Ptr{Rectangle}}, Cint, Cint, Cint, Cint), glyphs, glyphRecs, glyphCount, fontSize, padding, packMethod)
 end
-function UnloadFontData(a0, a1)
-    ccall((:UnloadFontData, libraylib), Cvoid, (Ptr{GlyphInfo}, Cint), a0, a1)
+function UnloadFontData(glyphs, glyphCount)
+    ccall((:UnloadFontData, libraylib), Cvoid, (Ptr{GlyphInfo}, Cint), glyphs, glyphCount)
 end
-function UnloadFont(a0)
-    ccall((:UnloadFont, libraylib), Cvoid, (Font,), a0)
+function UnloadFont(font)
+    ccall((:UnloadFont, libraylib), Cvoid, (Font,), font)
 end
-function ExportFontAsCode(a0, a1)
-    ccall((:ExportFontAsCode, libraylib), Bool, (Font, Cstring), a0, a1)
+function ExportFontAsCode(font, fileName)
+    ccall((:ExportFontAsCode, libraylib), Bool, (Font, Cstring), font, fileName)
 end
-function DrawFPS(a0, a1)
-    ccall((:DrawFPS, libraylib), Cvoid, (Cint, Cint), a0, a1)
+function DrawFPS(posX, posY)
+    ccall((:DrawFPS, libraylib), Cvoid, (Cint, Cint), posX, posY)
 end
-function DrawText(a0, a1, a2, a3, a4)
-    ccall((:DrawText, libraylib), Cvoid, (Cstring, Cint, Cint, Cint, Color), a0, a1, a2, a3, a4)
+function DrawText(text, posX, posY, fontSize, color)
+    ccall((:DrawText, libraylib), Cvoid, (Cstring, Cint, Cint, Cint, Color), text, posX, posY, fontSize, color)
 end
-function DrawTextEx(a0, a1, a2, a3, a4, a5)
-    ccall((:DrawTextEx, libraylib), Cvoid, (Font, Cstring, Vector2, Cfloat, Cfloat, Color), a0, a1, a2, a3, a4, a5)
+function DrawTextEx(font, text, position, fontSize, spacing, tint)
+    ccall((:DrawTextEx, libraylib), Cvoid, (Font, Cstring, Vector2, Cfloat, Cfloat, Color), font, text, position, fontSize, spacing, tint)
 end
-function DrawTextPro(a0, a1, a2, a3, a4, a5, a6, a7)
-    ccall((:DrawTextPro, libraylib), Cvoid, (Font, Cstring, Vector2, Vector2, Cfloat, Cfloat, Cfloat, Color), a0, a1, a2, a3, a4, a5, a6, a7)
+function DrawTextPro(font, text, position, origin, rotation, fontSize, spacing, tint)
+    ccall((:DrawTextPro, libraylib), Cvoid, (Font, Cstring, Vector2, Vector2, Cfloat, Cfloat, Cfloat, Color), font, text, position, origin, rotation, fontSize, spacing, tint)
 end
-function DrawTextCodepoint(a0, a1, a2, a3, a4)
-    ccall((:DrawTextCodepoint, libraylib), Cvoid, (Font, Cint, Vector2, Cfloat, Color), a0, a1, a2, a3, a4)
+function DrawTextCodepoint(font, codepoint, position, fontSize, tint)
+    ccall((:DrawTextCodepoint, libraylib), Cvoid, (Font, Cint, Vector2, Cfloat, Color), font, codepoint, position, fontSize, tint)
 end
-function DrawTextCodepoints(a0, a1, a2, a3, a4, a5, a6)
-    ccall((:DrawTextCodepoints, libraylib), Cvoid, (Font, Ptr{Cint}, Cint, Vector2, Cfloat, Cfloat, Color), a0, a1, a2, a3, a4, a5, a6)
+function DrawTextCodepoints(font, codepoints, codepointCount, position, fontSize, spacing, tint)
+    ccall((:DrawTextCodepoints, libraylib), Cvoid, (Font, Ptr{Cint}, Cint, Vector2, Cfloat, Cfloat, Color), font, codepoints, codepointCount, position, fontSize, spacing, tint)
 end
-function SetTextLineSpacing(a0)
-    ccall((:SetTextLineSpacing, libraylib), Cvoid, (Cint,), a0)
+function SetTextLineSpacing(spacing)
+    ccall((:SetTextLineSpacing, libraylib), Cvoid, (Cint,), spacing)
 end
-function MeasureText(a0, a1)
-    ccall((:MeasureText, libraylib), Cint, (Cstring, Cint), a0, a1)
+function MeasureText(text, fontSize)
+    ccall((:MeasureText, libraylib), Cint, (Cstring, Cint), text, fontSize)
 end
-function MeasureTextEx(a0, a1, a2, a3)
-    ccall((:MeasureTextEx, libraylib), Vector2, (Font, Cstring, Cfloat, Cfloat), a0, a1, a2, a3)
+function MeasureTextEx(font, text, fontSize, spacing)
+    ccall((:MeasureTextEx, libraylib), Vector2, (Font, Cstring, Cfloat, Cfloat), font, text, fontSize, spacing)
 end
-function MeasureTextCodepoints(a0, a1, a2, a3, a4)
-    ccall((:MeasureTextCodepoints, libraylib), Vector2, (Font, Ptr{Cint}, Cint, Cfloat, Cfloat), a0, a1, a2, a3, a4)
+function MeasureTextCodepoints(font, codepoints, length, fontSize, spacing)
+    ccall((:MeasureTextCodepoints, libraylib), Vector2, (Font, Ptr{Cint}, Cint, Cfloat, Cfloat), font, codepoints, length, fontSize, spacing)
 end
-function GetGlyphIndex(a0, a1)
-    ccall((:GetGlyphIndex, libraylib), Cint, (Font, Cint), a0, a1)
+function GetGlyphIndex(font, codepoint)
+    ccall((:GetGlyphIndex, libraylib), Cint, (Font, Cint), font, codepoint)
 end
-function GetGlyphInfo(a0, a1)
-    ccall((:GetGlyphInfo, libraylib), GlyphInfo, (Font, Cint), a0, a1)
+function GetGlyphInfo(font, codepoint)
+    ccall((:GetGlyphInfo, libraylib), GlyphInfo, (Font, Cint), font, codepoint)
 end
-function GetGlyphAtlasRec(a0, a1)
-    ccall((:GetGlyphAtlasRec, libraylib), Rectangle, (Font, Cint), a0, a1)
+function GetGlyphAtlasRec(font, codepoint)
+    ccall((:GetGlyphAtlasRec, libraylib), Rectangle, (Font, Cint), font, codepoint)
 end
-function LoadUTF8(a0, a1)
-    ccall((:LoadUTF8, libraylib), Ptr{Cchar}, (Ptr{Cint}, Cint), a0, a1)
+function LoadUTF8(codepoints, length)
+    ccall((:LoadUTF8, libraylib), Ptr{Cchar}, (Ptr{Cint}, Cint), codepoints, length)
 end
-function UnloadUTF8(a0)
-    ccall((:UnloadUTF8, libraylib), Cvoid, (Cstring,), a0)
+function UnloadUTF8(text)
+    ccall((:UnloadUTF8, libraylib), Cvoid, (Cstring,), text)
 end
-function LoadCodepoints(a0, a1)
-    ccall((:LoadCodepoints, libraylib), Ptr{Cint}, (Cstring, Ptr{Cint}), a0, a1)
+function LoadCodepoints(text, count)
+    ccall((:LoadCodepoints, libraylib), Ptr{Cint}, (Cstring, Ptr{Cint}), text, count)
 end
-function UnloadCodepoints(a0)
-    ccall((:UnloadCodepoints, libraylib), Cvoid, (Ptr{Cint},), a0)
+function UnloadCodepoints(codepoints)
+    ccall((:UnloadCodepoints, libraylib), Cvoid, (Ptr{Cint},), codepoints)
 end
-function GetCodepointCount(a0)
-    ccall((:GetCodepointCount, libraylib), Cint, (Cstring,), a0)
+function GetCodepointCount(text)
+    ccall((:GetCodepointCount, libraylib), Cint, (Cstring,), text)
 end
-function GetCodepoint(a0, a1)
-    ccall((:GetCodepoint, libraylib), Cint, (Cstring, Ptr{Cint}), a0, a1)
+function GetCodepoint(text, codepointSize)
+    ccall((:GetCodepoint, libraylib), Cint, (Cstring, Ptr{Cint}), text, codepointSize)
 end
-function GetCodepointNext(a0, a1)
-    ccall((:GetCodepointNext, libraylib), Cint, (Cstring, Ptr{Cint}), a0, a1)
+function GetCodepointNext(text, codepointSize)
+    ccall((:GetCodepointNext, libraylib), Cint, (Cstring, Ptr{Cint}), text, codepointSize)
 end
-function GetCodepointPrevious(a0, a1)
-    ccall((:GetCodepointPrevious, libraylib), Cint, (Cstring, Ptr{Cint}), a0, a1)
+function GetCodepointPrevious(text, codepointSize)
+    ccall((:GetCodepointPrevious, libraylib), Cint, (Cstring, Ptr{Cint}), text, codepointSize)
 end
-function CodepointToUTF8(a0, a1)
-    ccall((:CodepointToUTF8, libraylib), Ptr{Cchar}, (Cint, Ptr{Cint}), a0, a1)
+function CodepointToUTF8(codepoint, utf8Size)
+    ccall((:CodepointToUTF8, libraylib), Ptr{Cchar}, (Cint, Ptr{Cint}), codepoint, utf8Size)
 end
-function LoadTextLines(a0, a1)
-    ccall((:LoadTextLines, libraylib), Ptr{Ptr{Cchar}}, (Cstring, Ptr{Cint}), a0, a1)
+function LoadTextLines(text, count)
+    ccall((:LoadTextLines, libraylib), Ptr{Ptr{Cchar}}, (Cstring, Ptr{Cint}), text, count)
 end
-function UnloadTextLines(a0, a1)
-    ccall((:UnloadTextLines, libraylib), Cvoid, (Ptr{Ptr{Cchar}}, Cint), a0, a1)
+function UnloadTextLines(text, lineCount)
+    ccall((:UnloadTextLines, libraylib), Cvoid, (Ptr{Ptr{Cchar}}, Cint), text, lineCount)
 end
-function TextCopy(a0, a1)
-    ccall((:TextCopy, libraylib), Cint, (Cstring, Cstring), a0, a1)
+function TextCopy(dst, src)
+    ccall((:TextCopy, libraylib), Cint, (Cstring, Cstring), dst, src)
 end
-function TextIsEqual(a0, a1)
-    ccall((:TextIsEqual, libraylib), Bool, (Cstring, Cstring), a0, a1)
+function TextIsEqual(text1, text2)
+    ccall((:TextIsEqual, libraylib), Bool, (Cstring, Cstring), text1, text2)
 end
-function TextLength(a0)
-    ccall((:TextLength, libraylib), Cuint, (Cstring,), a0)
+function TextLength(text)
+    ccall((:TextLength, libraylib), Cuint, (Cstring,), text)
 end
-function TextSubtext(a0, a1, a2)
-    ccall((:TextSubtext, libraylib), Ptr{Cchar}, (Cstring, Cint, Cint), a0, a1, a2)
+function TextSubtext(text, position, length)
+    ccall((:TextSubtext, libraylib), Ptr{Cchar}, (Cstring, Cint, Cint), text, position, length)
 end
-function TextRemoveSpaces(a0)
-    ccall((:TextRemoveSpaces, libraylib), Ptr{Cchar}, (Cstring,), a0)
+function TextRemoveSpaces(text)
+    ccall((:TextRemoveSpaces, libraylib), Ptr{Cchar}, (Cstring,), text)
 end
-function GetTextBetween(a0, a1, a2)
-    ccall((:GetTextBetween, libraylib), Ptr{Cchar}, (Cstring, Cstring, Cstring), a0, a1, a2)
+function GetTextBetween(text, begin_, end_)
+    ccall((:GetTextBetween, libraylib), Ptr{Cchar}, (Cstring, Cstring, Cstring), text, begin_, end_)
 end
-function TextReplace(a0, a1, a2)
-    ccall((:TextReplace, libraylib), Ptr{Cchar}, (Cstring, Cstring, Cstring), a0, a1, a2)
+function TextReplace(text, search, replacement)
+    ccall((:TextReplace, libraylib), Ptr{Cchar}, (Cstring, Cstring, Cstring), text, search, replacement)
 end
-function TextReplaceAlloc(a0, a1, a2)
-    ccall((:TextReplaceAlloc, libraylib), Ptr{Cchar}, (Cstring, Cstring, Cstring), a0, a1, a2)
+function TextReplaceAlloc(text, search, replacement)
+    ccall((:TextReplaceAlloc, libraylib), Ptr{Cchar}, (Cstring, Cstring, Cstring), text, search, replacement)
 end
-function TextReplaceBetween(a0, a1, a2, a3)
-    ccall((:TextReplaceBetween, libraylib), Ptr{Cchar}, (Cstring, Cstring, Cstring, Cstring), a0, a1, a2, a3)
+function TextReplaceBetween(text, begin_, end_, replacement)
+    ccall((:TextReplaceBetween, libraylib), Ptr{Cchar}, (Cstring, Cstring, Cstring, Cstring), text, begin_, end_, replacement)
 end
-function TextReplaceBetweenAlloc(a0, a1, a2, a3)
-    ccall((:TextReplaceBetweenAlloc, libraylib), Ptr{Cchar}, (Cstring, Cstring, Cstring, Cstring), a0, a1, a2, a3)
+function TextReplaceBetweenAlloc(text, begin_, end_, replacement)
+    ccall((:TextReplaceBetweenAlloc, libraylib), Ptr{Cchar}, (Cstring, Cstring, Cstring, Cstring), text, begin_, end_, replacement)
 end
-function TextInsert(a0, a1, a2)
-    ccall((:TextInsert, libraylib), Ptr{Cchar}, (Cstring, Cstring, Cint), a0, a1, a2)
+function TextInsert(text, insert, position)
+    ccall((:TextInsert, libraylib), Ptr{Cchar}, (Cstring, Cstring, Cint), text, insert, position)
 end
-function TextInsertAlloc(a0, a1, a2)
-    ccall((:TextInsertAlloc, libraylib), Ptr{Cchar}, (Cstring, Cstring, Cint), a0, a1, a2)
+function TextInsertAlloc(text, insert, position)
+    ccall((:TextInsertAlloc, libraylib), Ptr{Cchar}, (Cstring, Cstring, Cint), text, insert, position)
 end
-function TextJoin(a0, a1, a2)
-    ccall((:TextJoin, libraylib), Ptr{Cchar}, (Ptr{Ptr{Cchar}}, Cint, Cstring), a0, a1, a2)
+function TextJoin(textList, count, delimiter)
+    ccall((:TextJoin, libraylib), Ptr{Cchar}, (Ptr{Ptr{Cchar}}, Cint, Cstring), textList, count, delimiter)
 end
-function TextSplit(a0, a1, a2)
-    ccall((:TextSplit, libraylib), Ptr{Ptr{Cchar}}, (Cstring, Cchar, Ptr{Cint}), a0, a1, a2)
+function TextSplit(text, delimiter, count)
+    ccall((:TextSplit, libraylib), Ptr{Ptr{Cchar}}, (Cstring, Cchar, Ptr{Cint}), text, delimiter, count)
 end
-function TextAppend(a0, a1, a2)
-    ccall((:TextAppend, libraylib), Cvoid, (Cstring, Cstring, Ptr{Cint}), a0, a1, a2)
+function TextAppend(text, append, position)
+    ccall((:TextAppend, libraylib), Cvoid, (Cstring, Cstring, Ptr{Cint}), text, append, position)
 end
-function TextFindIndex(a0, a1)
-    ccall((:TextFindIndex, libraylib), Cint, (Cstring, Cstring), a0, a1)
+function TextFindIndex(text, search)
+    ccall((:TextFindIndex, libraylib), Cint, (Cstring, Cstring), text, search)
 end
-function TextToUpper(a0)
-    ccall((:TextToUpper, libraylib), Ptr{Cchar}, (Cstring,), a0)
+function TextToUpper(text)
+    ccall((:TextToUpper, libraylib), Ptr{Cchar}, (Cstring,), text)
 end
-function TextToLower(a0)
-    ccall((:TextToLower, libraylib), Ptr{Cchar}, (Cstring,), a0)
+function TextToLower(text)
+    ccall((:TextToLower, libraylib), Ptr{Cchar}, (Cstring,), text)
 end
-function TextToPascal(a0)
-    ccall((:TextToPascal, libraylib), Ptr{Cchar}, (Cstring,), a0)
+function TextToPascal(text)
+    ccall((:TextToPascal, libraylib), Ptr{Cchar}, (Cstring,), text)
 end
-function TextToSnake(a0)
-    ccall((:TextToSnake, libraylib), Ptr{Cchar}, (Cstring,), a0)
+function TextToSnake(text)
+    ccall((:TextToSnake, libraylib), Ptr{Cchar}, (Cstring,), text)
 end
-function TextToCamel(a0)
-    ccall((:TextToCamel, libraylib), Ptr{Cchar}, (Cstring,), a0)
+function TextToCamel(text)
+    ccall((:TextToCamel, libraylib), Ptr{Cchar}, (Cstring,), text)
 end
-function TextToInteger(a0)
-    ccall((:TextToInteger, libraylib), Cint, (Cstring,), a0)
+function TextToInteger(text)
+    ccall((:TextToInteger, libraylib), Cint, (Cstring,), text)
 end
-function TextToFloat(a0)
-    ccall((:TextToFloat, libraylib), Cfloat, (Cstring,), a0)
+function TextToFloat(text)
+    ccall((:TextToFloat, libraylib), Cfloat, (Cstring,), text)
 end
-function DrawLine3D(a0, a1, a2)
-    ccall((:DrawLine3D, libraylib), Cvoid, (Vector3, Vector3, Color), a0, a1, a2)
+function DrawLine3D(startPos, endPos, color)
+    ccall((:DrawLine3D, libraylib), Cvoid, (Vector3, Vector3, Color), startPos, endPos, color)
 end
-function DrawPoint3D(a0, a1)
-    ccall((:DrawPoint3D, libraylib), Cvoid, (Vector3, Color), a0, a1)
+function DrawPoint3D(position, color)
+    ccall((:DrawPoint3D, libraylib), Cvoid, (Vector3, Color), position, color)
 end
-function DrawCircle3D(a0, a1, a2, a3, a4)
-    ccall((:DrawCircle3D, libraylib), Cvoid, (Vector3, Cfloat, Vector3, Cfloat, Color), a0, a1, a2, a3, a4)
+function DrawCircle3D(center, radius, rotationAxis, rotationAngle, color)
+    ccall((:DrawCircle3D, libraylib), Cvoid, (Vector3, Cfloat, Vector3, Cfloat, Color), center, radius, rotationAxis, rotationAngle, color)
 end
-function DrawTriangle3D(a0, a1, a2, a3)
-    ccall((:DrawTriangle3D, libraylib), Cvoid, (Vector3, Vector3, Vector3, Color), a0, a1, a2, a3)
+function DrawTriangle3D(v1, v2, v3, color)
+    ccall((:DrawTriangle3D, libraylib), Cvoid, (Vector3, Vector3, Vector3, Color), v1, v2, v3, color)
 end
-function DrawTriangleStrip3D(a0, a1, a2)
-    ccall((:DrawTriangleStrip3D, libraylib), Cvoid, (Ptr{Vector3}, Cint, Color), a0, a1, a2)
+function DrawTriangleStrip3D(points, pointCount, color)
+    ccall((:DrawTriangleStrip3D, libraylib), Cvoid, (Ptr{Vector3}, Cint, Color), points, pointCount, color)
 end
-function DrawCube(a0, a1, a2, a3, a4)
-    ccall((:DrawCube, libraylib), Cvoid, (Vector3, Cfloat, Cfloat, Cfloat, Color), a0, a1, a2, a3, a4)
+function DrawCube(position, width, height, length, color)
+    ccall((:DrawCube, libraylib), Cvoid, (Vector3, Cfloat, Cfloat, Cfloat, Color), position, width, height, length, color)
 end
-function DrawCubeV(a0, a1, a2)
-    ccall((:DrawCubeV, libraylib), Cvoid, (Vector3, Vector3, Color), a0, a1, a2)
+function DrawCubeV(position, size, color)
+    ccall((:DrawCubeV, libraylib), Cvoid, (Vector3, Vector3, Color), position, size, color)
 end
-function DrawCubeWires(a0, a1, a2, a3, a4)
-    ccall((:DrawCubeWires, libraylib), Cvoid, (Vector3, Cfloat, Cfloat, Cfloat, Color), a0, a1, a2, a3, a4)
+function DrawCubeWires(position, width, height, length, color)
+    ccall((:DrawCubeWires, libraylib), Cvoid, (Vector3, Cfloat, Cfloat, Cfloat, Color), position, width, height, length, color)
 end
-function DrawCubeWiresV(a0, a1, a2)
-    ccall((:DrawCubeWiresV, libraylib), Cvoid, (Vector3, Vector3, Color), a0, a1, a2)
+function DrawCubeWiresV(position, size, color)
+    ccall((:DrawCubeWiresV, libraylib), Cvoid, (Vector3, Vector3, Color), position, size, color)
 end
-function DrawSphere(a0, a1, a2)
-    ccall((:DrawSphere, libraylib), Cvoid, (Vector3, Cfloat, Color), a0, a1, a2)
+function DrawSphere(centerPos, radius, color)
+    ccall((:DrawSphere, libraylib), Cvoid, (Vector3, Cfloat, Color), centerPos, radius, color)
 end
-function DrawSphereEx(a0, a1, a2, a3, a4)
-    ccall((:DrawSphereEx, libraylib), Cvoid, (Vector3, Cfloat, Cint, Cint, Color), a0, a1, a2, a3, a4)
+function DrawSphereEx(centerPos, radius, rings, slices, color)
+    ccall((:DrawSphereEx, libraylib), Cvoid, (Vector3, Cfloat, Cint, Cint, Color), centerPos, radius, rings, slices, color)
 end
-function DrawSphereWires(a0, a1, a2, a3, a4)
-    ccall((:DrawSphereWires, libraylib), Cvoid, (Vector3, Cfloat, Cint, Cint, Color), a0, a1, a2, a3, a4)
+function DrawSphereWires(centerPos, radius, rings, slices, color)
+    ccall((:DrawSphereWires, libraylib), Cvoid, (Vector3, Cfloat, Cint, Cint, Color), centerPos, radius, rings, slices, color)
 end
-function DrawCylinder(a0, a1, a2, a3, a4, a5)
-    ccall((:DrawCylinder, libraylib), Cvoid, (Vector3, Cfloat, Cfloat, Cfloat, Cint, Color), a0, a1, a2, a3, a4, a5)
+function DrawCylinder(position, radiusTop, radiusBottom, height, slices, color)
+    ccall((:DrawCylinder, libraylib), Cvoid, (Vector3, Cfloat, Cfloat, Cfloat, Cint, Color), position, radiusTop, radiusBottom, height, slices, color)
 end
-function DrawCylinderEx(a0, a1, a2, a3, a4, a5)
-    ccall((:DrawCylinderEx, libraylib), Cvoid, (Vector3, Vector3, Cfloat, Cfloat, Cint, Color), a0, a1, a2, a3, a4, a5)
+function DrawCylinderEx(startPos, endPos, startRadius, endRadius, sides, color)
+    ccall((:DrawCylinderEx, libraylib), Cvoid, (Vector3, Vector3, Cfloat, Cfloat, Cint, Color), startPos, endPos, startRadius, endRadius, sides, color)
 end
-function DrawCylinderWires(a0, a1, a2, a3, a4, a5)
-    ccall((:DrawCylinderWires, libraylib), Cvoid, (Vector3, Cfloat, Cfloat, Cfloat, Cint, Color), a0, a1, a2, a3, a4, a5)
+function DrawCylinderWires(position, radiusTop, radiusBottom, height, slices, color)
+    ccall((:DrawCylinderWires, libraylib), Cvoid, (Vector3, Cfloat, Cfloat, Cfloat, Cint, Color), position, radiusTop, radiusBottom, height, slices, color)
 end
-function DrawCylinderWiresEx(a0, a1, a2, a3, a4, a5)
-    ccall((:DrawCylinderWiresEx, libraylib), Cvoid, (Vector3, Vector3, Cfloat, Cfloat, Cint, Color), a0, a1, a2, a3, a4, a5)
+function DrawCylinderWiresEx(startPos, endPos, startRadius, endRadius, sides, color)
+    ccall((:DrawCylinderWiresEx, libraylib), Cvoid, (Vector3, Vector3, Cfloat, Cfloat, Cint, Color), startPos, endPos, startRadius, endRadius, sides, color)
 end
-function DrawCapsule(a0, a1, a2, a3, a4, a5)
-    ccall((:DrawCapsule, libraylib), Cvoid, (Vector3, Vector3, Cfloat, Cint, Cint, Color), a0, a1, a2, a3, a4, a5)
+function DrawCapsule(startPos, endPos, radius, slices, rings, color)
+    ccall((:DrawCapsule, libraylib), Cvoid, (Vector3, Vector3, Cfloat, Cint, Cint, Color), startPos, endPos, radius, slices, rings, color)
 end
-function DrawCapsuleWires(a0, a1, a2, a3, a4, a5)
-    ccall((:DrawCapsuleWires, libraylib), Cvoid, (Vector3, Vector3, Cfloat, Cint, Cint, Color), a0, a1, a2, a3, a4, a5)
+function DrawCapsuleWires(startPos, endPos, radius, slices, rings, color)
+    ccall((:DrawCapsuleWires, libraylib), Cvoid, (Vector3, Vector3, Cfloat, Cint, Cint, Color), startPos, endPos, radius, slices, rings, color)
 end
-function DrawPlane(a0, a1, a2)
-    ccall((:DrawPlane, libraylib), Cvoid, (Vector3, Vector2, Color), a0, a1, a2)
+function DrawPlane(centerPos, size, color)
+    ccall((:DrawPlane, libraylib), Cvoid, (Vector3, Vector2, Color), centerPos, size, color)
 end
-function DrawRay(a0, a1)
-    ccall((:DrawRay, libraylib), Cvoid, (Ray, Color), a0, a1)
+function DrawRay(ray, color)
+    ccall((:DrawRay, libraylib), Cvoid, (Ray, Color), ray, color)
 end
-function DrawGrid(a0, a1)
-    ccall((:DrawGrid, libraylib), Cvoid, (Cint, Cfloat), a0, a1)
+function DrawGrid(slices, spacing)
+    ccall((:DrawGrid, libraylib), Cvoid, (Cint, Cfloat), slices, spacing)
 end
-function LoadModel(a0)
-    ccall((:LoadModel, libraylib), Model, (Cstring,), a0)
+function LoadModel(fileName)
+    ccall((:LoadModel, libraylib), Model, (Cstring,), fileName)
 end
-function LoadModelFromMesh(a0)
-    ccall((:LoadModelFromMesh, libraylib), Model, (Mesh,), a0)
+function LoadModelFromMesh(mesh)
+    ccall((:LoadModelFromMesh, libraylib), Model, (Mesh,), mesh)
 end
-function IsModelValid(a0)
-    ccall((:IsModelValid, libraylib), Bool, (Model,), a0)
+function IsModelValid(model)
+    ccall((:IsModelValid, libraylib), Bool, (Model,), model)
 end
-function UnloadModel(a0)
-    ccall((:UnloadModel, libraylib), Cvoid, (Model,), a0)
+function UnloadModel(model)
+    ccall((:UnloadModel, libraylib), Cvoid, (Model,), model)
 end
-function GetModelBoundingBox(a0)
-    ccall((:GetModelBoundingBox, libraylib), BoundingBox, (Model,), a0)
+function GetModelBoundingBox(model)
+    ccall((:GetModelBoundingBox, libraylib), BoundingBox, (Model,), model)
 end
-function DrawModel(a0, a1, a2, a3)
-    ccall((:DrawModel, libraylib), Cvoid, (Model, Vector3, Cfloat, Color), a0, a1, a2, a3)
+function DrawModel(model, position, scale, tint)
+    ccall((:DrawModel, libraylib), Cvoid, (Model, Vector3, Cfloat, Color), model, position, scale, tint)
 end
-function DrawModelEx(a0, a1, a2, a3, a4, a5)
-    ccall((:DrawModelEx, libraylib), Cvoid, (Model, Vector3, Vector3, Cfloat, Vector3, Color), a0, a1, a2, a3, a4, a5)
+function DrawModelEx(model, position, rotationAxis, rotationAngle, scale, tint)
+    ccall((:DrawModelEx, libraylib), Cvoid, (Model, Vector3, Vector3, Cfloat, Vector3, Color), model, position, rotationAxis, rotationAngle, scale, tint)
 end
-function DrawModelWires(a0, a1, a2, a3)
-    ccall((:DrawModelWires, libraylib), Cvoid, (Model, Vector3, Cfloat, Color), a0, a1, a2, a3)
+function DrawModelWires(model, position, scale, tint)
+    ccall((:DrawModelWires, libraylib), Cvoid, (Model, Vector3, Cfloat, Color), model, position, scale, tint)
 end
-function DrawModelWiresEx(a0, a1, a2, a3, a4, a5)
-    ccall((:DrawModelWiresEx, libraylib), Cvoid, (Model, Vector3, Vector3, Cfloat, Vector3, Color), a0, a1, a2, a3, a4, a5)
+function DrawModelWiresEx(model, position, rotationAxis, rotationAngle, scale, tint)
+    ccall((:DrawModelWiresEx, libraylib), Cvoid, (Model, Vector3, Vector3, Cfloat, Vector3, Color), model, position, rotationAxis, rotationAngle, scale, tint)
 end
-function DrawBoundingBox(a0, a1)
-    ccall((:DrawBoundingBox, libraylib), Cvoid, (BoundingBox, Color), a0, a1)
+function DrawBoundingBox(box, color)
+    ccall((:DrawBoundingBox, libraylib), Cvoid, (BoundingBox, Color), box, color)
 end
-function DrawBillboard(a0, a1, a2, a3, a4)
-    ccall((:DrawBillboard, libraylib), Cvoid, (Camera, Texture2D, Vector3, Cfloat, Color), a0, a1, a2, a3, a4)
+function DrawBillboard(camera, texture, position, scale, tint)
+    ccall((:DrawBillboard, libraylib), Cvoid, (Camera, Texture2D, Vector3, Cfloat, Color), camera, texture, position, scale, tint)
 end
-function DrawBillboardRec(a0, a1, a2, a3, a4, a5)
-    ccall((:DrawBillboardRec, libraylib), Cvoid, (Camera, Texture2D, Rectangle, Vector3, Vector2, Color), a0, a1, a2, a3, a4, a5)
+function DrawBillboardRec(camera, texture, source, position, size, tint)
+    ccall((:DrawBillboardRec, libraylib), Cvoid, (Camera, Texture2D, Rectangle, Vector3, Vector2, Color), camera, texture, source, position, size, tint)
 end
-function DrawBillboardPro(a0, a1, a2, a3, a4, a5, a6, a7, a8)
-    ccall((:DrawBillboardPro, libraylib), Cvoid, (Camera, Texture2D, Rectangle, Vector3, Vector3, Vector2, Vector2, Cfloat, Color), a0, a1, a2, a3, a4, a5, a6, a7, a8)
+function DrawBillboardPro(camera, texture, source, position, up, size, origin, rotation, tint)
+    ccall((:DrawBillboardPro, libraylib), Cvoid, (Camera, Texture2D, Rectangle, Vector3, Vector3, Vector2, Vector2, Cfloat, Color), camera, texture, source, position, up, size, origin, rotation, tint)
 end
-function UploadMesh(a0, a1)
-    ccall((:UploadMesh, libraylib), Cvoid, (Ptr{Mesh}, Bool), a0, a1)
+function UploadMesh(mesh, dynamic)
+    ccall((:UploadMesh, libraylib), Cvoid, (Ptr{Mesh}, Bool), mesh, dynamic)
 end
-function UpdateMeshBuffer(a0, a1, a2, a3, a4)
-    ccall((:UpdateMeshBuffer, libraylib), Cvoid, (Mesh, Cint, Ptr{Cvoid}, Cint, Cint), a0, a1, a2, a3, a4)
+function UpdateMeshBuffer(mesh, index, data, dataSize, offset)
+    ccall((:UpdateMeshBuffer, libraylib), Cvoid, (Mesh, Cint, Ptr{Cvoid}, Cint, Cint), mesh, index, data, dataSize, offset)
 end
-function UnloadMesh(a0)
-    ccall((:UnloadMesh, libraylib), Cvoid, (Mesh,), a0)
+function UnloadMesh(mesh)
+    ccall((:UnloadMesh, libraylib), Cvoid, (Mesh,), mesh)
 end
-function DrawMesh(a0, a1, a2)
-    ccall((:DrawMesh, libraylib), Cvoid, (Mesh, Material, Matrix), a0, a1, a2)
+function DrawMesh(mesh, material, transform)
+    ccall((:DrawMesh, libraylib), Cvoid, (Mesh, Material, Matrix), mesh, material, transform)
 end
-function DrawMeshInstanced(a0, a1, a2, a3)
-    ccall((:DrawMeshInstanced, libraylib), Cvoid, (Mesh, Material, Ptr{Matrix}, Cint), a0, a1, a2, a3)
+function DrawMeshInstanced(mesh, material, transforms, instances)
+    ccall((:DrawMeshInstanced, libraylib), Cvoid, (Mesh, Material, Ptr{Matrix}, Cint), mesh, material, transforms, instances)
 end
-function GetMeshBoundingBox(a0)
-    ccall((:GetMeshBoundingBox, libraylib), BoundingBox, (Mesh,), a0)
+function GetMeshBoundingBox(mesh)
+    ccall((:GetMeshBoundingBox, libraylib), BoundingBox, (Mesh,), mesh)
 end
-function GenMeshTangents(a0)
-    ccall((:GenMeshTangents, libraylib), Cvoid, (Ptr{Mesh},), a0)
+function GenMeshTangents(mesh)
+    ccall((:GenMeshTangents, libraylib), Cvoid, (Ptr{Mesh},), mesh)
 end
-function ExportMesh(a0, a1)
-    ccall((:ExportMesh, libraylib), Bool, (Mesh, Cstring), a0, a1)
+function ExportMesh(mesh, fileName)
+    ccall((:ExportMesh, libraylib), Bool, (Mesh, Cstring), mesh, fileName)
 end
-function ExportMeshAsCode(a0, a1)
-    ccall((:ExportMeshAsCode, libraylib), Bool, (Mesh, Cstring), a0, a1)
+function ExportMeshAsCode(mesh, fileName)
+    ccall((:ExportMeshAsCode, libraylib), Bool, (Mesh, Cstring), mesh, fileName)
 end
-function GenMeshPoly(a0, a1)
-    ccall((:GenMeshPoly, libraylib), Mesh, (Cint, Cfloat), a0, a1)
+function GenMeshPoly(sides, radius)
+    ccall((:GenMeshPoly, libraylib), Mesh, (Cint, Cfloat), sides, radius)
 end
-function GenMeshPlane(a0, a1, a2, a3)
-    ccall((:GenMeshPlane, libraylib), Mesh, (Cfloat, Cfloat, Cint, Cint), a0, a1, a2, a3)
+function GenMeshPlane(width, length, resX, resZ)
+    ccall((:GenMeshPlane, libraylib), Mesh, (Cfloat, Cfloat, Cint, Cint), width, length, resX, resZ)
 end
-function GenMeshCube(a0, a1, a2)
-    ccall((:GenMeshCube, libraylib), Mesh, (Cfloat, Cfloat, Cfloat), a0, a1, a2)
+function GenMeshCube(width, height, length)
+    ccall((:GenMeshCube, libraylib), Mesh, (Cfloat, Cfloat, Cfloat), width, height, length)
 end
-function GenMeshSphere(a0, a1, a2)
-    ccall((:GenMeshSphere, libraylib), Mesh, (Cfloat, Cint, Cint), a0, a1, a2)
+function GenMeshSphere(radius, rings, slices)
+    ccall((:GenMeshSphere, libraylib), Mesh, (Cfloat, Cint, Cint), radius, rings, slices)
 end
-function GenMeshHemiSphere(a0, a1, a2)
-    ccall((:GenMeshHemiSphere, libraylib), Mesh, (Cfloat, Cint, Cint), a0, a1, a2)
+function GenMeshHemiSphere(radius, rings, slices)
+    ccall((:GenMeshHemiSphere, libraylib), Mesh, (Cfloat, Cint, Cint), radius, rings, slices)
 end
-function GenMeshCylinder(a0, a1, a2)
-    ccall((:GenMeshCylinder, libraylib), Mesh, (Cfloat, Cfloat, Cint), a0, a1, a2)
+function GenMeshCylinder(radius, height, slices)
+    ccall((:GenMeshCylinder, libraylib), Mesh, (Cfloat, Cfloat, Cint), radius, height, slices)
 end
-function GenMeshCone(a0, a1, a2)
-    ccall((:GenMeshCone, libraylib), Mesh, (Cfloat, Cfloat, Cint), a0, a1, a2)
+function GenMeshCone(radius, height, slices)
+    ccall((:GenMeshCone, libraylib), Mesh, (Cfloat, Cfloat, Cint), radius, height, slices)
 end
-function GenMeshTorus(a0, a1, a2, a3)
-    ccall((:GenMeshTorus, libraylib), Mesh, (Cfloat, Cfloat, Cint, Cint), a0, a1, a2, a3)
+function GenMeshTorus(radius, size, radSeg, sides)
+    ccall((:GenMeshTorus, libraylib), Mesh, (Cfloat, Cfloat, Cint, Cint), radius, size, radSeg, sides)
 end
-function GenMeshKnot(a0, a1, a2, a3)
-    ccall((:GenMeshKnot, libraylib), Mesh, (Cfloat, Cfloat, Cint, Cint), a0, a1, a2, a3)
+function GenMeshKnot(radius, size, radSeg, sides)
+    ccall((:GenMeshKnot, libraylib), Mesh, (Cfloat, Cfloat, Cint, Cint), radius, size, radSeg, sides)
 end
-function GenMeshHeightmap(a0, a1)
-    ccall((:GenMeshHeightmap, libraylib), Mesh, (Image, Vector3), a0, a1)
+function GenMeshHeightmap(heightmap, size)
+    ccall((:GenMeshHeightmap, libraylib), Mesh, (Image, Vector3), heightmap, size)
 end
-function GenMeshCubicmap(a0, a1)
-    ccall((:GenMeshCubicmap, libraylib), Mesh, (Image, Vector3), a0, a1)
+function GenMeshCubicmap(cubicmap, cubeSize)
+    ccall((:GenMeshCubicmap, libraylib), Mesh, (Image, Vector3), cubicmap, cubeSize)
 end
-function LoadMaterials(a0, a1)
-    ccall((:LoadMaterials, libraylib), Ptr{Material}, (Cstring, Ptr{Cint}), a0, a1)
+function LoadMaterials(fileName, materialCount)
+    ccall((:LoadMaterials, libraylib), Ptr{Material}, (Cstring, Ptr{Cint}), fileName, materialCount)
 end
 function LoadMaterialDefault()
     ccall((:LoadMaterialDefault, libraylib), Material, ())
 end
-function IsMaterialValid(a0)
-    ccall((:IsMaterialValid, libraylib), Bool, (Material,), a0)
+function IsMaterialValid(material)
+    ccall((:IsMaterialValid, libraylib), Bool, (Material,), material)
 end
-function UnloadMaterial(a0)
-    ccall((:UnloadMaterial, libraylib), Cvoid, (Material,), a0)
+function UnloadMaterial(material)
+    ccall((:UnloadMaterial, libraylib), Cvoid, (Material,), material)
 end
-function SetMaterialTexture(a0, a1, a2)
-    ccall((:SetMaterialTexture, libraylib), Cvoid, (Ptr{Material}, Cint, Texture2D), a0, a1, a2)
+function SetMaterialTexture(material, mapType, texture)
+    ccall((:SetMaterialTexture, libraylib), Cvoid, (Ptr{Material}, Cint, Texture2D), material, mapType, texture)
 end
-function SetModelMeshMaterial(a0, a1, a2)
-    ccall((:SetModelMeshMaterial, libraylib), Cvoid, (Ptr{Model}, Cint, Cint), a0, a1, a2)
+function SetModelMeshMaterial(model, meshId, materialId)
+    ccall((:SetModelMeshMaterial, libraylib), Cvoid, (Ptr{Model}, Cint, Cint), model, meshId, materialId)
 end
-function LoadModelAnimations(a0, a1)
-    ccall((:LoadModelAnimations, libraylib), Ptr{ModelAnimation}, (Cstring, Ptr{Cint}), a0, a1)
+function LoadModelAnimations(fileName, animCount)
+    ccall((:LoadModelAnimations, libraylib), Ptr{ModelAnimation}, (Cstring, Ptr{Cint}), fileName, animCount)
 end
-function UpdateModelAnimation(a0, a1, a2)
-    ccall((:UpdateModelAnimation, libraylib), Cvoid, (Model, ModelAnimation, Cfloat), a0, a1, a2)
+function UpdateModelAnimation(model, anim, frame)
+    ccall((:UpdateModelAnimation, libraylib), Cvoid, (Model, ModelAnimation, Cfloat), model, anim, frame)
 end
-function UpdateModelAnimationEx(a0, a1, a2, a3, a4, a5)
-    ccall((:UpdateModelAnimationEx, libraylib), Cvoid, (Model, ModelAnimation, Cfloat, ModelAnimation, Cfloat, Cfloat), a0, a1, a2, a3, a4, a5)
+function UpdateModelAnimationEx(model, animA, frameA, animB, frameB, blend)
+    ccall((:UpdateModelAnimationEx, libraylib), Cvoid, (Model, ModelAnimation, Cfloat, ModelAnimation, Cfloat, Cfloat), model, animA, frameA, animB, frameB, blend)
 end
-function UnloadModelAnimations(a0, a1)
-    ccall((:UnloadModelAnimations, libraylib), Cvoid, (Ptr{ModelAnimation}, Cint), a0, a1)
+function UnloadModelAnimations(animations, animCount)
+    ccall((:UnloadModelAnimations, libraylib), Cvoid, (Ptr{ModelAnimation}, Cint), animations, animCount)
 end
-function IsModelAnimationValid(a0, a1)
-    ccall((:IsModelAnimationValid, libraylib), Bool, (Model, ModelAnimation), a0, a1)
+function IsModelAnimationValid(model, anim)
+    ccall((:IsModelAnimationValid, libraylib), Bool, (Model, ModelAnimation), model, anim)
 end
-function CheckCollisionSpheres(a0, a1, a2, a3)
-    ccall((:CheckCollisionSpheres, libraylib), Bool, (Vector3, Cfloat, Vector3, Cfloat), a0, a1, a2, a3)
+function CheckCollisionSpheres(center1, radius1, center2, radius2)
+    ccall((:CheckCollisionSpheres, libraylib), Bool, (Vector3, Cfloat, Vector3, Cfloat), center1, radius1, center2, radius2)
 end
-function CheckCollisionBoxes(a0, a1)
-    ccall((:CheckCollisionBoxes, libraylib), Bool, (BoundingBox, BoundingBox), a0, a1)
+function CheckCollisionBoxes(box1, box2)
+    ccall((:CheckCollisionBoxes, libraylib), Bool, (BoundingBox, BoundingBox), box1, box2)
 end
-function CheckCollisionBoxSphere(a0, a1, a2)
-    ccall((:CheckCollisionBoxSphere, libraylib), Bool, (BoundingBox, Vector3, Cfloat), a0, a1, a2)
+function CheckCollisionBoxSphere(box, center, radius)
+    ccall((:CheckCollisionBoxSphere, libraylib), Bool, (BoundingBox, Vector3, Cfloat), box, center, radius)
 end
-function GetRayCollisionSphere(a0, a1, a2)
-    ccall((:GetRayCollisionSphere, libraylib), RayCollision, (Ray, Vector3, Cfloat), a0, a1, a2)
+function GetRayCollisionSphere(ray, center, radius)
+    ccall((:GetRayCollisionSphere, libraylib), RayCollision, (Ray, Vector3, Cfloat), ray, center, radius)
 end
-function GetRayCollisionBox(a0, a1)
-    ccall((:GetRayCollisionBox, libraylib), RayCollision, (Ray, BoundingBox), a0, a1)
+function GetRayCollisionBox(ray, box)
+    ccall((:GetRayCollisionBox, libraylib), RayCollision, (Ray, BoundingBox), ray, box)
 end
-function GetRayCollisionMesh(a0, a1, a2)
-    ccall((:GetRayCollisionMesh, libraylib), RayCollision, (Ray, Mesh, Matrix), a0, a1, a2)
+function GetRayCollisionMesh(ray, mesh, transform)
+    ccall((:GetRayCollisionMesh, libraylib), RayCollision, (Ray, Mesh, Matrix), ray, mesh, transform)
 end
-function GetRayCollisionTriangle(a0, a1, a2, a3)
-    ccall((:GetRayCollisionTriangle, libraylib), RayCollision, (Ray, Vector3, Vector3, Vector3), a0, a1, a2, a3)
+function GetRayCollisionTriangle(ray, p1, p2, p3)
+    ccall((:GetRayCollisionTriangle, libraylib), RayCollision, (Ray, Vector3, Vector3, Vector3), ray, p1, p2, p3)
 end
-function GetRayCollisionQuad(a0, a1, a2, a3, a4)
-    ccall((:GetRayCollisionQuad, libraylib), RayCollision, (Ray, Vector3, Vector3, Vector3, Vector3), a0, a1, a2, a3, a4)
+function GetRayCollisionQuad(ray, p1, p2, p3, p4)
+    ccall((:GetRayCollisionQuad, libraylib), RayCollision, (Ray, Vector3, Vector3, Vector3, Vector3), ray, p1, p2, p3, p4)
 end
 function InitAudioDevice()
     ccall((:InitAudioDevice, libraylib), Cvoid, ())
@@ -2213,193 +2213,193 @@ end
 function IsAudioDeviceReady()
     ccall((:IsAudioDeviceReady, libraylib), Bool, ())
 end
-function SetMasterVolume(a0)
-    ccall((:SetMasterVolume, libraylib), Cvoid, (Cfloat,), a0)
+function SetMasterVolume(volume)
+    ccall((:SetMasterVolume, libraylib), Cvoid, (Cfloat,), volume)
 end
 function GetMasterVolume()
     ccall((:GetMasterVolume, libraylib), Cfloat, ())
 end
-function LoadWave(a0)
-    ccall((:LoadWave, libraylib), Wave, (Cstring,), a0)
+function LoadWave(fileName)
+    ccall((:LoadWave, libraylib), Wave, (Cstring,), fileName)
 end
-function LoadWaveFromMemory(a0, a1, a2)
-    ccall((:LoadWaveFromMemory, libraylib), Wave, (Cstring, Ptr{Cuchar}, Cint), a0, a1, a2)
+function LoadWaveFromMemory(fileType, fileData, dataSize)
+    ccall((:LoadWaveFromMemory, libraylib), Wave, (Cstring, Ptr{Cuchar}, Cint), fileType, fileData, dataSize)
 end
-function IsWaveValid(a0)
-    ccall((:IsWaveValid, libraylib), Bool, (Wave,), a0)
+function IsWaveValid(wave)
+    ccall((:IsWaveValid, libraylib), Bool, (Wave,), wave)
 end
-function LoadSound(a0)
-    ccall((:LoadSound, libraylib), Sound, (Cstring,), a0)
+function LoadSound(fileName)
+    ccall((:LoadSound, libraylib), Sound, (Cstring,), fileName)
 end
-function LoadSoundFromWave(a0)
-    ccall((:LoadSoundFromWave, libraylib), Sound, (Wave,), a0)
+function LoadSoundFromWave(wave)
+    ccall((:LoadSoundFromWave, libraylib), Sound, (Wave,), wave)
 end
-function LoadSoundAlias(a0)
-    ccall((:LoadSoundAlias, libraylib), Sound, (Sound,), a0)
+function LoadSoundAlias(source)
+    ccall((:LoadSoundAlias, libraylib), Sound, (Sound,), source)
 end
-function IsSoundValid(a0)
-    ccall((:IsSoundValid, libraylib), Bool, (Sound,), a0)
+function IsSoundValid(sound)
+    ccall((:IsSoundValid, libraylib), Bool, (Sound,), sound)
 end
-function UpdateSound(a0, a1, a2)
-    ccall((:UpdateSound, libraylib), Cvoid, (Sound, Ptr{Cvoid}, Cint), a0, a1, a2)
+function UpdateSound(sound, data, sampleCount)
+    ccall((:UpdateSound, libraylib), Cvoid, (Sound, Ptr{Cvoid}, Cint), sound, data, sampleCount)
 end
-function UnloadWave(a0)
-    ccall((:UnloadWave, libraylib), Cvoid, (Wave,), a0)
+function UnloadWave(wave)
+    ccall((:UnloadWave, libraylib), Cvoid, (Wave,), wave)
 end
-function UnloadSound(a0)
-    ccall((:UnloadSound, libraylib), Cvoid, (Sound,), a0)
+function UnloadSound(sound)
+    ccall((:UnloadSound, libraylib), Cvoid, (Sound,), sound)
 end
-function UnloadSoundAlias(a0)
-    ccall((:UnloadSoundAlias, libraylib), Cvoid, (Sound,), a0)
+function UnloadSoundAlias(alias)
+    ccall((:UnloadSoundAlias, libraylib), Cvoid, (Sound,), alias)
 end
-function ExportWave(a0, a1)
-    ccall((:ExportWave, libraylib), Bool, (Wave, Cstring), a0, a1)
+function ExportWave(wave, fileName)
+    ccall((:ExportWave, libraylib), Bool, (Wave, Cstring), wave, fileName)
 end
-function ExportWaveAsCode(a0, a1)
-    ccall((:ExportWaveAsCode, libraylib), Bool, (Wave, Cstring), a0, a1)
+function ExportWaveAsCode(wave, fileName)
+    ccall((:ExportWaveAsCode, libraylib), Bool, (Wave, Cstring), wave, fileName)
 end
-function PlaySound(a0)
-    ccall((:PlaySound, libraylib), Cvoid, (Sound,), a0)
+function PlaySound(sound)
+    ccall((:PlaySound, libraylib), Cvoid, (Sound,), sound)
 end
-function StopSound(a0)
-    ccall((:StopSound, libraylib), Cvoid, (Sound,), a0)
+function StopSound(sound)
+    ccall((:StopSound, libraylib), Cvoid, (Sound,), sound)
 end
-function PauseSound(a0)
-    ccall((:PauseSound, libraylib), Cvoid, (Sound,), a0)
+function PauseSound(sound)
+    ccall((:PauseSound, libraylib), Cvoid, (Sound,), sound)
 end
-function ResumeSound(a0)
-    ccall((:ResumeSound, libraylib), Cvoid, (Sound,), a0)
+function ResumeSound(sound)
+    ccall((:ResumeSound, libraylib), Cvoid, (Sound,), sound)
 end
-function IsSoundPlaying(a0)
-    ccall((:IsSoundPlaying, libraylib), Bool, (Sound,), a0)
+function IsSoundPlaying(sound)
+    ccall((:IsSoundPlaying, libraylib), Bool, (Sound,), sound)
 end
-function SetSoundVolume(a0, a1)
-    ccall((:SetSoundVolume, libraylib), Cvoid, (Sound, Cfloat), a0, a1)
+function SetSoundVolume(sound, volume)
+    ccall((:SetSoundVolume, libraylib), Cvoid, (Sound, Cfloat), sound, volume)
 end
-function SetSoundPitch(a0, a1)
-    ccall((:SetSoundPitch, libraylib), Cvoid, (Sound, Cfloat), a0, a1)
+function SetSoundPitch(sound, pitch)
+    ccall((:SetSoundPitch, libraylib), Cvoid, (Sound, Cfloat), sound, pitch)
 end
-function SetSoundPan(a0, a1)
-    ccall((:SetSoundPan, libraylib), Cvoid, (Sound, Cfloat), a0, a1)
+function SetSoundPan(sound, pan)
+    ccall((:SetSoundPan, libraylib), Cvoid, (Sound, Cfloat), sound, pan)
 end
-function WaveCopy(a0)
-    ccall((:WaveCopy, libraylib), Wave, (Wave,), a0)
+function WaveCopy(wave)
+    ccall((:WaveCopy, libraylib), Wave, (Wave,), wave)
 end
-function WaveCrop(a0, a1, a2)
-    ccall((:WaveCrop, libraylib), Cvoid, (Ptr{Wave}, Cint, Cint), a0, a1, a2)
+function WaveCrop(wave, initFrame, finalFrame)
+    ccall((:WaveCrop, libraylib), Cvoid, (Ptr{Wave}, Cint, Cint), wave, initFrame, finalFrame)
 end
-function WaveFormat(a0, a1, a2, a3)
-    ccall((:WaveFormat, libraylib), Cvoid, (Ptr{Wave}, Cint, Cint, Cint), a0, a1, a2, a3)
+function WaveFormat(wave, sampleRate, sampleSize, channels)
+    ccall((:WaveFormat, libraylib), Cvoid, (Ptr{Wave}, Cint, Cint, Cint), wave, sampleRate, sampleSize, channels)
 end
-function LoadWaveSamples(a0)
-    ccall((:LoadWaveSamples, libraylib), Ptr{Cfloat}, (Wave,), a0)
+function LoadWaveSamples(wave)
+    ccall((:LoadWaveSamples, libraylib), Ptr{Cfloat}, (Wave,), wave)
 end
-function UnloadWaveSamples(a0)
-    ccall((:UnloadWaveSamples, libraylib), Cvoid, (Ptr{Cfloat},), a0)
+function UnloadWaveSamples(samples)
+    ccall((:UnloadWaveSamples, libraylib), Cvoid, (Ptr{Cfloat},), samples)
 end
-function LoadMusicStream(a0)
-    ccall((:LoadMusicStream, libraylib), Music, (Cstring,), a0)
+function LoadMusicStream(fileName)
+    ccall((:LoadMusicStream, libraylib), Music, (Cstring,), fileName)
 end
-function LoadMusicStreamFromMemory(a0, a1, a2)
-    ccall((:LoadMusicStreamFromMemory, libraylib), Music, (Cstring, Ptr{Cuchar}, Cint), a0, a1, a2)
+function LoadMusicStreamFromMemory(fileType, data, dataSize)
+    ccall((:LoadMusicStreamFromMemory, libraylib), Music, (Cstring, Ptr{Cuchar}, Cint), fileType, data, dataSize)
 end
-function IsMusicValid(a0)
-    ccall((:IsMusicValid, libraylib), Bool, (Music,), a0)
+function IsMusicValid(music)
+    ccall((:IsMusicValid, libraylib), Bool, (Music,), music)
 end
-function UnloadMusicStream(a0)
-    ccall((:UnloadMusicStream, libraylib), Cvoid, (Music,), a0)
+function UnloadMusicStream(music)
+    ccall((:UnloadMusicStream, libraylib), Cvoid, (Music,), music)
 end
-function PlayMusicStream(a0)
-    ccall((:PlayMusicStream, libraylib), Cvoid, (Music,), a0)
+function PlayMusicStream(music)
+    ccall((:PlayMusicStream, libraylib), Cvoid, (Music,), music)
 end
-function IsMusicStreamPlaying(a0)
-    ccall((:IsMusicStreamPlaying, libraylib), Bool, (Music,), a0)
+function IsMusicStreamPlaying(music)
+    ccall((:IsMusicStreamPlaying, libraylib), Bool, (Music,), music)
 end
-function UpdateMusicStream(a0)
-    ccall((:UpdateMusicStream, libraylib), Cvoid, (Music,), a0)
+function UpdateMusicStream(music)
+    ccall((:UpdateMusicStream, libraylib), Cvoid, (Music,), music)
 end
-function StopMusicStream(a0)
-    ccall((:StopMusicStream, libraylib), Cvoid, (Music,), a0)
+function StopMusicStream(music)
+    ccall((:StopMusicStream, libraylib), Cvoid, (Music,), music)
 end
-function PauseMusicStream(a0)
-    ccall((:PauseMusicStream, libraylib), Cvoid, (Music,), a0)
+function PauseMusicStream(music)
+    ccall((:PauseMusicStream, libraylib), Cvoid, (Music,), music)
 end
-function ResumeMusicStream(a0)
-    ccall((:ResumeMusicStream, libraylib), Cvoid, (Music,), a0)
+function ResumeMusicStream(music)
+    ccall((:ResumeMusicStream, libraylib), Cvoid, (Music,), music)
 end
-function SeekMusicStream(a0, a1)
-    ccall((:SeekMusicStream, libraylib), Cvoid, (Music, Cfloat), a0, a1)
+function SeekMusicStream(music, position)
+    ccall((:SeekMusicStream, libraylib), Cvoid, (Music, Cfloat), music, position)
 end
-function SetMusicVolume(a0, a1)
-    ccall((:SetMusicVolume, libraylib), Cvoid, (Music, Cfloat), a0, a1)
+function SetMusicVolume(music, volume)
+    ccall((:SetMusicVolume, libraylib), Cvoid, (Music, Cfloat), music, volume)
 end
-function SetMusicPitch(a0, a1)
-    ccall((:SetMusicPitch, libraylib), Cvoid, (Music, Cfloat), a0, a1)
+function SetMusicPitch(music, pitch)
+    ccall((:SetMusicPitch, libraylib), Cvoid, (Music, Cfloat), music, pitch)
 end
-function SetMusicPan(a0, a1)
-    ccall((:SetMusicPan, libraylib), Cvoid, (Music, Cfloat), a0, a1)
+function SetMusicPan(music, pan)
+    ccall((:SetMusicPan, libraylib), Cvoid, (Music, Cfloat), music, pan)
 end
-function GetMusicTimeLength(a0)
-    ccall((:GetMusicTimeLength, libraylib), Cfloat, (Music,), a0)
+function GetMusicTimeLength(music)
+    ccall((:GetMusicTimeLength, libraylib), Cfloat, (Music,), music)
 end
-function GetMusicTimePlayed(a0)
-    ccall((:GetMusicTimePlayed, libraylib), Cfloat, (Music,), a0)
+function GetMusicTimePlayed(music)
+    ccall((:GetMusicTimePlayed, libraylib), Cfloat, (Music,), music)
 end
-function LoadAudioStream(a0, a1, a2)
-    ccall((:LoadAudioStream, libraylib), AudioStream, (Cuint, Cuint, Cuint), a0, a1, a2)
+function LoadAudioStream(sampleRate, sampleSize, channels)
+    ccall((:LoadAudioStream, libraylib), AudioStream, (Cuint, Cuint, Cuint), sampleRate, sampleSize, channels)
 end
-function IsAudioStreamValid(a0)
-    ccall((:IsAudioStreamValid, libraylib), Bool, (AudioStream,), a0)
+function IsAudioStreamValid(stream)
+    ccall((:IsAudioStreamValid, libraylib), Bool, (AudioStream,), stream)
 end
-function UnloadAudioStream(a0)
-    ccall((:UnloadAudioStream, libraylib), Cvoid, (AudioStream,), a0)
+function UnloadAudioStream(stream)
+    ccall((:UnloadAudioStream, libraylib), Cvoid, (AudioStream,), stream)
 end
-function UpdateAudioStream(a0, a1, a2)
-    ccall((:UpdateAudioStream, libraylib), Cvoid, (AudioStream, Ptr{Cvoid}, Cint), a0, a1, a2)
+function UpdateAudioStream(stream, data, frameCount)
+    ccall((:UpdateAudioStream, libraylib), Cvoid, (AudioStream, Ptr{Cvoid}, Cint), stream, data, frameCount)
 end
-function IsAudioStreamProcessed(a0)
-    ccall((:IsAudioStreamProcessed, libraylib), Bool, (AudioStream,), a0)
+function IsAudioStreamProcessed(stream)
+    ccall((:IsAudioStreamProcessed, libraylib), Bool, (AudioStream,), stream)
 end
-function PlayAudioStream(a0)
-    ccall((:PlayAudioStream, libraylib), Cvoid, (AudioStream,), a0)
+function PlayAudioStream(stream)
+    ccall((:PlayAudioStream, libraylib), Cvoid, (AudioStream,), stream)
 end
-function PauseAudioStream(a0)
-    ccall((:PauseAudioStream, libraylib), Cvoid, (AudioStream,), a0)
+function PauseAudioStream(stream)
+    ccall((:PauseAudioStream, libraylib), Cvoid, (AudioStream,), stream)
 end
-function ResumeAudioStream(a0)
-    ccall((:ResumeAudioStream, libraylib), Cvoid, (AudioStream,), a0)
+function ResumeAudioStream(stream)
+    ccall((:ResumeAudioStream, libraylib), Cvoid, (AudioStream,), stream)
 end
-function IsAudioStreamPlaying(a0)
-    ccall((:IsAudioStreamPlaying, libraylib), Bool, (AudioStream,), a0)
+function IsAudioStreamPlaying(stream)
+    ccall((:IsAudioStreamPlaying, libraylib), Bool, (AudioStream,), stream)
 end
-function StopAudioStream(a0)
-    ccall((:StopAudioStream, libraylib), Cvoid, (AudioStream,), a0)
+function StopAudioStream(stream)
+    ccall((:StopAudioStream, libraylib), Cvoid, (AudioStream,), stream)
 end
-function SetAudioStreamVolume(a0, a1)
-    ccall((:SetAudioStreamVolume, libraylib), Cvoid, (AudioStream, Cfloat), a0, a1)
+function SetAudioStreamVolume(stream, volume)
+    ccall((:SetAudioStreamVolume, libraylib), Cvoid, (AudioStream, Cfloat), stream, volume)
 end
-function SetAudioStreamPitch(a0, a1)
-    ccall((:SetAudioStreamPitch, libraylib), Cvoid, (AudioStream, Cfloat), a0, a1)
+function SetAudioStreamPitch(stream, pitch)
+    ccall((:SetAudioStreamPitch, libraylib), Cvoid, (AudioStream, Cfloat), stream, pitch)
 end
-function SetAudioStreamPan(a0, a1)
-    ccall((:SetAudioStreamPan, libraylib), Cvoid, (AudioStream, Cfloat), a0, a1)
+function SetAudioStreamPan(stream, pan)
+    ccall((:SetAudioStreamPan, libraylib), Cvoid, (AudioStream, Cfloat), stream, pan)
 end
-function SetAudioStreamBufferSizeDefault(a0)
-    ccall((:SetAudioStreamBufferSizeDefault, libraylib), Cvoid, (Cint,), a0)
+function SetAudioStreamBufferSizeDefault(size)
+    ccall((:SetAudioStreamBufferSizeDefault, libraylib), Cvoid, (Cint,), size)
 end
-function SetAudioStreamCallback(a0, a1)
-    ccall((:SetAudioStreamCallback, libraylib), Cvoid, (AudioStream, Ptr{Cvoid}), a0, a1)
+function SetAudioStreamCallback(stream, callback)
+    ccall((:SetAudioStreamCallback, libraylib), Cvoid, (AudioStream, Ptr{Cvoid}), stream, callback)
 end
-function AttachAudioStreamProcessor(a0, a1)
-    ccall((:AttachAudioStreamProcessor, libraylib), Cvoid, (AudioStream, Ptr{Cvoid}), a0, a1)
+function AttachAudioStreamProcessor(stream, processor)
+    ccall((:AttachAudioStreamProcessor, libraylib), Cvoid, (AudioStream, Ptr{Cvoid}), stream, processor)
 end
-function DetachAudioStreamProcessor(a0, a1)
-    ccall((:DetachAudioStreamProcessor, libraylib), Cvoid, (AudioStream, Ptr{Cvoid}), a0, a1)
+function DetachAudioStreamProcessor(stream, processor)
+    ccall((:DetachAudioStreamProcessor, libraylib), Cvoid, (AudioStream, Ptr{Cvoid}), stream, processor)
 end
-function AttachAudioMixedProcessor(a0)
-    ccall((:AttachAudioMixedProcessor, libraylib), Cvoid, (Ptr{Cvoid},), a0)
+function AttachAudioMixedProcessor(processor)
+    ccall((:AttachAudioMixedProcessor, libraylib), Cvoid, (Ptr{Cvoid},), processor)
 end
-function DetachAudioMixedProcessor(a0)
-    ccall((:DetachAudioMixedProcessor, libraylib), Cvoid, (Ptr{Cvoid},), a0)
+function DetachAudioMixedProcessor(processor)
+    ccall((:DetachAudioMixedProcessor, libraylib), Cvoid, (Ptr{Cvoid},), processor)
 end
 export Vector2, Vector3, Vector4, Quaternion, Matrix, Color, Rectangle, Image, Texture, Texture2D, TextureCubemap, RenderTexture, RenderTexture2D, NPatchInfo, GlyphInfo, Font, Camera3D, Camera, Camera2D, Mesh, Shader, MaterialMap, Material, Transform, ModelAnimPose, BoneInfo, ModelSkeleton, Model, ModelAnimation, Ray, RayCollision, BoundingBox, Wave, AudioStream, Sound, Music, VrDeviceInfo, VrStereoConfig, FilePathList, AutomationEvent, AutomationEventList, FLAG_VSYNC_HINT, FLAG_FULLSCREEN_MODE, FLAG_WINDOW_RESIZABLE, FLAG_WINDOW_UNDECORATED, FLAG_WINDOW_HIDDEN, FLAG_WINDOW_MINIMIZED, FLAG_WINDOW_MAXIMIZED, FLAG_WINDOW_UNFOCUSED, FLAG_WINDOW_TOPMOST, FLAG_WINDOW_ALWAYS_RUN, FLAG_WINDOW_TRANSPARENT, FLAG_WINDOW_HIGHDPI, FLAG_WINDOW_MOUSE_PASSTHROUGH, FLAG_BORDERLESS_WINDOWED_MODE, FLAG_MSAA_4X_HINT, FLAG_INTERLACED_HINT, LOG_ALL, LOG_TRACE, LOG_DEBUG, LOG_INFO, LOG_WARNING, LOG_ERROR, LOG_FATAL, LOG_NONE, KEY_NULL, KEY_APOSTROPHE, KEY_COMMA, KEY_MINUS, KEY_PERIOD, KEY_SLASH, KEY_ZERO, KEY_ONE, KEY_TWO, KEY_THREE, KEY_FOUR, KEY_FIVE, KEY_SIX, KEY_SEVEN, KEY_EIGHT, KEY_NINE, KEY_SEMICOLON, KEY_EQUAL, KEY_A, KEY_B, KEY_C, KEY_D, KEY_E, KEY_F, KEY_G, KEY_H, KEY_I, KEY_J, KEY_K, KEY_L, KEY_M, KEY_N, KEY_O, KEY_P, KEY_Q, KEY_R, KEY_S, KEY_T, KEY_U, KEY_V, KEY_W, KEY_X, KEY_Y, KEY_Z, KEY_LEFT_BRACKET, KEY_BACKSLASH, KEY_RIGHT_BRACKET, KEY_GRAVE, KEY_SPACE, KEY_ESCAPE, KEY_ENTER, KEY_TAB, KEY_BACKSPACE, KEY_INSERT, KEY_DELETE, KEY_RIGHT, KEY_LEFT, KEY_DOWN, KEY_UP, KEY_PAGE_UP, KEY_PAGE_DOWN, KEY_HOME, KEY_END, KEY_CAPS_LOCK, KEY_SCROLL_LOCK, KEY_NUM_LOCK, KEY_PRINT_SCREEN, KEY_PAUSE, KEY_F1, KEY_F2, KEY_F3, KEY_F4, KEY_F5, KEY_F6, KEY_F7, KEY_F8, KEY_F9, KEY_F10, KEY_F11, KEY_F12, KEY_LEFT_SHIFT, KEY_LEFT_CONTROL, KEY_LEFT_ALT, KEY_LEFT_SUPER, KEY_RIGHT_SHIFT, KEY_RIGHT_CONTROL, KEY_RIGHT_ALT, KEY_RIGHT_SUPER, KEY_KB_MENU, KEY_KP_0, KEY_KP_1, KEY_KP_2, KEY_KP_3, KEY_KP_4, KEY_KP_5, KEY_KP_6, KEY_KP_7, KEY_KP_8, KEY_KP_9, KEY_KP_DECIMAL, KEY_KP_DIVIDE, KEY_KP_MULTIPLY, KEY_KP_SUBTRACT, KEY_KP_ADD, KEY_KP_ENTER, KEY_KP_EQUAL, KEY_BACK, KEY_MENU, KEY_VOLUME_UP, KEY_VOLUME_DOWN, MOUSE_BUTTON_LEFT, MOUSE_BUTTON_RIGHT, MOUSE_BUTTON_MIDDLE, MOUSE_BUTTON_SIDE, MOUSE_BUTTON_EXTRA, MOUSE_BUTTON_FORWARD, MOUSE_BUTTON_BACK, MOUSE_CURSOR_DEFAULT, MOUSE_CURSOR_ARROW, MOUSE_CURSOR_IBEAM, MOUSE_CURSOR_CROSSHAIR, MOUSE_CURSOR_POINTING_HAND, MOUSE_CURSOR_RESIZE_EW, MOUSE_CURSOR_RESIZE_NS, MOUSE_CURSOR_RESIZE_NWSE, MOUSE_CURSOR_RESIZE_NESW, MOUSE_CURSOR_RESIZE_ALL, MOUSE_CURSOR_NOT_ALLOWED, GAMEPAD_BUTTON_UNKNOWN, GAMEPAD_BUTTON_LEFT_FACE_UP, GAMEPAD_BUTTON_LEFT_FACE_RIGHT, GAMEPAD_BUTTON_LEFT_FACE_DOWN, GAMEPAD_BUTTON_LEFT_FACE_LEFT, GAMEPAD_BUTTON_RIGHT_FACE_UP, GAMEPAD_BUTTON_RIGHT_FACE_RIGHT, GAMEPAD_BUTTON_RIGHT_FACE_DOWN, GAMEPAD_BUTTON_RIGHT_FACE_LEFT, GAMEPAD_BUTTON_LEFT_TRIGGER_1, GAMEPAD_BUTTON_LEFT_TRIGGER_2, GAMEPAD_BUTTON_RIGHT_TRIGGER_1, GAMEPAD_BUTTON_RIGHT_TRIGGER_2, GAMEPAD_BUTTON_MIDDLE_LEFT, GAMEPAD_BUTTON_MIDDLE, GAMEPAD_BUTTON_MIDDLE_RIGHT, GAMEPAD_BUTTON_LEFT_THUMB, GAMEPAD_BUTTON_RIGHT_THUMB, GAMEPAD_AXIS_LEFT_X, GAMEPAD_AXIS_LEFT_Y, GAMEPAD_AXIS_RIGHT_X, GAMEPAD_AXIS_RIGHT_Y, GAMEPAD_AXIS_LEFT_TRIGGER, GAMEPAD_AXIS_RIGHT_TRIGGER, MATERIAL_MAP_ALBEDO, MATERIAL_MAP_METALNESS, MATERIAL_MAP_NORMAL, MATERIAL_MAP_ROUGHNESS, MATERIAL_MAP_OCCLUSION, MATERIAL_MAP_EMISSION, MATERIAL_MAP_HEIGHT, MATERIAL_MAP_CUBEMAP, MATERIAL_MAP_IRRADIANCE, MATERIAL_MAP_PREFILTER, MATERIAL_MAP_BRDF, SHADER_LOC_VERTEX_POSITION, SHADER_LOC_VERTEX_TEXCOORD01, SHADER_LOC_VERTEX_TEXCOORD02, SHADER_LOC_VERTEX_NORMAL, SHADER_LOC_VERTEX_TANGENT, SHADER_LOC_VERTEX_COLOR, SHADER_LOC_MATRIX_MVP, SHADER_LOC_MATRIX_VIEW, SHADER_LOC_MATRIX_PROJECTION, SHADER_LOC_MATRIX_MODEL, SHADER_LOC_MATRIX_NORMAL, SHADER_LOC_VECTOR_VIEW, SHADER_LOC_COLOR_DIFFUSE, SHADER_LOC_COLOR_SPECULAR, SHADER_LOC_COLOR_AMBIENT, SHADER_LOC_MAP_ALBEDO, SHADER_LOC_MAP_METALNESS, SHADER_LOC_MAP_NORMAL, SHADER_LOC_MAP_ROUGHNESS, SHADER_LOC_MAP_OCCLUSION, SHADER_LOC_MAP_EMISSION, SHADER_LOC_MAP_HEIGHT, SHADER_LOC_MAP_CUBEMAP, SHADER_LOC_MAP_IRRADIANCE, SHADER_LOC_MAP_PREFILTER, SHADER_LOC_MAP_BRDF, SHADER_LOC_VERTEX_BONEIDS, SHADER_LOC_VERTEX_BONEWEIGHTS, SHADER_LOC_MATRIX_BONETRANSFORMS, SHADER_LOC_VERTEX_INSTANCETRANSFORM, SHADER_UNIFORM_FLOAT, SHADER_UNIFORM_VEC2, SHADER_UNIFORM_VEC3, SHADER_UNIFORM_VEC4, SHADER_UNIFORM_INT, SHADER_UNIFORM_IVEC2, SHADER_UNIFORM_IVEC3, SHADER_UNIFORM_IVEC4, SHADER_UNIFORM_UINT, SHADER_UNIFORM_UIVEC2, SHADER_UNIFORM_UIVEC3, SHADER_UNIFORM_UIVEC4, SHADER_UNIFORM_SAMPLER2D, SHADER_ATTRIB_FLOAT, SHADER_ATTRIB_VEC2, SHADER_ATTRIB_VEC3, SHADER_ATTRIB_VEC4, PIXELFORMAT_UNCOMPRESSED_GRAYSCALE, PIXELFORMAT_UNCOMPRESSED_GRAY_ALPHA, PIXELFORMAT_UNCOMPRESSED_R5G6B5, PIXELFORMAT_UNCOMPRESSED_R8G8B8, PIXELFORMAT_UNCOMPRESSED_R5G5B5A1, PIXELFORMAT_UNCOMPRESSED_R4G4B4A4, PIXELFORMAT_UNCOMPRESSED_R8G8B8A8, PIXELFORMAT_UNCOMPRESSED_R32, PIXELFORMAT_UNCOMPRESSED_R32G32B32, PIXELFORMAT_UNCOMPRESSED_R32G32B32A32, PIXELFORMAT_UNCOMPRESSED_R16, PIXELFORMAT_UNCOMPRESSED_R16G16B16, PIXELFORMAT_UNCOMPRESSED_R16G16B16A16, PIXELFORMAT_COMPRESSED_DXT1_RGB, PIXELFORMAT_COMPRESSED_DXT1_RGBA, PIXELFORMAT_COMPRESSED_DXT3_RGBA, PIXELFORMAT_COMPRESSED_DXT5_RGBA, PIXELFORMAT_COMPRESSED_ETC1_RGB, PIXELFORMAT_COMPRESSED_ETC2_RGB, PIXELFORMAT_COMPRESSED_ETC2_EAC_RGBA, PIXELFORMAT_COMPRESSED_PVRT_RGB, PIXELFORMAT_COMPRESSED_PVRT_RGBA, PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA, PIXELFORMAT_COMPRESSED_ASTC_8x8_RGBA, TEXTURE_FILTER_POINT, TEXTURE_FILTER_BILINEAR, TEXTURE_FILTER_TRILINEAR, TEXTURE_FILTER_ANISOTROPIC_4X, TEXTURE_FILTER_ANISOTROPIC_8X, TEXTURE_FILTER_ANISOTROPIC_16X, TEXTURE_WRAP_REPEAT, TEXTURE_WRAP_CLAMP, TEXTURE_WRAP_MIRROR_REPEAT, TEXTURE_WRAP_MIRROR_CLAMP, CUBEMAP_LAYOUT_AUTO_DETECT, CUBEMAP_LAYOUT_LINE_VERTICAL, CUBEMAP_LAYOUT_LINE_HORIZONTAL, CUBEMAP_LAYOUT_CROSS_THREE_BY_FOUR, CUBEMAP_LAYOUT_CROSS_FOUR_BY_THREE, FONT_DEFAULT, FONT_BITMAP, FONT_SDF, BLEND_ALPHA, BLEND_ADDITIVE, BLEND_MULTIPLIED, BLEND_ADD_COLORS, BLEND_SUBTRACT_COLORS, BLEND_ALPHA_PREMULTIPLY, BLEND_CUSTOM, BLEND_CUSTOM_SEPARATE, GESTURE_NONE, GESTURE_TAP, GESTURE_DOUBLETAP, GESTURE_HOLD, GESTURE_DRAG, GESTURE_SWIPE_RIGHT, GESTURE_SWIPE_LEFT, GESTURE_SWIPE_UP, GESTURE_SWIPE_DOWN, GESTURE_PINCH_IN, GESTURE_PINCH_OUT, CAMERA_CUSTOM, CAMERA_FREE, CAMERA_ORBITAL, CAMERA_FIRST_PERSON, CAMERA_THIRD_PERSON, CAMERA_PERSPECTIVE, CAMERA_ORTHOGRAPHIC, NPATCH_NINE_PATCH, NPATCH_THREE_PATCH_VERTICAL, NPATCH_THREE_PATCH_HORIZONTAL, LIGHTGRAY, GRAY, DARKGRAY, YELLOW, GOLD, ORANGE, PINK, RED, MAROON, GREEN, LIME, DARKGREEN, SKYBLUE, BLUE, DARKBLUE, PURPLE, VIOLET, DARKPURPLE, BEIGE, BROWN, DARKBROWN, WHITE, BLACK, BLANK, MAGENTA, RAYWHITE, InitWindow, CloseWindow, WindowShouldClose, IsWindowReady, IsWindowFullscreen, IsWindowHidden, IsWindowMinimized, IsWindowMaximized, IsWindowFocused, IsWindowResized, IsWindowState, SetWindowState, ClearWindowState, ToggleFullscreen, ToggleBorderlessWindowed, MaximizeWindow, MinimizeWindow, RestoreWindow, SetWindowIcon, SetWindowIcons, SetWindowTitle, SetWindowPosition, SetWindowMonitor, SetWindowMinSize, SetWindowMaxSize, SetWindowSize, SetWindowOpacity, SetWindowFocused, GetWindowHandle, GetScreenWidth, GetScreenHeight, GetRenderWidth, GetRenderHeight, GetMonitorCount, GetCurrentMonitor, GetMonitorPosition, GetMonitorWidth, GetMonitorHeight, GetMonitorPhysicalWidth, GetMonitorPhysicalHeight, GetMonitorRefreshRate, GetWindowPosition, GetWindowScaleDPI, GetMonitorName, SetClipboardText, GetClipboardText, GetClipboardImage, EnableEventWaiting, DisableEventWaiting, ShowCursor, HideCursor, IsCursorHidden, EnableCursor, DisableCursor, IsCursorOnScreen, ClearBackground, BeginDrawing, EndDrawing, BeginMode2D, EndMode2D, BeginMode3D, EndMode3D, BeginTextureMode, EndTextureMode, BeginShaderMode, EndShaderMode, BeginBlendMode, EndBlendMode, BeginScissorMode, EndScissorMode, BeginVrStereoMode, EndVrStereoMode, LoadVrStereoConfig, UnloadVrStereoConfig, LoadShader, LoadShaderFromMemory, IsShaderValid, GetShaderLocation, GetShaderLocationAttrib, SetShaderValue, SetShaderValueV, SetShaderValueMatrix, SetShaderValueTexture, UnloadShader, GetScreenToWorldRay, GetScreenToWorldRayEx, GetWorldToScreen, GetWorldToScreenEx, GetWorldToScreen2D, GetScreenToWorld2D, GetCameraMatrix, GetCameraMatrix2D, SetTargetFPS, GetFrameTime, GetTime, GetFPS, SwapScreenBuffer, PollInputEvents, WaitTime, SetRandomSeed, GetRandomValue, LoadRandomSequence, UnloadRandomSequence, TakeScreenshot, SetConfigFlags, OpenURL, SetTraceLogLevel, SetTraceLogCallback, MemAlloc, MemRealloc, MemFree, LoadFileData, UnloadFileData, SaveFileData, ExportDataAsCode, LoadFileText, UnloadFileText, SaveFileText, SetLoadFileDataCallback, SetSaveFileDataCallback, SetLoadFileTextCallback, SetSaveFileTextCallback, FileRename, FileRemove, FileCopy, FileMove, FileTextReplace, FileTextFindIndex, FileExists, DirectoryExists, IsFileExtension, GetFileLength, GetFileModTime, GetFileExtension, GetFileName, GetFileNameWithoutExt, GetDirectoryPath, GetPrevDirectoryPath, GetWorkingDirectory, GetApplicationDirectory, MakeDirectory, ChangeDirectory, IsPathFile, IsFileNameValid, LoadDirectoryFiles, LoadDirectoryFilesEx, UnloadDirectoryFiles, IsFileDropped, LoadDroppedFiles, UnloadDroppedFiles, GetDirectoryFileCount, GetDirectoryFileCountEx, CompressData, DecompressData, EncodeDataBase64, DecodeDataBase64, ComputeCRC32, ComputeMD5, ComputeSHA1, ComputeSHA256, LoadAutomationEventList, UnloadAutomationEventList, ExportAutomationEventList, SetAutomationEventList, SetAutomationEventBaseFrame, StartAutomationEventRecording, StopAutomationEventRecording, PlayAutomationEvent, IsKeyPressed, IsKeyPressedRepeat, IsKeyDown, IsKeyReleased, IsKeyUp, GetKeyPressed, GetCharPressed, GetKeyName, SetExitKey, IsGamepadAvailable, GetGamepadName, IsGamepadButtonPressed, IsGamepadButtonDown, IsGamepadButtonReleased, IsGamepadButtonUp, GetGamepadButtonPressed, GetGamepadAxisCount, GetGamepadAxisMovement, SetGamepadMappings, SetGamepadVibration, IsMouseButtonPressed, IsMouseButtonDown, IsMouseButtonReleased, IsMouseButtonUp, GetMouseX, GetMouseY, GetMousePosition, GetMouseDelta, SetMousePosition, SetMouseOffset, SetMouseScale, GetMouseWheelMove, GetMouseWheelMoveV, SetMouseCursor, GetTouchX, GetTouchY, GetTouchPosition, GetTouchPointId, GetTouchPointCount, SetGesturesEnabled, IsGestureDetected, GetGestureDetected, GetGestureHoldDuration, GetGestureDragVector, GetGestureDragAngle, GetGesturePinchVector, GetGesturePinchAngle, UpdateCamera, UpdateCameraPro, SetShapesTexture, GetShapesTexture, GetShapesTextureRectangle, DrawPixel, DrawPixelV, DrawLine, DrawLineV, DrawLineEx, DrawLineStrip, DrawLineBezier, DrawLineDashed, DrawCircle, DrawCircleV, DrawCircleGradient, DrawCircleSector, DrawCircleSectorLines, DrawCircleLines, DrawCircleLinesV, DrawEllipse, DrawEllipseV, DrawEllipseLines, DrawEllipseLinesV, DrawRing, DrawRingLines, DrawRectangle, DrawRectangleV, DrawRectangleRec, DrawRectanglePro, DrawRectangleGradientV, DrawRectangleGradientH, DrawRectangleGradientEx, DrawRectangleLines, DrawRectangleLinesEx, DrawRectangleRounded, DrawRectangleRoundedLines, DrawRectangleRoundedLinesEx, DrawTriangle, DrawTriangleLines, DrawTriangleFan, DrawTriangleStrip, DrawPoly, DrawPolyLines, DrawPolyLinesEx, DrawSplineLinear, DrawSplineBasis, DrawSplineCatmullRom, DrawSplineBezierQuadratic, DrawSplineBezierCubic, DrawSplineSegmentLinear, DrawSplineSegmentBasis, DrawSplineSegmentCatmullRom, DrawSplineSegmentBezierQuadratic, DrawSplineSegmentBezierCubic, GetSplinePointLinear, GetSplinePointBasis, GetSplinePointCatmullRom, GetSplinePointBezierQuad, GetSplinePointBezierCubic, CheckCollisionRecs, CheckCollisionCircles, CheckCollisionCircleRec, CheckCollisionCircleLine, CheckCollisionPointRec, CheckCollisionPointCircle, CheckCollisionPointTriangle, CheckCollisionPointLine, CheckCollisionPointPoly, CheckCollisionLines, GetCollisionRec, LoadImage, LoadImageRaw, LoadImageAnim, LoadImageAnimFromMemory, LoadImageFromMemory, LoadImageFromTexture, LoadImageFromScreen, IsImageValid, UnloadImage, ExportImage, ExportImageToMemory, ExportImageAsCode, GenImageColor, GenImageGradientLinear, GenImageGradientRadial, GenImageGradientSquare, GenImageChecked, GenImageWhiteNoise, GenImagePerlinNoise, GenImageCellular, GenImageText, ImageCopy, ImageFromImage, ImageFromChannel, ImageText, ImageTextEx, ImageFormat, ImageToPOT, ImageCrop, ImageAlphaCrop, ImageAlphaClear, ImageAlphaMask, ImageAlphaPremultiply, ImageBlurGaussian, ImageKernelConvolution, ImageResize, ImageResizeNN, ImageResizeCanvas, ImageMipmaps, ImageDither, ImageFlipVertical, ImageFlipHorizontal, ImageRotate, ImageRotateCW, ImageRotateCCW, ImageColorTint, ImageColorInvert, ImageColorGrayscale, ImageColorContrast, ImageColorBrightness, ImageColorReplace, LoadImageColors, LoadImagePalette, UnloadImageColors, UnloadImagePalette, GetImageAlphaBorder, GetImageColor, ImageClearBackground, ImageDrawPixel, ImageDrawPixelV, ImageDrawLine, ImageDrawLineV, ImageDrawLineEx, ImageDrawCircle, ImageDrawCircleV, ImageDrawCircleLines, ImageDrawCircleLinesV, ImageDrawRectangle, ImageDrawRectangleV, ImageDrawRectangleRec, ImageDrawRectangleLines, ImageDrawTriangle, ImageDrawTriangleEx, ImageDrawTriangleLines, ImageDrawTriangleFan, ImageDrawTriangleStrip, ImageDraw, ImageDrawText, ImageDrawTextEx, LoadTexture, LoadTextureFromImage, LoadTextureCubemap, LoadRenderTexture, IsTextureValid, UnloadTexture, IsRenderTextureValid, UnloadRenderTexture, UpdateTexture, UpdateTextureRec, GenTextureMipmaps, SetTextureFilter, SetTextureWrap, DrawTexture, DrawTextureV, DrawTextureEx, DrawTextureRec, DrawTexturePro, DrawTextureNPatch, ColorIsEqual, Fade, ColorToInt, ColorNormalize, ColorFromNormalized, ColorToHSV, ColorFromHSV, ColorTint, ColorBrightness, ColorContrast, ColorAlpha, ColorAlphaBlend, ColorLerp, GetColor, GetPixelColor, SetPixelColor, GetPixelDataSize, GetFontDefault, LoadFont, LoadFontEx, LoadFontFromImage, LoadFontFromMemory, IsFontValid, LoadFontData, GenImageFontAtlas, UnloadFontData, UnloadFont, ExportFontAsCode, DrawFPS, DrawText, DrawTextEx, DrawTextPro, DrawTextCodepoint, DrawTextCodepoints, SetTextLineSpacing, MeasureText, MeasureTextEx, MeasureTextCodepoints, GetGlyphIndex, GetGlyphInfo, GetGlyphAtlasRec, LoadUTF8, UnloadUTF8, LoadCodepoints, UnloadCodepoints, GetCodepointCount, GetCodepoint, GetCodepointNext, GetCodepointPrevious, CodepointToUTF8, LoadTextLines, UnloadTextLines, TextCopy, TextIsEqual, TextLength, TextSubtext, TextRemoveSpaces, GetTextBetween, TextReplace, TextReplaceAlloc, TextReplaceBetween, TextReplaceBetweenAlloc, TextInsert, TextInsertAlloc, TextJoin, TextSplit, TextAppend, TextFindIndex, TextToUpper, TextToLower, TextToPascal, TextToSnake, TextToCamel, TextToInteger, TextToFloat, DrawLine3D, DrawPoint3D, DrawCircle3D, DrawTriangle3D, DrawTriangleStrip3D, DrawCube, DrawCubeV, DrawCubeWires, DrawCubeWiresV, DrawSphere, DrawSphereEx, DrawSphereWires, DrawCylinder, DrawCylinderEx, DrawCylinderWires, DrawCylinderWiresEx, DrawCapsule, DrawCapsuleWires, DrawPlane, DrawRay, DrawGrid, LoadModel, LoadModelFromMesh, IsModelValid, UnloadModel, GetModelBoundingBox, DrawModel, DrawModelEx, DrawModelWires, DrawModelWiresEx, DrawBoundingBox, DrawBillboard, DrawBillboardRec, DrawBillboardPro, UploadMesh, UpdateMeshBuffer, UnloadMesh, DrawMesh, DrawMeshInstanced, GetMeshBoundingBox, GenMeshTangents, ExportMesh, ExportMeshAsCode, GenMeshPoly, GenMeshPlane, GenMeshCube, GenMeshSphere, GenMeshHemiSphere, GenMeshCylinder, GenMeshCone, GenMeshTorus, GenMeshKnot, GenMeshHeightmap, GenMeshCubicmap, LoadMaterials, LoadMaterialDefault, IsMaterialValid, UnloadMaterial, SetMaterialTexture, SetModelMeshMaterial, LoadModelAnimations, UpdateModelAnimation, UpdateModelAnimationEx, UnloadModelAnimations, IsModelAnimationValid, CheckCollisionSpheres, CheckCollisionBoxes, CheckCollisionBoxSphere, GetRayCollisionSphere, GetRayCollisionBox, GetRayCollisionMesh, GetRayCollisionTriangle, GetRayCollisionQuad, InitAudioDevice, CloseAudioDevice, IsAudioDeviceReady, SetMasterVolume, GetMasterVolume, LoadWave, LoadWaveFromMemory, IsWaveValid, LoadSound, LoadSoundFromWave, LoadSoundAlias, IsSoundValid, UpdateSound, UnloadWave, UnloadSound, UnloadSoundAlias, ExportWave, ExportWaveAsCode, PlaySound, StopSound, PauseSound, ResumeSound, IsSoundPlaying, SetSoundVolume, SetSoundPitch, SetSoundPan, WaveCopy, WaveCrop, WaveFormat, LoadWaveSamples, UnloadWaveSamples, LoadMusicStream, LoadMusicStreamFromMemory, IsMusicValid, UnloadMusicStream, PlayMusicStream, IsMusicStreamPlaying, UpdateMusicStream, StopMusicStream, PauseMusicStream, ResumeMusicStream, SeekMusicStream, SetMusicVolume, SetMusicPitch, SetMusicPan, GetMusicTimeLength, GetMusicTimePlayed, LoadAudioStream, IsAudioStreamValid, UnloadAudioStream, UpdateAudioStream, IsAudioStreamProcessed, PlayAudioStream, PauseAudioStream, ResumeAudioStream, IsAudioStreamPlaying, StopAudioStream, SetAudioStreamVolume, SetAudioStreamPitch, SetAudioStreamPan, SetAudioStreamBufferSizeDefault, SetAudioStreamCallback, AttachAudioStreamProcessor, DetachAudioStreamProcessor, AttachAudioMixedProcessor, DetachAudioMixedProcessor

@@ -15,6 +15,8 @@ julia --project=. examples/basic_2d.jl
 julia --project=. examples/basic_3d.jl
 ```
 
+`examples/basic_3d.jl` shows camera mutation through `Ref`.
+
 The API follows raylib's C names. Release native resources with their matching `Unload*` functions. `TraceLog` and `TextFormat` are omitted.
 
 Tests: `julia --project=. -e 'using Pkg; Pkg.test()'`. Regenerate bindings: `python3 gen/generate.py`.
